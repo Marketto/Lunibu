@@ -7,6 +7,8 @@ import { ACTIVE, MED_SOURCES, checkDose, checkPlan, filterLog, findPlan, latestW
 import { MILESTONE_TEXT, LOCALE } from '../lib/i18n.js';
 import { formatAge } from '../lib/age.js';
 import Milestones from './Milestones.jsx';
+import Fever from './Fever.jsx';
+import { FEVER_TEXT } from '../lib/feverText.js';
 import ImportCsv, { IMPORT_BTN } from './ImportCsv.jsx';
 import SOURCES from '../../content/sources.json';
 
@@ -18,7 +20,7 @@ const ordEn = (n) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ({ 1: 'st', 
 
 export const DIARY_TEXT = {
   it: {
-    title: 'Diario', sub: 'Crescita e medicine, solo sul tuo telefono.',
+    title: 'Diario', sub: 'Crescita, medicine e temperatura sul tuo telefono.',
     tabGrowth: 'Crescita', tabMeds: 'Medicine',
     weight: 'Peso', height: 'Altezza', head: 'Testa', bmi: 'BMI',
     heightLong: (m) => (m < 24 ? 'Lunghezza (sdraiato)' : 'Altezza (in piedi)'), headLong: 'Circonferenza cranica',
@@ -129,7 +131,7 @@ export const DIARY_TEXT = {
     sources: 'Fonti'
   },
   ru: {
-    title: 'Дневник', sub: 'Рост и лекарства — только на вашем телефоне.',
+    title: 'Дневник', sub: 'Рост, лекарства и температура на вашем телефоне.',
     tabGrowth: 'Рост', tabMeds: 'Лекарства',
     weight: 'Вес', height: 'Рост', head: 'Голова', bmi: 'ИМТ',
     heightLong: (m) => (m < 24 ? 'Длина тела (лёжа)' : 'Рост (стоя)'), headLong: 'Окружность головы',
@@ -239,7 +241,7 @@ export const DIARY_TEXT = {
     sources: 'Источники'
   },
   en: {
-    title: 'Diary', sub: 'Growth and medicines, only on your phone.',
+    title: 'Diary', sub: 'Growth, medicines and temperature on your phone.',
     tabGrowth: 'Growth', tabMeds: 'Medicines',
     weight: 'Weight', height: 'Height', head: 'Head', bmi: 'BMI',
     heightLong: (m) => (m < 24 ? 'Length (lying down)' : 'Height (standing)'), headLong: 'Head circumference',
@@ -741,7 +743,27 @@ function MyMeds({ s, lang, kid, months, mine, medPlans, setMedPlans, giveDose, a
   );
 }
 
-function Meds({ lang, kid, months, meds, setMeds, growth, medPlans, setMedPlans }) {
+/** CSV per il pediatra: medicine, crescita e (se presenti) temperature del bambino. */
+function downloadCsv({ kid, lang, meds, growth, temps = [] }) {
+  const rows = meds.filter((m) => m.kidId === kid.id).sort((a, b) => a.at.localeCompare(b.at)).map((e) => {
+    const w = latestWeight(growth, kid.id, e.at);
+    const mg = toMg(e);
+    return [e.at.slice(0, 16).replace('T', ' '), e.name, e.route || '', e.amount, e.unit, e.conc || '', mg || '', w ? w.kg : '', mg && w ? (mg / w.kg).toFixed(1) : '', e.note];
+  });
+  const g = growth.filter((x) => x.kidId === kid.id).sort((a, b) => a.date.localeCompare(b.date)).map((x) => [x.date, x.weight || '', x.height || '', x.head || '']);
+  const tp = temps.filter((x) => x.kidId === kid.id).sort((a, b) => a.at.localeCompare(b.at)).map((x) => [x.at.slice(0, 16).replace('T', ' '), x.value ?? '', x.site || '', x.feelsHot ? 1 : 0, x.note || '']);
+  const H = lang === 'en'
+    ? [['date_time', 'medicine', 'route', 'amount', 'unit', 'mg_per_ml', 'mg', 'weight_kg', 'mg_per_kg', 'note'], ['date', 'weight_kg', 'height_cm', 'head_cm'], ['date_time', 'temperature_c', 'site', 'feels_hot_no_thermometer', 'how_are_they_note']]
+    : [['data_ora', 'farmaco', 'via', 'quantita', 'unita', 'mg_per_ml', 'mg', 'peso_kg', 'mg_per_kg', 'nota'], ['data', 'peso_kg', 'altezza_cm', 'testa_cm'], ['data_ora', 'temperatura_c', 'sede', 'sembra_caldo_senza_termometro', 'come_sta_nota']];
+  const csv = toCsv(rows, H[0]) + '\n\n' + toCsv(g, H[1]) + (tp.length ? '\n\n' + toCsv(tp, H[2]) : '');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['\ufeff' + csv], { type: 'text/csv' }));
+  a.download = `lunibu-${(kid.name || (lang === 'en' ? 'child' : lang === 'ru' ? 'rebenok' : 'bimbo')).toLowerCase()}-${today()}.csv`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+function Meds({ lang, kid, months, meds, setMeds, growth, medPlans, setMedPlans, temps }) {
   const s = DIARY_TEXT[lang];
   const [form, setForm] = useState(null);
   const [fMed, setFMed] = useState('');
@@ -798,23 +820,7 @@ function Meds({ lang, kid, months, meds, setMeds, growth, medPlans, setMedPlans 
   });
   const maxN = Math.max(3, ...perDay.map((p) => p.n));
 
-  const exportCsv = () => {
-    const rows = mine.sort((a, b) => a.at.localeCompare(b.at)).map((e) => {
-      const w = latestWeight(growth, kid.id, e.at);
-      const mg = toMg(e);
-      return [e.at.slice(0, 16).replace('T', ' '), e.name, e.route || '', e.amount, e.unit, e.conc || '', mg || '', w ? w.kg : '', mg && w ? (mg / w.kg).toFixed(1) : '', e.note];
-    });
-    const g = growth.filter((x) => x.kidId === kid.id).sort((a, b) => a.date.localeCompare(b.date)).map((x) => [x.date, x.weight || '', x.height || '', x.head || '']);
-    const H = lang === 'en'
-      ? [['date_time', 'medicine', 'route', 'amount', 'unit', 'mg_per_ml', 'mg', 'weight_kg', 'mg_per_kg', 'note'], ['date', 'weight_kg', 'height_cm', 'head_cm']]
-      : [['data_ora', 'farmaco', 'via', 'quantita', 'unita', 'mg_per_ml', 'mg', 'peso_kg', 'mg_per_kg', 'nota'], ['data', 'peso_kg', 'altezza_cm', 'testa_cm']];
-    const csv = toCsv(rows, H[0]) + '\n\n' + toCsv(g, H[1]);
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' }));
-    a.download = `lunibu-${(kid.name || (lang === 'en' ? 'child' : lang === 'ru' ? 'rebenok' : 'bimbo')).toLowerCase()}-${today()}.csv`;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-  };
+  const exportCsv = () => downloadCsv({ kid, lang, meds, growth, temps });
 
   const a = form && ACTIVE[form.active];
   const giveDose = (g) => {
@@ -975,7 +981,7 @@ function Meds({ lang, kid, months, meds, setMeds, growth, medPlans, setMedPlans 
 }
 
 /* ---------- Pagina Diario ---------- */
-export default function Diary({ lang, kids, active, setActive, growth, meds, setGrowth, setMeds, setKid, medPlans = [], setMedPlans, milestones = [], setMilestones }) {
+export default function Diary({ lang, kids, active, setActive, growth, meds, setGrowth, setMeds, setKid, medPlans = [], setMedPlans, milestones = [], setMilestones, temps = [], setTemps }) {
   const s = DIARY_TEXT[lang];
   const [tab, setTab] = useState('growth');
   const [importing, setImporting] = useState(false);
@@ -987,10 +993,10 @@ export default function Diary({ lang, kids, active, setActive, growth, meds, set
       <p className="lead">{s.sub}</p>
       <KidPills kids={kids} active={Math.max(0, active)} setActive={setActive} lang={lang} id="dkp" noAll />
       <div className="seg big" role="tablist">
-        {['growth', 'meds', 'miles'].map((k) => (
-          <button key={k} className={tab === k ? 'on' : ''} onClick={() => setTab(k)} role="tab" aria-selected={tab === k}>
+        {['growth', 'meds', 'temp', 'miles'].map((k) => (
+          <button key={k} className={tab === k ? 'on' : ''} onClick={() => setTab(k)} role="tab" aria-selected={tab === k} data-tour={k === 'temp' ? 'diary-temp' : undefined}>
             {tab === k && <motion.i layoutId="diary-tab" className="seg-pill" transition={spring} />}
-            <span>{k === 'growth' ? s.tabGrowth : k === 'meds' ? s.tabMeds : MILESTONE_TEXT[lang].tab}</span>
+            <span>{k === 'growth' ? s.tabGrowth : k === 'meds' ? s.tabMeds : k === 'temp' ? FEVER_TEXT[lang].tab : MILESTONE_TEXT[lang].tab}</span>
           </button>
         ))}
       </div>
@@ -1016,7 +1022,8 @@ export default function Diary({ lang, kids, active, setActive, growth, meds, set
           <Growth lang={lang} kid={kid} growth={growth} setGrowth={setGrowth} />
         </>
       )}
-      {tab === 'meds' && <Meds lang={lang} kid={kid} months={months} meds={meds} setMeds={setMeds} growth={growth} medPlans={medPlans} setMedPlans={setMedPlans} />}
+      {tab === 'meds' && <Meds lang={lang} kid={kid} months={months} meds={meds} setMeds={setMeds} growth={growth} medPlans={medPlans} setMedPlans={setMedPlans} temps={temps} />}
+      {tab === 'temp' && <Fever lang={lang} kid={kid} temps={temps} setTemps={setTemps} meds={meds} onExport={() => downloadCsv({ kid, lang, meds, growth, temps })} />}
       {tab === 'miles' && <Milestones lang={lang} kid={kid} milestones={milestones} setMilestones={setMilestones} />}
       {importing
         ? <ImportCsv lang={lang} kids={kids} active={Math.max(0, active)} growth={growth} meds={meds} setGrowth={setGrowth} setMeds={setMeds} onClose={() => setImporting(false)} />

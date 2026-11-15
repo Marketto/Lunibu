@@ -1,5 +1,11 @@
 # Novità di Lunibù
 
+## 1.15.0 — 15 novembre 2026
+- Nuovo registro della temperatura nel Diario: valore, sede e ora, e/o "sembra caldo" senza termometro, con una nota libera su come sta. Liste informative verde/giallo/rosso e "Dorme" adattate da NICE e NHS, con il 112 accanto alla lista rossa: l'app non calcola alcun esito da ciò che inserisci. Avvisi per età (sotto i 3 mesi, da 3 a 6 mesi, febbre da 5 giorni) con le fonti.
+- Grafico con le dosi di paracetamolo e ibuprofene già registrate, senza tempi di effetto: le fonti non li indicano.
+- Promemoria facoltativi per rimisurare: intervalli predefiniti che puoi cambiare, senza fondamento scientifico, con conto alla rovescia, notifiche solo se le attivi e file per il calendario. Le temperature si sincronizzano con l'altro genitore e si esportano nel CSV.
+- Condizioni d'uso aggiornate alla versione 1.6 (registro temperatura, privacy, legge applicabile): leggile e accettale al prossimo avvio.
+
 ## 1.14.0 — 14 novembre 2026
 - Nuova lingua: l'app è ora disponibile anche in inglese (Italiano, Русский, English), con interfaccia, condizioni d'uso, diario, giochi e schede tradotti. Si cambia da Bimbi → Lingua; la lingua del telefono è riconosciuta automaticamente. Dove una traduzione manca ancora, l'app mostra il testo italiano.
 - Il giro delle funzioni mostra la novità e porta al selettore della lingua.

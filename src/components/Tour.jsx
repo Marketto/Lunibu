@@ -38,7 +38,7 @@ export default function Tour({ lang, slides, onClose, go, route }) {
   const back = () => setI((n) => Math.max(0, n - 1));
 
   // Il primo passo (e ogni passo) richiede la Home se il bersaglio è lì; il selettore lingua sta in Bimbi
-  useEffect(() => { if (sl.target === 'search' && route) go(''); else if (sl.target === 'lang' && route !== 'bimbi') go('bimbi'); }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (sl.target === 'search' && route) go(''); else if (sl.target === 'lang' && route !== 'bimbi') go('bimbi'); else if (sl.target === 'diary-temp' && route !== 'diario') go('diario'); }, [i]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Cerca il bersaglio (con qualche tentativo), lo porta in vista e lo misura
   useEffect(() => {

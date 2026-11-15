@@ -42,7 +42,7 @@ async function decryptBytes(salt, iv, ct, pass) {
 export function buildPayload(state, appVersion = '') {
   return {
     format: 'lunibu-sync', v: 1, exportedAt: new Date().toISOString(), appVersion,
-    kids: state.kids || [], growth: state.growth || [], meds: state.meds || [], medPlans: state.medPlans || [], milestones: state.milestones || [], deleted: state.deleted || {}
+    kids: state.kids || [], growth: state.growth || [], meds: state.meds || [], medPlans: state.medPlans || [], milestones: state.milestones || [], temps: state.temps || [], deleted: state.deleted || {}
   };
 }
 
@@ -100,10 +100,12 @@ export function buildQuickPayload(state, { now = Date.now(), medsOnly = false, a
   const medPlans = (state.medPlans || []).filter((p) => kidIds0.has(p.kidId) || recent(p));
   // anche le tappe segnate di recente (pochi record piccoli)
   const milestones = (state.milestones || []).filter((x) => recent(x) && !medsOnly);
-  const kidIds = new Set([...kidIds0, ...medPlans.map((p) => p.kidId), ...milestones.map((x) => x.kidId)]);
+  // anche le temperature registrate di recente (dati sanitari del minore: viaggiano cifrate come il resto)
+  const temps = (state.temps || []).filter((x) => recent(x) && !medsOnly);
+  const kidIds = new Set([...kidIds0, ...medPlans.map((p) => p.kidId), ...milestones.map((x) => x.kidId), ...temps.map((x) => x.kidId)]);
   const kids = (state.kids || []).filter((k) => kidIds.has(k.id)).map(({ id, birth, name, sex }) => ({ id, birth, name, ...(sex ? { sex } : {}) }));
   const deleted = Object.fromEntries(Object.entries(state.deleted || {}).filter(([, t]) => t >= since));
-  return { format: 'lunibu-sync', v: 1, quick: true, exportedAt: new Date(now).toISOString(), appVersion, kids, growth, meds, medPlans, milestones, deleted };
+  return { format: 'lunibu-sync', v: 1, quick: true, exportedAt: new Date(now).toISOString(), appVersion, kids, growth, meds, medPlans, milestones, temps, deleted };
 }
 
 /** payload -> stringa base64url per il frammento dell'URL. [flag compressione][salt 16][iv 12][cifrato] */
@@ -175,6 +177,7 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
   const m = mergeList(local.meds, remote.meds);
   const mp = mergeList(local.medPlans, remote.medPlans);
   const ms = mergeList(local.milestones, remote.milestones, true);
+  const tp = mergeList(local.temps, remote.temps);
 
   const since = now - H24;
   const recentDoses = m.list
@@ -183,7 +186,7 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
     .map((e) => ({ id: e.id, kidId: e.kidId, name: e.name, at: e.at, amount: e.amount, unit: e.unit }));
 
   return {
-    kids, growth: g.list, meds: m.list, medPlans: mp.list, milestones: ms.list, deleted,
-    stats: { addedGrowth: g.added.size, addedMeds: m.added.size, updated: g.updated.size + m.updated.size + mp.updated.size + ms.updated.size, addedMilestones: ms.added.size, addedPlans: mp.added.size, addedKids, recentDoses }
+    kids, growth: g.list, meds: m.list, medPlans: mp.list, milestones: ms.list, temps: tp.list, deleted,
+    stats: { addedGrowth: g.added.size, addedMeds: m.added.size, updated: g.updated.size + m.updated.size + mp.updated.size + ms.updated.size + tp.updated.size + tp.added.size, addedTemps: tp.added.size, addedMilestones: ms.added.size, addedPlans: mp.added.size, addedKids, recentDoses }
   };
 }

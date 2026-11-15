@@ -300,8 +300,8 @@ input[type=range] { width: 100%; accent-color: #f7d79a; }
 /* ---------- Form e impostazioni ---------- */
 .field { display: block; margin-top: 12px; }
 .field span { display: block; font-size: .85rem; color: var(--ink-soft); margin-bottom: 6px; }
-.field input { width: 100%; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--mist-2); background: var(--paper); font-size: 1rem; }
-.field input:focus { outline: none; border-color: var(--lav); }
+.field input, .field textarea { width: 100%; font-family: inherit; resize: vertical; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--mist-2); background: var(--paper); font-size: 1rem; }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--lav); }
 .kid-card { position: relative; padding: 16px 18px 18px; border-radius: 24px; background: var(--paper); box-shadow: var(--lift); margin-top: 14px; }
 .kid-card-head { display: flex; align-items: center; gap: 12px; }
 .kid-card-head .av { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: 1.1rem; color: var(--ink); }
@@ -703,3 +703,53 @@ button.chip.on { background: #7b6fd6; color: #fff; }
 .tour-count { font-size: .8rem; color: var(--ink-soft); }
 .tour-skip { background: none; border: 0; padding: 8px 6px; margin: -8px -6px; min-height: 36px; color: var(--ink); font: inherit; font-size: .85rem; text-decoration: underline; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .tour-ring { animation: none; opacity: .9; } }
+
+/* ---------- Diario: temperatura ---------- */
+.diary .seg.big button { padding: 9px 4px; font-size: .88rem; min-width: 0; }
+.diary .seg.big button span { overflow: hidden; text-overflow: ellipsis; }
+.fever-info { margin: 8px 0 0; }
+.fever-warn { display: flex; gap: 10px; margin-top: 10px; padding: 12px 14px; border-radius: 18px; background: #eef0ff; color: var(--ink); font-size: .9rem; }
+.fever-warn.strict { background: var(--urg-bg); color: var(--urg-ink); box-shadow: 0 0 0 2px var(--urg-line); }
+.fever-warn p { margin: 0; }
+.fever-warn .refs a { background: rgba(255, 255, 255, .7); }
+.fever-sheet { margin-top: 14px; padding: 12px; border-radius: 20px; background: var(--mist); }
+.fever-sheet h3 { margin: 0 0 4px; font-size: 1.05rem; }
+.fever-sheet legend { font-weight: 700; font-size: .92rem; }
+.fever-asleep { margin-top: 12px; padding: 10px 14px; border-radius: 18px; background: #eef0ff; color: var(--ink); font-size: .92rem; }
+.fever-asleep summary { cursor: pointer; font-weight: 700; min-height: 32px; }
+.fever-asleep[open] { box-shadow: 0 0 0 2px var(--lav-d); }
+.fever-asleep p { margin: 6px 0 0; }
+.fever-asleep .btn { margin-top: 10px; }
+.fever-result h4 { margin: 0 0 4px; font-size: .95rem; }
+.fever-result ul { margin: 0; padding-left: 18px; }
+.fever-result li { margin: 2px 0; }
+.fever-note { margin: 4px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.fever-result { margin-top: 12px; padding: 12px 14px; border-radius: 18px; font-size: .92rem; }
+.fever-result p { margin: 4px 0 0; }
+.fever-result.green { background: #e7f4ec; color: #22573f; }
+.fever-result.amber { background: var(--care-bg); color: var(--care-ink); box-shadow: 0 0 0 2px var(--care-line); }
+.fever-result.red { background: var(--urg-bg); color: var(--urg-ink); box-shadow: 0 0 0 2px var(--urg-line); }
+.btn.fever-112 { margin-top: 10px; width: 100%; font-weight: 800; background: var(--urg-ink); color: #fff; text-decoration: none; }
+.fever-bad { color: var(--urg-ink); }
+.fever-banner { margin-top: 12px; padding: 12px 14px; border-radius: 18px; background: #eef0ff; box-shadow: 0 0 0 2px var(--lav); }
+.fever-banner.due { background: var(--care-bg); box-shadow: 0 0 0 2px var(--care-line); color: var(--care-ink); }
+.fever-banner .row { margin-top: 10px; flex-wrap: wrap; }
+.fever-saved { margin-top: 12px; }
+.fever-prompt { margin-top: 12px; padding: 14px; border-radius: 20px; background: var(--paper); box-shadow: var(--lift); }
+.fever-prompt p { margin: 0 0 6px; }
+.fever-prompt-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.fever-prompt-btns .btn { padding: 11px 16px; flex: 1 1 auto; }
+.fever-disclaimer { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--mist-2); color: var(--ink-soft); }
+.fever-chart .grid { stroke: rgba(46, 47, 87, .1); }
+.fever-chart .fever-line { stroke: #c5543b; stroke-width: 1.2; stroke-dasharray: 4 3; }
+.fever-chart .dose-mark { stroke: #3f8a6a; stroke-width: 1.6; stroke-dasharray: 2 2; }
+.fever-chart .dose-letter { font: 800 10px var(--ui); fill: #22573f; }
+.fever-prefs .check { margin-top: 12px; }
+.fever .btn.wide { margin-top: 12px; }
+
+.btn.fever-112-soft { margin-top: 10px; width: 100%; border: 2px solid var(--urg-line); color: var(--urg-ink); text-decoration: none; font-weight: 700; }
+.diary .seg.big button span { white-space: normal; overflow-wrap: anywhere; text-align: center; line-height: 1.15; }
+.fever .field-row { flex-wrap: wrap; }
+.fever .field-row .field { min-width: 0; flex: 1 1 140px; }
+.fever { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+.fever-limits { margin-top: 10px; }

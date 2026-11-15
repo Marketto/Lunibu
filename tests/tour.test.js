@@ -24,6 +24,11 @@ describe('dati del giro', () => {
     expect(l.target).toBe('lang');
     for (const lg of ['it', 'ru', 'en']) for (const n of ['Italiano', 'Русский', 'English']) expect(l[lg].text).toContain(n);
   });
+  it('il passo della temperatura appare dalla 1.15.0 e porta alla scheda del Diario', () => {
+    const t = TOUR.find((x) => x.id === 'temperatura');
+    expect(t.since).toBe('1.15.0');
+    expect(t.target).toBe('diary-temp');
+  });
   it('target valido', () => { for (const s of TOUR) expect(TOUR_TARGETS).toContain(s.target); });
   it('since è semver valido e non oltre la versione del pacchetto', () => {
     for (const s of TOUR) {

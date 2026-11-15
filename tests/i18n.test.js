@@ -93,8 +93,8 @@ describe('testi sensibili en', () => {
     expect(STRINGS.en.disclaimer).toContain('112');
     expect(STRINGS.en.urgentTitle).toContain('112');
   });
-  it('condizioni: versione 1.5 e nota che prevale l\'italiano', () => {
-    expect(TERMS_VERSION).toBe('1.5');
+  it('condizioni: versione 1.6 e nota che prevale l\'italiano', () => {
+    expect(TERMS_VERSION).toBe('1.6');
     expect(TERMS.en.updated).toMatch(/Italian version prevails/);
     expect(TERMS.en.sections.length).toBe(TERMS.it.sections.length);
   });

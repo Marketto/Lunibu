@@ -770,7 +770,7 @@
     "type": "ente sanitario"
   },
   "M1": {
-    "label": "NICE. Fever in under 5s: assessment and initial management (NG143). 2019",
+    "label": "NICE. Fever in under 5s: assessment and initial management (NG143). 2019, aggiornata 2021 (testo completo in PDF dal sito NICE)",
     "url": "https://www.nice.org.uk/guidance/ng143/chapter/Recommendations",
     "type": "linea guida"
   },
@@ -1298,5 +1298,20 @@
     "label": "Eurydice (Commissione europea). Italia: organizzazione dell'istruzione primaria (età di iscrizione, calendario)",
     "url": "https://eurydice.eacea.ec.europa.eu/it/eurypedia/italy/organizzazione-dellistruzione-primaria",
     "type": "ente governativo"
+  },
+  "M10": {
+    "label": "NHS. High temperature (fever) in children. Page last reviewed 3 January 2024",
+    "url": "https://www.nhs.uk/conditions/fever-in-children/",
+    "type": "ente sanitario"
+  },
+  "M11": {
+    "label": "AAP – HealthyChildren.org. Fever Without Fear (updated 23/9/2025)",
+    "url": "https://www.healthychildren.org/English/health-issues/conditions/fever/Pages/Fever-Without-Fear.aspx",
+    "type": "ente sanitario"
+  },
+  "M12": {
+    "label": "AAP – HealthyChildren.org. When to Call the Pediatrician: Fever (updated 2/12/2022)",
+    "url": "https://www.healthychildren.org/English/health-issues/conditions/fever/Pages/When-to-Call-the-Pediatrician.aspx",
+    "type": "ente sanitario"
   }
 }
