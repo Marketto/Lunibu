@@ -20,7 +20,7 @@ const TX = {
     f: { date: 'Data / data e ora', weight: 'Peso', height: 'Lunghezza / altezza', head: 'Circonferenza testa', med: 'Nome del farmaco', dose: 'Quantità di farmaco', note: 'Nota' },
     unitFor: 'Unità', dateOrder: 'Le date sono ambigue (es. 03/04/2025). Come sono scritte?', dmy: 'giorno/mese', mdy: 'mese/giorno',
     needDate: 'Scegli la colonna della data e almeno un dato da importare.',
-    kidAsk: 'Per quale bimbo sono questi dati?', summary: (g, m, k) => `${g} misure, ${m} medicine, ${k} righe ignorate`,
+    kidAsk: 'Per quale bimbo sono questi dati?', tempsDone: (n) => `, ${n} temperature`, tempsImported: (n) => `Importate anche ${n} temperature (Diario → Temperatura).`, summary: (g, m, k) => `${g} misure, ${m} medicine, ${k} righe ignorate`,
     reasons: { noDate: 'data mancante o illeggibile', empty: 'nessun dato', badValue: 'valori non plausibili', outOfRange: 'data prima della nascita o futura', noName: 'dose senza nome del farmaco', duplicate: 'già presenti' },
     confirm: 'Importa', done: (g, m) => `Importate ${g} misure e ${m} medicine. Valutazioni e controlli delle dosi si aggiornano da soli.`,
     verify: 'Controlla che i valori importati siano giusti: l\'app non può verificarli.',
@@ -38,7 +38,7 @@ const TX = {
     f: { date: 'Дата / дата и время', weight: 'Вес', height: 'Длина / рост', head: 'Окружность головы', med: 'Название лекарства', dose: 'Количество лекарства', note: 'Заметка' },
     unitFor: 'Единицы', dateOrder: 'Даты неоднозначны (например, 03/04/2025). Как они записаны?', dmy: 'день/месяц', mdy: 'месяц/день',
     needDate: 'Выберите столбец с датой и хотя бы одно данное для импорта.',
-    kidAsk: 'Для какого ребёнка эти данные?', summary: (g, m, k) => `${g} измерений, ${m} лекарств, ${k} строк пропущено`,
+    kidAsk: 'Для какого ребёнка эти данные?', tempsDone: (n) => `, ${n} измерений температуры`, tempsImported: (n) => `Также импортировано измерений температуры: ${n} (Дневник → Температура).`, summary: (g, m, k) => `${g} измерений, ${m} лекарств, ${k} строк пропущено`,
     reasons: { noDate: 'нет даты или она нечитаема', empty: 'нет данных', badValue: 'неправдоподобные значения', outOfRange: 'дата до рождения или в будущем', noName: 'доза без названия лекарства', duplicate: 'уже есть' },
     confirm: 'Импортировать', done: (g, m) => `Импортировано: ${g} измерений и ${m} лекарств. Оценки и проверки доз обновятся сами.`,
     verify: 'Проверьте, что импортированные значения верны: приложение не может это проверить.',
@@ -56,7 +56,7 @@ const TX = {
     f: { date: 'Date / date and time', weight: 'Weight', height: 'Length / height', head: 'Head circumference', med: 'Medicine name', dose: 'Amount of medicine', note: 'Note' },
     unitFor: 'Unit', dateOrder: 'The dates are ambiguous (e.g. 03/04/2025). How are they written?', dmy: 'day/month', mdy: 'month/day',
     needDate: 'Choose the date column and at least one data item to import.',
-    kidAsk: 'Which child is this data for?', summary: (g, m, k) => `${g} measurements, ${m} medicines, ${k} rows ignored`,
+    kidAsk: 'Which child is this data for?', tempsDone: (n) => `, ${n} temperature readings`, tempsImported: (n) => `Also imported ${n} temperature readings (Diary → Temperature).`, summary: (g, m, k) => `${g} measurements, ${m} medicines, ${k} rows ignored`,
     reasons: { noDate: 'missing or unreadable date', empty: 'no data', badValue: 'implausible values', outOfRange: 'date before birth or in the future', noName: 'dose without a medicine name', duplicate: 'already present' },
     confirm: 'Import', done: (g, m) => `Imported ${g} measurements and ${m} medicines. Assessments and dose checks update on their own.`,
     verify: 'Check that the imported values are correct: the app cannot verify them.',
@@ -87,7 +87,7 @@ export function describe(sheets) {
   }).join('\n\n');
 }
 
-export default function ImportCsv({ lang, kids, active, growth, meds, setGrowth, setMeds, onClose }) {
+export default function ImportCsv({ lang, kids, active, growth, meds, setGrowth, setMeds, temps = [], setTemps, onClose }) {
   const s = TX[lang];
   const [step, setStep] = useState(0);
   const [data, setData] = useState(null); // { rows }
@@ -158,7 +158,7 @@ export default function ImportCsv({ lang, kids, active, growth, meds, setGrowth,
 
   const kid = kids[kidIdx] || kids[0];
   const built = useMemo(() => {
-    if (preset && step >= 1) return buildFromBabyTracker(data.rows, { kid, existing: { growth, meds }, medMap });
+    if (preset && step >= 1) return buildFromBabyTracker(data.rows, { kid, existing: { growth, meds, temps }, medMap });
     if (step < 3 || !map) return null;
     return buildRecords(body, map, { order: effOrder, wUnit: units.weight, hUnit: units.height, headUnit: units.head, doseUnit: units.dose, kid, names: NAMES[lang], existing: { growth, meds } });
   }, [step, map, body, units, effOrder, kid, lang, preset, medMap]); // eslint-disable-line
@@ -181,8 +181,9 @@ export default function ImportCsv({ lang, kids, active, growth, meds, setGrowth,
   const confirm = () => {
     if (built.growth.length) setGrowth([...growth, ...built.growth]);
     if (built.meds.length) setMeds([...meds, ...built.meds]);
+    if (built.temps?.length && setTemps) setTemps([...temps, ...built.temps]);
     if (preset) saveMedMap(medMap);
-    setResult(s.done(built.growth.length, built.meds.length));
+    setResult(s.done(built.growth.length, built.meds.length) + (built.temps?.length ? ' ' + s.tempsImported(built.temps.length) : ''));
   };
 
   return (
@@ -288,11 +289,11 @@ export default function ImportCsv({ lang, kids, active, growth, meds, setGrowth,
             <label className="field"><span>{s.kidAsk}</span>
               <select value={kidIdx} onChange={(e) => setKidIdx(+e.target.value)}>{kids.map((k, i) => <option key={k.id} value={i}>{k.name || k.birth}</option>)}</select></label>
           )}
-          <p role="status"><strong>{s.summary(built.growth.length, built.meds.length, skipped - (built.ignored.temperature || 0) - (built.ignored.otherActivities || 0))}</strong>{reasons && <> ({reasons})</>}</p>
-          {preset && (built.ignored.temperature > 0 || built.ignored.otherActivities > 0) && <p className="small muted">{s.notImported(built.ignored.temperature, built.ignored.otherActivities)}</p>}
+          <p role="status"><strong>{s.summary(built.growth.length, built.meds.length, skipped - (built.ignored.otherActivities || 0)) + (built.temps?.length ? s.tempsDone(built.temps.length) : '')}</strong>{reasons && <> ({reasons})</>}</p>
+          {preset && built.ignored.otherActivities > 0 && <p className="small muted">{s.notImported(0, built.ignored.otherActivities)}</p>}
           <p className="small muted">{s.verify}</p>
           <div className="row"><button className="btn ghost" onClick={() => setStep(preset && !medList.length ? 1 : 2)}>{s.back}</button>
-            <motion.button className="btn primary" disabled={!built.growth.length && !built.meds.length} onClick={confirm} {...tap}>{s.confirm}</motion.button></div>
+            <motion.button className="btn primary" disabled={!built.growth.length && !built.meds.length && !built.temps?.length} onClick={confirm} {...tap}>{s.confirm}</motion.button></div>
         </>
       )}
     </motion.section>

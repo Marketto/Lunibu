@@ -1026,7 +1026,7 @@ export default function Diary({ lang, kids, active, setActive, growth, meds, set
       {tab === 'temp' && <Fever lang={lang} kid={kid} temps={temps} setTemps={setTemps} meds={meds} onExport={() => downloadCsv({ kid, lang, meds, growth, temps })} />}
       {tab === 'miles' && <Milestones lang={lang} kid={kid} milestones={milestones} setMilestones={setMilestones} />}
       {importing
-        ? <ImportCsv lang={lang} kids={kids} active={Math.max(0, active)} growth={growth} meds={meds} setGrowth={setGrowth} setMeds={setMeds} onClose={() => setImporting(false)} />
+        ? <ImportCsv lang={lang} kids={kids} active={Math.max(0, active)} growth={growth} meds={meds} setGrowth={setGrowth} setMeds={setMeds} temps={temps} setTemps={setTemps} onClose={() => setImporting(false)} />
         : <button className="btn ghost wide" style={{ marginTop: 14 }} onClick={() => setImporting(true)}>⤒ {IMPORT_BTN[lang]}</button>}
     </div>
   );

@@ -266,8 +266,9 @@ export function buildFromBabyTracker(rows, opts) {
   // il principio attivo può cambiare tra due importazioni: per i doppioni conta anche la chiave senza "active"
   const base = (r) => mKey({ ...r, active: '' });
   const seenMB = new Set((existing.meds || []).filter((g) => g.kidId === kid.id).map(base));
-  const ignored = { noDate: 0, empty: 0, badValue: 0, outOfRange: 0, noName: 0, duplicate: 0, temperature: 0, otherActivities: 0 };
-  const growth = [], meds = [];
+  const seenT = new Set((existing.temps || []).filter((x) => x.kidId === kid.id).map((x) => `${x.at.slice(0, 16)}|${x.value ?? ''}`));
+  const ignored = { noDate: 0, empty: 0, badValue: 0, outOfRange: 0, noName: 0, duplicate: 0, otherActivities: 0 };
+  const growth = [], meds = [], temps = [];
   const days = new Map(); // data -> record di crescita
   const fields = { weight: [['kg', 'g', 'lb'], toKg, 3], height: [['cm', 'in'], toCm, 1], head: [['cm', 'in'], toCm, 1] };
 
@@ -275,11 +276,25 @@ export function buildFromBabyTracker(rows, opts) {
     const act = String(r[0] || '').trim() || String(r[1] || '').trim();
     if (!act) { ignored.empty++; continue; }
     const kind = btKind(act);
-    if (kind === 'temperature') { ignored.temperature++; continue; }
     if (!kind) { ignored.otherActivities++; continue; }
     const d = parseDate(r[2]);
     if (!d) { ignored.noDate++; continue; }
     if (d.date < kid.birth || d.date > today) { ignored.outOfRange++; continue; }
+
+    if (kind === 'temperature') {
+      // "36.6°C", "36,6 °C", "97.9°F"
+      const m = /(-?\d+(?:[.,]\d+)?)\s*°?\s*([CF])?/i.exec(String(r[4] ?? ''));
+      let v = m ? parseFloat(m[1].replace(',', '.')) : NaN;
+      if (m && ((m[2] || '').toUpperCase() === 'F' || (!m[2] && v > 50))) v = (v - 32) * 5 / 9;
+      v = Math.round(v * 10) / 10;
+      if (!(v >= 30 && v <= 45)) { ignored.badValue++; continue; }
+      const at = new Date(`${d.date}T${d.time || '12:00'}:00`).toISOString();
+      const k = `${at.slice(0, 16)}|${v}`;
+      if (seenT.has(k)) { ignored.duplicate++; continue; }
+      seenT.add(k);
+      temps.push({ id: uid(), kidId: kid.id, at, value: v, feelsHot: false, source: 'import', updatedAt: now });
+      continue;
+    }
 
     if (kind === 'medicine') {
       const p = parseMedDetails(r[4]);
@@ -316,5 +331,5 @@ export function buildFromBabyTracker(rows, opts) {
     const k = gKey(g);
     if (seenG.has(k)) ignored.duplicate++; else { seenG.add(k); growth.push(g); }
   }
-  return { growth, meds, ignored };
+  return { growth, meds, temps, ignored };
 }

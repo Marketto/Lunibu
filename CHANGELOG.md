@@ -1,5 +1,8 @@
 # Novità di Lunibù
 
+## 1.15.1 — 17 novembre 2026
+- Importazione da Baby Tracker: ora vengono importate anche le temperature (°C o °F) nel registro della temperatura, senza doppioni se reimporti lo stesso file.
+
 ## 1.15.0 — 15 novembre 2026
 - Nuovo registro della temperatura nel Diario: valore, sede e ora, e/o "sembra caldo" senza termometro, con una nota libera su come sta. Liste informative verde/giallo/rosso e "Dorme" adattate da NICE e NHS, con il 112 accanto alla lista rossa: l'app non calcola alcun esito da ciò che inserisci. Avvisi per età (sotto i 3 mesi, da 3 a 6 mesi, febbre da 5 giorni) con le fonti.
 - Grafico con le dosi di paracetamolo e ibuprofene già registrate, senza tempi di effetto: le fonti non li indicano.

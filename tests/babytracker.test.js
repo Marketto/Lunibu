@@ -52,7 +52,8 @@ describe('baby tracker', () => {
     const o = buildFromBabyTracker(r, { kid, now });
     expect(o.growth[0]).toMatchObject({ weight: 9.072, height: 76.2, head: 45 });
     expect(o.meds[0]).toMatchObject({ name: 'X', amount: 5, unit: 'gocce' });
-    expect(o.ignored.temperature).toBe(1);
+    expect(o.temps).toHaveLength(1);
+    expect(o.temps[0]).toMatchObject({ value: 37, feelsHot: false, source: 'import' });
   });
   it('parses medicine details', () => {
     expect(parseMedDetails('Brandx 2,50ml')).toEqual({ name: 'Brandx', amount: 2.5, unit: 'ml', note: '' });
@@ -77,7 +78,16 @@ describe('baby tracker', () => {
   });
   it('counts ignored reasons', () => {
     const { ignored } = build();
-    expect(ignored).toMatchObject({ temperature: 2, otherActivities: 4, empty: 1, badValue: 1 });
+    expect(ignored).toMatchObject({ otherActivities: 4, empty: 1 });
+  });
+  it('imports temperatures (°C, °F), dedupes on re-import', () => {
+    const r = [H, row('Temperatura', '2026-08-03, 11:45', '36.6°C'), row('Temperature', '2026-08-03, 12:45', '100.4°F'), row('Temperatura', '2026-08-03, 13:45', '99°C')];
+    const o = buildFromBabyTracker(r, { kid, now });
+    expect(o.temps.map((x) => x.value)).toEqual([36.6, 38]);
+    expect(o.ignored.badValue).toBe(1);
+    const again = buildFromBabyTracker(r, { kid, now, existing: { temps: o.temps } });
+    expect(again.temps).toHaveLength(0);
+    expect(again.ignored.duplicate).toBe(2);
   });
   it('dedupes on re-import, even if the mapping changed', () => {
     const first = build();
