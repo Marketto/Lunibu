@@ -1313,5 +1313,180 @@
     "label": "AAP – HealthyChildren.org. When to Call the Pediatrician: Fever (updated 2/12/2022)",
     "url": "https://www.healthychildren.org/English/health-issues/conditions/fever/Pages/When-to-Call-the-Pediatrician.aspx",
     "type": "ente sanitario"
+  },
+  "RB1": {
+    "label": "Evans DW, Leckman JF, Carter A, Reznick JS, Henshaw D, King RA, Pauls D. Ritual, habit, and perfectionism: the prevalence and development of compulsive-like behavior in normal young children. Child Dev. 1997;68(1):58-68",
+    "url": "https://doi.org/10.1111/j.1467-8624.1997.tb01925.x",
+    "type": "studio osservazionale"
+  },
+  "RB3": {
+    "label": "Horst JS, Parsons KL, Bryan NM. Get the story straight: contextual repetition promotes word learning from storybooks. Front Psychol. 2011;2:17",
+    "url": "https://doi.org/10.3389/fpsyg.2011.00017",
+    "type": "studio sperimentale (piccolo)"
+  },
+  "RB4": {
+    "label": "Chouinard MM. Children's questions: a mechanism for cognitive development. Monogr Soc Res Child Dev. 2007;72(1). PMID 17394580",
+    "url": "https://read.qxmd.com/read/17394580/children-s-questions-a-mechanism-for-cognitive-development",
+    "type": "studio osservazionale"
+  },
+  "RB5": {
+    "label": "Benderev R (ZERO TO THREE). Creating Routines for Love and Learning. 2010",
+    "url": "https://www.zerotothree.org/resource/creating-routines-for-love-and-learning/",
+    "type": "divulgativo esperti"
+  },
+  "RB6": {
+    "label": "Center on the Developing Child, Harvard University. InBrief: Executive Function: Skills for Life and Learning. 2012",
+    "url": "https://developingchild.harvard.edu/resources/inbrief-executive-function/",
+    "type": "sintesi"
+  },
+  "RB7": {
+    "label": "CDC. Signs and Symptoms of Autism Spectrum Disorder (reviewed 16 May 2024)",
+    "url": "https://www.cdc.gov/autism/signs-symptoms/index.html",
+    "type": "ente sanitario"
+  },
+  "RB8": {
+    "label": "NICE CG128. Autism spectrum disorder in under 19s: recognition, referral and diagnosis (2011, updated 2017)",
+    "url": "https://www.nice.org.uk/guidance/CG128",
+    "type": "linea guida"
+  },
+  "RB9": {
+    "label": "NIMH. Obsessive-Compulsive Disorder: When Unwanted Thoughts or Repetitive Behaviors Take Over (NIH Pub. 23-MH-4676, 2023)",
+    "url": "https://www.nimh.nih.gov/health/publications/obsessive-compulsive-disorder-when-unwanted-thoughts-or-repetitive-behaviors-take-over",
+    "type": "ente sanitario"
+  },
+  "RB10": {
+    "label": "AACAP. Facts for Families No. 60: Obsessive-Compulsive Disorder in Children and Adolescents (updated Oct 2023)",
+    "url": "https://www.aacap.org/AACAP/Families_and_Youth/Facts_for_Families/FFF-Guide/Obsessive-Compulsive-Disorder-In-Children-And-Adolescents-060.aspx",
+    "type": "società scientifica"
+  },
+  "RB12": {
+    "label": "Lebowitz ER, Bloch M. Family accommodation in pediatric obsessive-compulsive disorder. Expert Rev Neurother. 2012;12(2):229-238",
+    "url": "https://doi.org/10.1586/ern.11.200",
+    "type": "revisione narrativa"
+  },
+  "RB13": {
+    "label": "CDC. Steps for Giving Good Directions (Essentials for Parenting Toddlers and Preschoolers)",
+    "url": "https://www.cdc.gov/parenting-toddlers/directions/good-directions.html",
+    "type": "ente sanitario"
+  },
+  "PB1": {
+    "label": "Kamins ML, Dweck CS. Person versus process praise and criticism: implications for contingent self-worth and coping. Developmental Psychology. 1999;35(3):835-847",
+    "url": "https://doi.org/10.1037/0012-1649.35.3.835",
+    "type": "studio sperimentale"
+  },
+  "PB2": {
+    "label": "Nix RL et al. The relation between mothers' hostile attribution tendencies and children's externalizing behavior problems: the mediating role of mothers' harsh discipline practices. Child Development. 1999;70(4):896-909",
+    "url": "https://doi.org/10.1111/1467-8624.00065",
+    "type": "studio longitudinale"
+  },
+  "PB3": {
+    "label": "van Eldik WM et al. The interparental relationship: meta-analytic associations with children's maladjustment and responses to interparental conflict. Psychological Bulletin. 2020;146(7):553-594",
+    "url": "https://doi.org/10.1037/bul0000233",
+    "type": "meta-analisi"
+  },
+  "PB4": {
+    "label": "Grych JH, Harold GT, Miles CJ. A prospective investigation of appraisals as mediators of the link between interparental conflict and child adjustment. Child Development. 2003;74(4):1176-1193",
+    "url": "https://doi.org/10.1111/1467-8624.00600",
+    "type": "studio longitudinale"
+  },
+  "PB5": {
+    "label": "Cummings EM, Ballard M, El-Sheikh M, Lake M. Resolution and children's responses to interadult anger. Developmental Psychology. 1991;27(3):462-470",
+    "url": "https://doi.org/10.1037/0012-1649.27.3.462",
+    "type": "studio sperimentale"
+  },
+  "PB6": {
+    "label": "Koss KJ et al. Understanding children's emotional processes and behavioral strategies in the context of marital conflict. Journal of Experimental Child Psychology. 2011;109(3):336-352",
+    "url": "https://doi.org/10.1016/j.jecp.2011.02.007",
+    "type": "studio sperimentale"
+  },
+  "PB7": {
+    "label": "Stuewig J et al. Children's proneness to shame and guilt predict risky and illegal behaviors in young adulthood. Child Psychiatry & Human Development. 2015;46(2):217-227",
+    "url": "https://doi.org/10.1007/s10578-014-0467-1",
+    "type": "studio longitudinale"
+  },
+  "PB8": {
+    "label": "AAP - HealthyChildren.org. Divorce and Separation: How to Help Your Child Adjust",
+    "url": "https://www.healthychildren.org/English/family-life/family-dynamics/types-of-families/Pages/Adjusting-to-Divorce.aspx",
+    "type": "società scientifica"
+  },
+  "PB9": {
+    "label": "AACAP. Facts for Families No. 136: Temper Tantrums and Outbursts (updated June 2025)",
+    "url": "https://www.aacap.org/AACAP/Families_and_Youth/Facts_for_Families/FFF-Guide/Temper_Tantrums.aspx",
+    "type": "società scientifica"
+  },
+  "PB10": {
+    "label": "CDC. Tips for Giving Directions (Essentials for Parenting Toddlers and Preschoolers)",
+    "url": "https://www.cdc.gov/parenting-toddlers/communication/giving-directions.html",
+    "type": "ente sanitario"
+  },
+  "K38": {
+    "label": "Kendi S, Johnston BD; AAP Council on Injury, Violence, and Poison Prevention. Child Pedestrian Safety (policy statement). Pediatrics. 2023;152(1):e2023062506",
+    "url": "https://doi.org/10.1542/peds.2023-062506",
+    "type": "linea guida"
+  },
+  "K39": {
+    "label": "AAP - HealthyChildren.org. Pedestrian Safety Tips for Families (Kendi S; updated 2 March 2026)",
+    "url": "https://www.healthychildren.org/English/safety-prevention/all-around/Pages/pedestrian-safety-tips-for-families.aspx",
+    "type": "ente sanitario"
+  },
+  "K40": {
+    "label": "Schwebel DC, Davis AL, O'Neal EE. Child pedestrian injury: a review of behavioral risks and preventive strategies. Am J Lifestyle Med. 2012;6(4):292-302",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3467946",
+    "type": "revisione narrativa"
+  },
+  "K41": {
+    "label": "Thomson JA, Tolmie A, Foot HC, McLaren B. Child development and the aims of road safety education. Road Safety Research Report No. 1. Department of Transport (UK); 1996",
+    "url": "https://core.ac.uk/download/9026892.pdf",
+    "type": "rapporto"
+  },
+  "K42": {
+    "label": "Morrongiello BA, Schell SL. Child injury: the role of supervision in prevention. Am J Lifestyle Med. 2010;4(1):65-74",
+    "url": "https://doi.org/10.1177/1559827609348475",
+    "type": "revisione narrativa"
+  },
+  "K43": {
+    "label": "Morrongiello BA, Kane A, Bell M. Advancing our understanding of mothers' safety rules for school-age children. Can J Public Health. 2011;102(6):455-458",
+    "url": "https://doi.org/10.1007/BF03404199",
+    "type": "studio osservazionale"
+  },
+  "K44": {
+    "label": "Morrongiello BA, Midgett C, Shields R. Don't run with scissors: young children's knowledge of home safety rules. J Pediatr Psychol. 2001;26(2):105-115",
+    "url": "https://doi.org/10.1093/jpepsy/26.2.105",
+    "type": "studio osservazionale"
+  },
+  "K45": {
+    "label": "Peterson L, Mori L, Scissors C. Mom or dad says I shouldn't: supervised and unsupervised children's knowledge of their parents' rules for home safety. J Pediatr Psychol. 1986;11(2):177-188",
+    "url": "https://doi.org/10.1093/jpepsy/11.2.177",
+    "type": "studio osservazionale"
+  },
+  "K46": {
+    "label": "Duperrex O, Roberts I, Bunn F. Safety education of pedestrians for injury prevention. Cochrane Database Syst Rev. 2002;(2):CD001531",
+    "url": "https://doi.org/10.1002/14651858.CD001531",
+    "type": "revisione sistematica"
+  },
+  "K47": {
+    "label": "Best JR, Miller PH. A developmental perspective on executive function. Child Dev. 2010;81(6):1641-1660",
+    "url": "https://doi.org/10.1111/j.1467-8624.2010.01499.x",
+    "type": "revisione"
+  },
+  "K48": {
+    "label": "Center on the Developing Child, Harvard University. Enhancing and Practicing Executive Function Skills with Children from Infancy to Adolescence",
+    "url": "https://developingchild.harvard.edu/wp-content/uploads/2024/10/Enhancing-and-Practicing-Executive-Function-Skills-with-Children-from-Infancy-to-Adolescence-1.pdf",
+    "type": "sintesi"
+  },
+  "K49": {
+    "label": "Schwebel DC, Plumert JM. Longitudinal and concurrent relations among temperament, ability estimation, and injury proneness. Child Dev. 1999;70(3):700-712",
+    "url": "https://doi.org/10.1111/1467-8624.00050",
+    "type": "studio longitudinale"
+  },
+  "K50": {
+    "label": "Morrongiello BA, McArthur BA. Parent supervision to prevent injuries to young children. Encyclopedia on Early Childhood Development; rev. 2018",
+    "url": "https://www.child-encyclopedia.com/pdf/expert/parenting-skills/according-experts/parent-supervision-prevent-injuries-young-children",
+    "type": "sintesi esperti"
+  },
+  "K51": {
+    "label": "Brussoni M, Olsen LL, Pike I, Sleet DA. Risky play and children's safety: balancing priorities for optimal child development. Int J Environ Res Public Health. 2012;9(9):3134-3148",
+    "url": "https://stacks.cdc.gov/view/cdc/11059",
+    "type": "revisione narrativa"
   }
 }

@@ -2274,5 +2274,194 @@
         "If you think your child is in immediate danger, call 112 right away (the free EU-wide emergency number, active in Italy alongside 118). Outside Italy, call your local emergency number. Do not leave them alone."
       ]
     }
+  },
+  {
+    "id": "problema-non-bambino",
+    "category": "emozioni",
+    "ageFrom": 24,
+    "ageTo": 144,
+    "alert": "none",
+    "evidence": "bassa",
+    "sources": [
+      "PB1",
+      "PB2",
+      "PB3",
+      "PB4",
+      "PB5",
+      "PB6",
+      "PB7",
+      "PB8",
+      "PB9",
+      "PB10",
+      "B30"
+    ],
+    "it": {
+      "title": "Nei conflitti il problema non è il bambino",
+      "summary": "Le prove su come parlare al bambino durante i conflitti sono limitate: un breve esperimento di laboratorio, alcuni studi di associazione e indicazioni di enti sanitari e società scientifiche. Suggeriscono di descrivere il comportamento invece di giudicare la persona e di non coinvolgere il bambino nei litigi tra adulti. Vedi anche le schede disciplina, capricci e lodi.",
+      "keywords": [
+        "il problema non è il bambino",
+        "sei cattivo",
+        "etichette",
+        "critica alla persona",
+        "colpa",
+        "senso di colpa",
+        "vergogna",
+        "litigi tra genitori",
+        "conflitto tra genitori",
+        "litigare davanti ai figli",
+        "non è colpa tua",
+        "umiliare",
+        "rimproveri",
+        "descrivere il comportamento"
+      ],
+      "research": [
+        {
+          "t": "In un esperimento breve con 67 bambini di 5–6 anni (gioco di ruolo con bambole), chi riceveva una critica alla persona («Sono molto deluso di te») si giudicava peggio, era di umore peggiore e insisteva meno di chi riceveva una critica alla strategia («Forse potresti provare in un altro modo»). Gli autori notano che la critica alla persona era anche più dura (Kamins e Dweck 1999).",
+          "from": 60,
+          "to": 72
+        },
+        {
+          "t": "In uno studio su 277 famiglie seguite per oltre 4 anni, le madri che tendevano ad attribuire intenzioni ostili a comportamenti ambigui del figlio usavano una disciplina più dura, e i figli avevano più problemi di comportamento a scuola; il legame restava tenendo conto dei problemi iniziali. È un'associazione (Nix 1999).",
+          "from": 60,
+          "to": 108
+        },
+        "Una meta-analisi (van Eldik 2020: 169 studi sui problemi dei figli, 61 sulle loro reazioni) associa i conflitti tra genitori, soprattutto quelli ostili per i problemi di comportamento, a più problemi nei figli; anche i conflitti che riguardano i figli comportano rischi simili. Sono associazioni.",
+        {
+          "t": "In uno studio su 298 ragazzi di 11–12 anni, più conflitto tra i genitori prediceva che i figli si sentissero più minacciati e più in colpa; sentirsi in colpa si associava poi a più problemi di comportamento, sentirsi minacciati a più ansia e tristezza (Grych 2003). Associazione, non prova di causa.",
+          "from": 132,
+          "to": 144
+        },
+        {
+          "t": "In esperimenti con video di litigi tra adulti, le reazioni dei bambini erano più negative quanto meno il litigio si risolveva (Cummings 1991, 5–19 anni); in uno studio su 207 bambini di circa 8 anni il 98,5% vedeva gli adulti felici dopo un litigio risolto (Koss 2011). Sono scene di laboratorio, non litigi reali.",
+          "from": 60,
+          "to": 144
+        },
+        {
+          "t": "In uno studio su 380 bambini di 10–12 anni seguiti fino ai 18–21, la tendenza a provare vergogna (giudizio su tutto il sé) si associava a più comportamenti a rischio, la tendenza a provare colpa (riferita a un'azione) a meno. Lo studio non misura cosa dicono i genitori (Stuewig 2015).",
+          "from": 120,
+          "to": 144
+        }
+      ],
+      "tips": [
+        "Descrivi il comportamento e cosa fare invece: «Hai tirato il cubo: i cubi servono per costruire», non «Sei cattivo».",
+        "Prima di reagire, chiediti se è stanco, affamato, ha dolore o sta per ammalarsi (AACAP).",
+        "Parla con tono fermo ma calmo, senza urlare (CDC) e senza umiliare (AAP).",
+        "Evitate di litigare o di criticare l'altro genitore davanti a lui, e non usatelo come messaggero (AAP).",
+        "Se ha assistito a un litigio, fategli sapere che vi siete chiariti. (deduzione da studi di laboratorio, non un intervento testato)",
+        "Digli chiaramente che i problemi tra adulti non sono colpa sua: è un'indicazione dell'AAP, non un intervento testato."
+      ]
+    },
+    "ru": {
+      "title": "В конфликтах проблема не в ребёнке",
+      "summary": "Данных о том, как разговаривать с ребёнком во время конфликтов, немного: один краткий лабораторный эксперимент, несколько исследований связи и рекомендации органов здравоохранения и научных обществ. Они советуют описывать поведение, а не судить о личности, и не вовлекать ребёнка в ссоры взрослых. См. также карточки о дисциплине, капризах и похвале.",
+      "keywords": [
+        "проблема не в ребёнке",
+        "ты плохой",
+        "ярлыки",
+        "критика личности",
+        "вина",
+        "чувство вины",
+        "стыд",
+        "ссоры родителей",
+        "конфликт между родителями",
+        "ссориться при детях",
+        "это не твоя вина",
+        "унижать",
+        "упрёки",
+        "описывать поведение"
+      ],
+      "research": [
+        {
+          "t": "В коротком эксперименте с 67 детьми 5–6 лет (ролевая игра с куклами) дети, получавшие критику личности («Я очень разочарован в тебе»), хуже оценивали себя, были в худшем настроении и проявляли меньше настойчивости, чем те, кто получал критику стратегии («Может быть, ты мог бы попробовать по-другому»). Авторы отмечают, что критика личности была и более резкой (Kamins и Dweck, 1999).",
+          "from": 60,
+          "to": 72
+        },
+        {
+          "t": "В исследовании 277 семей, за которыми наблюдали более 4 лет, матери, склонные приписывать враждебные намерения неоднозначному поведению ребёнка, применяли более жёсткую дисциплину, а у детей было больше проблем с поведением в школе; связь сохранялась с поправкой на исходные проблемы. Это связь, а не доказательство причины (Nix, 1999).",
+          "from": 60,
+          "to": 108
+        },
+        "Метаанализ (van Eldik, 2020: 169 исследований о проблемах детей, 61 — об их реакциях) связывает конфликты между родителями, особенно враждебные — с проблемами поведения, с большим числом проблем у детей; конфликты, касающиеся самих детей, несут сходные риски. Это связи, а не доказательство причины.",
+        {
+          "t": "В исследовании 298 подростков 11–12 лет более сильный конфликт между родителями предсказывал, что дети будут чувствовать себя более под угрозой и более виноватыми; чувство вины затем было связано с большим числом проблем с поведением, чувство угрозы — с большей тревогой и грустью (Grych, 2003). Связь, а не доказательство причины.",
+          "from": 132,
+          "to": 144
+        },
+        {
+          "t": "В экспериментах с видеозаписями ссор взрослых реакции детей были тем более негативными, чем меньше ссора разрешалась (Cummings, 1991, 5–19 лет); в исследовании 207 детей около 8 лет 98,5% видели взрослых счастливыми после разрешённой ссоры (Koss, 2011). Это лабораторные сцены, а не реальные ссоры.",
+          "from": 60,
+          "to": 144
+        },
+        {
+          "t": "В исследовании 380 детей 10–12 лет, за которыми наблюдали до 18–21 года, склонность испытывать стыд (оценка всего себя) была связана с большим числом рискованных поступков, а склонность испытывать вину (относящуюся к поступку) — с меньшим. Исследование не измеряет, что говорят родители (Stuewig, 2015).",
+          "from": 120,
+          "to": 144
+        }
+      ],
+      "tips": [
+        "Описывайте поведение и что делать вместо этого: «Ты бросил кубик: кубики нужны, чтобы строить», а не «Ты плохой».",
+        "Прежде чем реагировать, спросите себя, не устал ли он, не голоден ли, не болит ли у него что-то или не заболевает ли он (AACAP).",
+        "Говорите твёрдым, но спокойным тоном, не кричите (CDC) и не унижайте (AAP).",
+        "Старайтесь не ссориться и не критиковать другого родителя при ребёнке и не используйте его как посредника (AAP).",
+        "Если он стал свидетелем ссоры, дайте ему знать, что вы помирились. (вывод из лабораторных исследований, а не проверенное вмешательство)",
+        "Скажите ему ясно, что проблемы между взрослыми — не его вина: это рекомендация AAP, а не проверенное вмешательство."
+      ]
+    },
+    "en": {
+      "title": "In conflicts, the problem is not the child",
+      "summary": "The evidence on how to talk to a child during conflicts is limited: one brief laboratory experiment, some association studies and guidance from health agencies and professional societies. They suggest describing the behavior rather than judging the person, and not involving the child in arguments between adults. See also the cards on discipline, tantrums and praise.",
+      "keywords": [
+        "the problem is not the child",
+        "you're bad",
+        "labels",
+        "criticizing the person",
+        "blame",
+        "guilt",
+        "shame",
+        "parents arguing",
+        "parental conflict",
+        "arguing in front of children",
+        "it's not your fault",
+        "humiliating",
+        "scolding",
+        "describing the behavior"
+      ],
+      "research": [
+        {
+          "t": "In a brief experiment with 67 children aged 5–6 (role play with dolls), children who received criticism of the person (\"I'm very disappointed in you\") judged themselves more harshly, were in a worse mood and persisted less than those who received criticism of the strategy (\"Maybe you could try another way\"). The authors note that the criticism of the person was also harsher (Kamins and Dweck 1999).",
+          "from": 60,
+          "to": 72
+        },
+        {
+          "t": "In a study of 277 families followed for more than 4 years, mothers who tended to attribute hostile intentions to their child's ambiguous behavior used harsher discipline, and their children had more behavior problems at school; the link held after accounting for initial problems. This is an association (Nix 1999).",
+          "from": 60,
+          "to": 108
+        },
+        "A meta-analysis (van Eldik 2020: 169 studies on children's problems, 61 on their reactions) associates conflict between parents, especially hostile conflict for behavior problems, with more problems in children; conflicts about the children themselves carry similar risks. These are associations.",
+        {
+          "t": "In a study of 298 children aged 11–12, more conflict between parents predicted that children felt more threatened and more guilty; feeling guilty was then associated with more behavior problems, and feeling threatened with more anxiety and sadness (Grych 2003). Association, not proof of cause.",
+          "from": 132,
+          "to": 144
+        },
+        {
+          "t": "In experiments with videos of arguments between adults, children's reactions were more negative the less the argument was resolved (Cummings 1991, ages 5–19); in a study of 207 children aged about 8, 98.5% saw the adults as happy after a resolved argument (Koss 2011). These are laboratory scenes, not real arguments.",
+          "from": 60,
+          "to": 144
+        },
+        {
+          "t": "In a study of 380 children aged 10–12 followed until ages 18–21, the tendency to feel shame (a judgment of the whole self) was associated with more risky behavior, while the tendency to feel guilt (about an action) was associated with less. The study does not measure what parents say (Stuewig 2015).",
+          "from": 120,
+          "to": 144
+        }
+      ],
+      "tips": [
+        "Describe the behavior and what to do instead: \"You threw the block: blocks are for building,\" not \"You're bad.\"",
+        "Before reacting, ask yourself whether they are tired, hungry, in pain or about to get sick (AACAP).",
+        "Speak in a firm but calm tone, without yelling (CDC) and without humiliating (AAP).",
+        "Avoid arguing or criticizing the other parent in front of them, and don't use them as a messenger (AAP).",
+        "If they witnessed an argument, let them know that you have made up. (inferred from laboratory studies, not a tested intervention)",
+        "Tell them clearly that problems between adults are not their fault: this is AAP guidance, not a tested intervention."
+      ]
+    }
   }
 ]

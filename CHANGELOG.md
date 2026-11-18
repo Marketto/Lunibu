@@ -1,5 +1,8 @@
 # Novità di Lunibù
 
+## 1.16.0 — 18 novembre 2026
+- Tre nuove schede con fonti verificate (italiano, russo, inglese): «Domande ripetute, rituali e "non ascolta": quando è normale», «Nei conflitti il problema non è il bambino» e «Spiegare rischio e pericolo alle diverse età» (con fasce 2–3, 3–6, 6–9, 9–12 anni).
+
 ## 1.15.1 — 17 novembre 2026
 - Importazione da Baby Tracker: ora vengono importate anche le temperature (°C o °F) nel registro della temperatura, senza doppioni se reimporti lo stesso file.
 

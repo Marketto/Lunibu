@@ -656,5 +656,301 @@
         "The child is very discouraged or says they can't manage."
       ]
     }
+  },
+  {
+    "id": "rituali-e-ascolto",
+    "category": "sviluppo",
+    "ageFrom": 12,
+    "ageTo": 144,
+    "alert": "pediatra",
+    "evidence": "moderata",
+    "sources": [
+      "RB1",
+      "RB3",
+      "RB4",
+      "RB5",
+      "RB6",
+      "RB7",
+      "RB8",
+      "RB9",
+      "RB10",
+      "RB12",
+      "RB13"
+    ],
+    "it": {
+      "title": "Domande ripetute, rituali e \"non ascolta\": quando è normale",
+      "summary": "Chiedere mille volte la stessa cosa, volere sempre lo stesso ordine o sembrare sordi alle richieste è molto comune nei primi anni. Qui trovi cosa dice la ricerca e quando vale la pena parlarne col pediatra.",
+      "keywords": [
+        "domande ripetute",
+        "perché",
+        "rituali",
+        "routine",
+        "stesse cose",
+        "stesso libro",
+        "non ascolta",
+        "non mi ascolta",
+        "non obbedisce",
+        "ripete sempre",
+        "manie",
+        "ordine",
+        "vuole tutto uguale",
+        "capricci",
+        "ossessioni",
+        "DOC",
+        "attenzione"
+      ],
+      "research": [
+        {
+          "t": "In uno studio su 1.492 genitori (Evans 1997; bambini 8–72 mesi), i comportamenti simili a rituali (per esempio \"stesso ordine\" o \"giusto così\") erano più frequenti a 2, 3 e 4 anni che prima di 1 anno o dopo i 4: fanno parte del repertorio normale. Dati riferiti dai genitori, in un solo momento: non seguono i bambini nel tempo.",
+          "from": 18,
+          "to": 60
+        },
+        {
+          "t": "In un piccolo studio sperimentale (Horst 2011; 16 bambini di 3 anni, 8 per gruppo), chi aveva sentito la stessa storia più volte ricordava le parole nuove; chi aveva sentito storie diverse no. Essendo piccolo, va preso come indizio, non come prova definitiva.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Osservando le conversazioni, Chouinard (2007) riporta che quando la risposta non è informativa i bambini continuano a chiedere: cercano informazioni, non solo attenzione.",
+          "from": 12,
+          "to": 72
+        },
+        {
+          "t": "Il CDC ricorda che i bambini piccoli e in età prescolare hanno una capacità di attenzione molto breve: per questo conviene dare una sola istruzione alla volta.",
+          "from": 24,
+          "to": 60
+        },
+        "Il Center on the Developing Child di Harvard (2012) osserva che autocontrollo e flessibilità mentale non sono innati e si sviluppano fino all'adolescenza e all'inizio dell'età adulta. Non dimostra che sia questa la causa del \"non ascolta\"."
+      ],
+      "tips": [
+        {
+          "t": "Per dare un'istruzione (CDC): avvicinati, cerca il contatto visivo, chiamalo per nome e mettiti alla sua altezza; una richiesta alla volta, in forma di affermazione e non di domanda; di' cosa fare invece di cosa non fare; usa una voce calma e ferma.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Se serve, ripeti con calma e controlla che abbia capito; poi riconosci con una lode quando lo fa.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Routine prevedibili aiutano; avvisa qualche minuto prima di un cambio di attività (parere di esperti, ZERO TO THREE 2010).",
+          "from": 12,
+          "to": 60
+        },
+        {
+          "t": "Rileggere lo stesso libro va benissimo: nel piccolo studio di Horst (2011) la ripetizione ha aiutato a ricordare le parole nuove.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Rispondi alle domande con informazioni vere, anche semplici: è ciò che il bambino sta cercando.",
+          "from": 12,
+          "to": 72
+        },
+        {
+          "t": "Solo se sospetti un DOC: annota esempi e quanto tempo occupano i rituali e parlane col pediatra. In bambini con DOC, partecipare ai rituali (accomodamento familiare) è associato a sintomi più gravi (campione clinico, Lebowitz 2012): eventuali cambiamenti vanno pianificati con un professionista. Non vale per i normali rituali dei più piccoli.",
+          "from": 60,
+          "to": 144
+        }
+      ],
+      "redFlags": [
+        "Perde parole, abilità sociali o motorie che aveva già: parlane subito col pediatra.",
+        {
+          "t": "Movimenti o giochi ripetitivi e forte disagio per piccoli cambiamenti, insieme a difficoltà a comunicare e a relazionarsi: vedi la scheda \"Segnali precoci di autismo\" (segnali-autismo). Alcune di queste caratteristiche possono comparire anche senza autismo: conta l'insieme, non il singolo segno.",
+          "from": 12,
+          "to": 144
+        },
+        {
+          "t": "Rituali o pensieri ripetuti che gli fanno perdere molto tempo, lo angosciano o ostacolano scuola, amici o famiglia (nel DOC, secondo il NIMH, di solito più di 1 ora al giorno: è una caratteristica tipica, non una soglia).",
+          "from": 60,
+          "to": 144
+        }
+      ]
+    },
+    "ru": {
+      "title": "Повторяющиеся вопросы, ритуалы и «не слушает»: когда это нормально",
+      "summary": "Спрашивать одно и то же тысячу раз, хотеть всё в одном и том же порядке или словно не слышать просьб — это очень частое явление в первые годы жизни. Здесь вы найдёте, что говорят исследования и когда стоит обсудить это с педиатром.",
+      "keywords": [
+        "повторяющиеся вопросы",
+        "почему",
+        "ритуалы",
+        "рутина",
+        "одно и то же",
+        "одна и та же книга",
+        "не слушает",
+        "не слушается",
+        "не слушает меня",
+        "не подчиняется",
+        "повторяет всё время",
+        "странности",
+        "порядок",
+        "хочет, чтобы всё было одинаково",
+        "капризы",
+        "навязчивости",
+        "ОКР",
+        "внимание"
+      ],
+      "research": [
+        {
+          "t": "В исследовании с участием 1492 родителей (Evans, 1997; дети 8–72 месяцев) ритуалоподобное поведение (например, «тот же порядок» или «как надо») встречалось чаще в 2, 3 и 4 года, чем до 1 года или после 4 лет: это часть нормального репертуара. Данные со слов родителей, на один момент времени: за детьми во времени не наблюдали.",
+          "from": 18,
+          "to": 60
+        },
+        {
+          "t": "В небольшом экспериментальном исследовании (Horst, 2011; 16 детей 3 лет, по 8 в группе) дети, которые слышали одну и ту же историю несколько раз, запоминали новые слова; те, кто слышал разные истории, — нет. Поскольку исследование небольшое, его следует воспринимать как предварительное указание, а не как окончательное доказательство.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Наблюдая за разговорами, Chouinard (2007) сообщает, что когда ответ неинформативен, дети продолжают спрашивать: они ищут информацию, а не только внимание.",
+          "from": 12,
+          "to": 72
+        },
+        {
+          "t": "CDC напоминает, что у малышей и дошкольников внимание удерживается очень недолго, поэтому лучше давать одну инструкцию за раз.",
+          "from": 24,
+          "to": 60
+        },
+        "Центр развития ребёнка Гарвардского университета (Center on the Developing Child, 2012) отмечает, что самоконтроль и гибкость мышления не врождённые и развиваются до подросткового возраста и начала взрослой жизни. Это не доказывает, что именно в этом причина того, что ребёнок «не слушает»."
+      ],
+      "tips": [
+        {
+          "t": "Как давать инструкцию (CDC): подойдите ближе, встретьтесь с ребёнком взглядом, назовите его по имени и опуститесь на его уровень; одна просьба за раз, в форме утверждения, а не вопроса; говорите, что делать, а не чего не делать; используйте спокойный и твёрдый голос.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "При необходимости спокойно повторите и проверьте, понял ли ребёнок; затем похвалой отметьте, когда он это делает.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Предсказуемая рутина помогает; предупреждайте за несколько минут о смене занятия (мнение экспертов, ZERO TO THREE, 2010).",
+          "from": 12,
+          "to": 60
+        },
+        {
+          "t": "Перечитывать одну и ту же книгу — это совершенно нормально: в небольшом исследовании Horst (2011) повторение помогло запоминать новые слова.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Отвечайте на вопросы настоящей информацией, пусть и простой: именно её ребёнок и ищет.",
+          "from": 12,
+          "to": 72
+        },
+        {
+          "t": "Только если вы подозреваете ОКР: запишите примеры и то, сколько времени занимают ритуалы, и обсудите это с педиатром. У детей с ОКР участие семьи в ритуалах (семейная аккомодация) связано с более тяжёлыми симптомами (клиническая выборка, Lebowitz, 2012): любые изменения следует планировать вместе со специалистом. Это не относится к обычным ритуалам маленьких детей.",
+          "from": 60,
+          "to": 144
+        }
+      ],
+      "redFlags": [
+        "Теряет слова, социальные или двигательные навыки, которые у него уже были: сразу обсудите это с педиатром.",
+        {
+          "t": "Повторяющиеся движения или игры и сильное расстройство из-за небольших перемен, вместе с трудностями в общении и во взаимодействии с людьми: смотрите карточку «Ранние признаки аутизма» (segnali-autismo). Некоторые из этих особенностей могут встречаться и без аутизма: важна совокупность, а не отдельный признак.",
+          "from": 12,
+          "to": 144
+        },
+        {
+          "t": "Ритуалы или повторяющиеся мысли, которые отнимают много времени, вызывают у него сильную тревогу или мешают школе, друзьям или семье (при ОКР, по данным NIMH, обычно более 1 часа в день: это типичная характеристика, а не порог).",
+          "from": 60,
+          "to": 144
+        }
+      ]
+    },
+    "en": {
+      "title": "Repeated questions, rituals and \"not listening\": when it's normal",
+      "summary": "Asking the same thing a thousand times, wanting everything in the same order, or seeming deaf to requests is very common in the early years. Here you'll find what research says and when it's worth talking to your pediatrician.",
+      "keywords": [
+        "repeated questions",
+        "why",
+        "rituals",
+        "routine",
+        "same things",
+        "same book",
+        "not listening",
+        "doesn't listen",
+        "won't listen",
+        "disobedient",
+        "keeps repeating",
+        "quirks",
+        "order",
+        "wants everything the same",
+        "tantrums",
+        "obsessions",
+        "OCD",
+        "attention"
+      ],
+      "research": [
+        {
+          "t": "In a study of 1,492 parents (Evans 1997; children 8–72 months), ritual-like behaviors (for example \"same order\" or \"just right\") were more frequent at ages 2, 3 and 4 than before age 1 or after age 4: they are part of the normal repertoire. The data were reported by parents at a single point in time: children were not followed over time.",
+          "from": 18,
+          "to": 60
+        },
+        {
+          "t": "In a small experimental study (Horst 2011; 16 three-year-olds, 8 per group), children who had heard the same story several times remembered the new words; those who had heard different stories did not. Because it is small, take it as a hint, not as definitive proof.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "By observing conversations, Chouinard (2007) reports that when the answer is not informative, children keep asking: they are seeking information, not just attention.",
+          "from": 12,
+          "to": 72
+        },
+        {
+          "t": "The CDC notes that toddlers and preschoolers have a very short attention span: that is why it helps to give one instruction at a time.",
+          "from": 24,
+          "to": 60
+        },
+        "The Center on the Developing Child at Harvard (2012) notes that self-control and mental flexibility are not innate and keep developing through adolescence and into early adulthood. It does not show that this is the cause of \"not listening\"."
+      ],
+      "tips": [
+        {
+          "t": "To give an instruction (CDC): move close, make eye contact, call them by name and get down to their level; one request at a time, phrased as a statement rather than a question; say what to do instead of what not to do; use a calm, firm voice.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "If needed, repeat calmly and check that they understood; then acknowledge it with praise when they do it.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Predictable routines help; give a few minutes' warning before a change of activity (expert opinion, ZERO TO THREE 2010).",
+          "from": 12,
+          "to": 60
+        },
+        {
+          "t": "Rereading the same book is perfectly fine: in the small study by Horst (2011), repetition helped children remember new words.",
+          "from": 24,
+          "to": 60
+        },
+        {
+          "t": "Answer questions with real information, even if simple: it is what the child is looking for.",
+          "from": 12,
+          "to": 72
+        },
+        {
+          "t": "Only if you suspect OCD: note examples and how much time the rituals take, and talk to your pediatrician. In children with OCD, taking part in the rituals (family accommodation) is associated with more severe symptoms (clinical sample, Lebowitz 2012): any changes should be planned with a professional. This does not apply to the normal rituals of younger children.",
+          "from": 60,
+          "to": 144
+        }
+      ],
+      "redFlags": [
+        "They lose words, social skills or motor skills they already had: talk to your pediatrician right away.",
+        {
+          "t": "Repetitive movements or play and strong distress at small changes, together with difficulty communicating and relating to others: see the card \"Early signs of autism\" (segnali-autismo). Some of these features can also appear without autism: it is the whole picture that counts, not a single sign.",
+          "from": 12,
+          "to": 144
+        },
+        {
+          "t": "Repeated rituals or thoughts that take up a lot of their time, distress them, or get in the way of school, friends or family (in OCD, according to the NIMH, usually more than 1 hour a day: this is a typical feature, not a threshold).",
+          "from": 60,
+          "to": 144
+        }
+      ]
+    }
   }
 ]
