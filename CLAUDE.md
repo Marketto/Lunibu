@@ -6,6 +6,14 @@ e invitare ad approfondire e verificare.
 
 ## Regole d'oro (non negoziabili)
 
+0. **Non creiamo contenuti: riportiamo quelli autorevoli.** Ogni frase di schede, giochi, tappe, avvisi e guida —
+   titoli, riassunti, consigli, esempi e frasi tra virgolette compresi — deve essere detta dalla fonte citata
+   (parafrasi fedele: stesso significato, numeri, età, contesto e forza della raccomandazione). Vietati consigli o
+   esempi inventati, deduzioni proprie (anche se etichettate) e generalizzazioni oltre età o contesto della fonte.
+   Se una fonte autorevole non lo dice, **non si scrive**: si omette il tema o si dichiara che non ci sono fonti.
+   Gli argomenti proposti dall'utente sono esempi di temi da cercare, non contenuti da riempire.
+   Unica eccezione: *confezionare* strumenti pratici (musiche e suoni, istruzioni di un gioco) seguendo descrizioni
+   accurate presenti nelle fonti; si presentano come realizzazione dell'app e non aggiungono affermazioni di beneficio.
 1. **Nessun dato di ricerca senza fonte verificata.** Ogni affermazione nelle schede (`content/cards/*.json`) e nei
    giochi (`content/games.json`) deve citare un id presente in `content/sources.json`.
 2. **Verifica dopo ogni trasformazione.** Dopo *qualsiasi* passaggio che crea o modifica dati di ricerca
@@ -36,7 +44,9 @@ e invitare ad approfondire e verificare.
 | Commit, push, deploy, controllo segreti | `release-manager` + skill `release` | haiku · low | procedura fissa |
 
 Regole di instradamento:
-- Lavoro di una sola riga o un controllo noto → fallo direttamente, senza agenti.
+- Lavoro di una sola riga o un controllo noto → fallo direttamente, senza agenti (mai per testi di contenuto).
+- Nessun agente scrive testo di contenuto che non abbia una fonte verificata (regola 0); il verificatore classifica ogni
+  frase e blocca quelle non dette dalla fonte.
 - Ricerca e verifica girano in **parallelo** su temi diversi, mai sulla stessa scheda.
 - Ogni agente riceve: obiettivo, file da leggere, formato di output (JSON dove possibile) → risposte brevi = meno token.
 - I risultati del verificatore che segnalano "must fix" bloccano il merge finché non sono corretti e ri-verificati.

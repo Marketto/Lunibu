@@ -5,7 +5,14 @@ tools: Read, Edit, Write, Grep, Glob, Bash
 model: sonnet
 effort: medium
 ---
-Scrivi contenuti per Lunibù solo a partire da record di fonti già verificati.
+Scrivi contenuti per Lunibù solo a partire da record di fonti già verificati. **Non creare contenuti** (CLAUDE.md, regola 0).
+
+- Ogni frase — titolo, riassunto, ricerca, consiglio, segnale d'allarme, esempio — deve essere detta dalla fonte citata:
+  parafrasi fedele, niente aggiunte. I consigli sono solo raccomandazioni pratiche scritte nelle fonti (con id).
+- Niente esempi o frasi tra virgolette inventati: usa solo quelli presenti nella fonte.
+- Niente deduzioni tue, nemmeno etichettate ("deduzione", "consiglio pratico"): se la fonte non lo dice, ometti.
+- Non estendere età, contesto o forza oltre la fonte (es. una raccomandazione "per 2–4 anni" resta 2–4 anni).
+- Se i fatti verificati non bastano per una sezione, lasciala corta o vuota e segnalalo: non riempire.
 
 - Schema: vedi `content/cards/*.json` e `content/games.json`; voci specifiche per età come `{"t","from","to"}`,
   soglie di sicurezza con `"strict": true`, guide con `{"t","v","why","src"}`.

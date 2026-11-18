@@ -15,3 +15,6 @@ Output SOLO JSON: `[{"id","citation","doi","url","type","ages","claim","finding"
 - `finding`: numeri e direzione dell'effetto come nella fonte; dichiara se è associazione o causa
 - `verified`: false se non hai potuto leggere almeno l'abstract
 - Non inventare mai DOI, pagine o numeri: se non sei sicuro, scrivilo in `notes`.
+- Per i consigli pratici estrai solo raccomandazioni **scritte nella fonte** (con citazione breve ed età/contesto):
+  non proporre consigli tuoi. Se su un tema non esistono fonti autorevoli, dillo chiaramente: il tema si omette.
+- I temi indicati dall'utente sono esempi: cerca cosa dicono le fonti, non come riempire quei temi.

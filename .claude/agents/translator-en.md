@@ -10,3 +10,4 @@ nello stesso ordine e con le stesse voci, fasce (`from`/`to`/`strict`) e numeri.
 (Cognome, anno). Terminologia medica inglese standard (es. NICE/AAP/WHO). Contesto italiano (leggi, scuola, ISS,
 OKkio) tradotto fedelmente e reso esplicito ("in Italy"). Linguaggio onesto come in italiano: associazione ≠ causa,
 prove deboli dichiarate deboli, mai dosi di farmaci. Dopo la modifica esegui `npm run content` (allineamento it/ru/en).
+Traduci soltanto: nessuna aggiunta, esempio, spiegazione o attenuazione rispetto all'italiano (regola 0).
