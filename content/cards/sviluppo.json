@@ -679,7 +679,7 @@
     ],
     "it": {
       "title": "Domande ripetute, rituali e \"non ascolta\": quando è normale",
-      "summary": "Chiedere mille volte la stessa cosa, volere sempre lo stesso ordine o sembrare sordi alle richieste è molto comune nei primi anni. Qui trovi cosa dice la ricerca e quando vale la pena parlarne col pediatra.",
+      "summary": "Volere le cose sempre nello stesso ordine è più frequente tra 2 e 4 anni; i bambini piccoli hanno una capacità di attenzione molto breve; quando la risposta non è informativa, continuano a chiedere. Qui trovi cosa dice la ricerca e quando vale la pena parlarne col pediatra.",
       "keywords": [
         "domande ripetute",
         "perché",
@@ -734,28 +734,18 @@
           "to": 60
         },
         {
-          "t": "Routine prevedibili aiutano; avvisa qualche minuto prima di un cambio di attività (parere di esperti, ZERO TO THREE 2010).",
+          "t": "Routine stabili permettono ai piccoli di prevedere cosa succederà; alcuni genitori usano un timer o un avviso di 5 minuti prima di un cambio di attività (ZERO TO THREE 2010, divulgativo).",
           "from": 12,
           "to": 60
         },
         {
-          "t": "Rileggere lo stesso libro va benissimo: nel piccolo studio di Horst (2011) la ripetizione ha aiutato a ricordare le parole nuove.",
-          "from": 24,
-          "to": 60
-        },
-        {
-          "t": "Rispondi alle domande con informazioni vere, anche semplici: è ciò che il bambino sta cercando.",
-          "from": 12,
-          "to": 72
-        },
-        {
-          "t": "Solo se sospetti un DOC: annota esempi e quanto tempo occupano i rituali e parlane col pediatra. In bambini con DOC, partecipare ai rituali (accomodamento familiare) è associato a sintomi più gravi (campione clinico, Lebowitz 2012): eventuali cambiamenti vanno pianificati con un professionista. Non vale per i normali rituali dei più piccoli.",
+          "t": "Solo se sospetti un DOC: l'AACAP indica che è importante rivolgersi a un neuropsichiatra infantile. In bambini con DOC l'accomodamento familiare (adattarsi ai sintomi, per esempio partecipando ai rituali) è fortemente associato a sintomi più gravi (revisione di studi clinici, Lebowitz 2012); in alcune terapie cognitivo-comportamentali con la famiglia i genitori venivano addestrati a ridurlo. Questi dati riguardano solo bambini con DOC.",
           "from": 60,
           "to": 144
         }
       ],
       "redFlags": [
-        "Perde parole, abilità sociali o motorie che aveva già: parlane subito col pediatra.",
+        "Perde parole, abilità sociali o motorie che aveva già: le linee guida NICE indicano l'invio a una valutazione specialistica (sotto i 3 anni, perdita di linguaggio o abilità sociali: team per l'autismo; dopo i 3 anni perdita di linguaggio, o perdita di abilità motorie a ogni età: pediatra o neurologo pediatrico).",
         {
           "t": "Movimenti o giochi ripetitivi e forte disagio per piccoli cambiamenti, insieme a difficoltà a comunicare e a relazionarsi: vedi la scheda \"Segnali precoci di autismo\" (segnali-autismo). Alcune di queste caratteristiche possono comparire anche senza autismo: conta l'insieme, non il singolo segno.",
           "from": 12,
@@ -770,7 +760,7 @@
     },
     "ru": {
       "title": "Повторяющиеся вопросы, ритуалы и «не слушает»: когда это нормально",
-      "summary": "Спрашивать одно и то же тысячу раз, хотеть всё в одном и том же порядке или словно не слышать просьб — это очень частое явление в первые годы жизни. Здесь вы найдёте, что говорят исследования и когда стоит обсудить это с педиатром.",
+      "summary": "Желание, чтобы всё было в одном и том же порядке, чаще встречается в 2–4 года; у малышей внимание удерживается очень недолго; если ответ неинформативен, дети продолжают спрашивать. Здесь вы найдёте, что говорят исследования и когда стоит обсудить это с педиатром.",
       "keywords": [
         "повторяющиеся вопросы",
         "почему",
@@ -826,28 +816,18 @@
           "to": 60
         },
         {
-          "t": "Предсказуемая рутина помогает; предупреждайте за несколько минут о смене занятия (мнение экспертов, ZERO TO THREE, 2010).",
+          "t": "Стабильный распорядок позволяет малышам предвидеть, что будет дальше; некоторые родители используют таймер или предупреждение за 5 минут перед сменой занятия (ZERO TO THREE, 2010, научно-популярный материал).",
           "from": 12,
           "to": 60
         },
         {
-          "t": "Перечитывать одну и ту же книгу — это совершенно нормально: в небольшом исследовании Horst (2011) повторение помогло запоминать новые слова.",
-          "from": 24,
-          "to": 60
-        },
-        {
-          "t": "Отвечайте на вопросы настоящей информацией, пусть и простой: именно её ребёнок и ищет.",
-          "from": 12,
-          "to": 72
-        },
-        {
-          "t": "Только если вы подозреваете ОКР: запишите примеры и то, сколько времени занимают ритуалы, и обсудите это с педиатром. У детей с ОКР участие семьи в ритуалах (семейная аккомодация) связано с более тяжёлыми симптомами (клиническая выборка, Lebowitz, 2012): любые изменения следует планировать вместе со специалистом. Это не относится к обычным ритуалам маленьких детей.",
+          "t": "Только если вы подозреваете ОКР: AACAP указывает, что важно обратиться к детскому психиатру. У детей с ОКР семейная аккомодация (подстройка под симптомы, например участие в ритуалах) тесно связана с более тяжёлыми симптомами (обзор клинических исследований, Lebowitz, 2012); в некоторых вариантах семейной когнитивно-поведенческой терапии родителей обучали её уменьшать. Эти данные касаются только детей с ОКР.",
           "from": 60,
           "to": 144
         }
       ],
       "redFlags": [
-        "Теряет слова, социальные или двигательные навыки, которые у него уже были: сразу обсудите это с педиатром.",
+        "Теряет слова, социальные или двигательные навыки, которые у него уже были: по рекомендациям NICE нужно направление к специалистам (до 3 лет при потере речи или социальных навыков — в команду по аутизму; после 3 лет при потере речи, а также при потере двигательных навыков в любом возрасте — к педиатру или детскому неврологу).",
         {
           "t": "Повторяющиеся движения или игры и сильное расстройство из-за небольших перемен, вместе с трудностями в общении и во взаимодействии с людьми: смотрите карточку «Ранние признаки аутизма» (segnali-autismo). Некоторые из этих особенностей могут встречаться и без аутизма: важна совокупность, а не отдельный признак.",
           "from": 12,
@@ -862,7 +842,7 @@
     },
     "en": {
       "title": "Repeated questions, rituals and \"not listening\": when it's normal",
-      "summary": "Asking the same thing a thousand times, wanting everything in the same order, or seeming deaf to requests is very common in the early years. Here you'll find what research says and when it's worth talking to your pediatrician.",
+      "summary": "Wanting things in the same order is more frequent at ages 2 to 4; young children have a very short attention span; when an answer is not informative, children keep asking. Here you'll find what research says and when it's worth talking to your pediatrician.",
       "keywords": [
         "repeated questions",
         "why",
@@ -918,28 +898,18 @@
           "to": 60
         },
         {
-          "t": "Predictable routines help; give a few minutes' warning before a change of activity (expert opinion, ZERO TO THREE 2010).",
+          "t": "Stable routines let young children anticipate what will happen next; some parents use a timer or a 5-minute warning before a change of activity (ZERO TO THREE 2010, popular expert resource).",
           "from": 12,
           "to": 60
         },
         {
-          "t": "Rereading the same book is perfectly fine: in the small study by Horst (2011), repetition helped children remember new words.",
-          "from": 24,
-          "to": 60
-        },
-        {
-          "t": "Answer questions with real information, even if simple: it is what the child is looking for.",
-          "from": 12,
-          "to": 72
-        },
-        {
-          "t": "Only if you suspect OCD: note examples and how much time the rituals take, and talk to your pediatrician. In children with OCD, taking part in the rituals (family accommodation) is associated with more severe symptoms (clinical sample, Lebowitz 2012): any changes should be planned with a professional. This does not apply to the normal rituals of younger children.",
+          "t": "Only if you suspect OCD: the AACAP says it is important to seek help from a child and adolescent psychiatrist. In children with OCD, family accommodation (giving in to symptoms, for example taking part in rituals) is strongly associated with more severe symptoms (review of clinical studies, Lebowitz 2012); in some family-based cognitive behavioral therapy studies, parents were trained to reduce it. These data apply only to children with OCD.",
           "from": 60,
           "to": 144
         }
       ],
       "redFlags": [
-        "They lose words, social skills or motor skills they already had: talk to your pediatrician right away.",
+        "They lose words, social skills or motor skills they already had: NICE guidance calls for referral (under 3, loss of language or social skills: autism team; over 3, loss of language, or loss of motor skills at any age: pediatrician or pediatric neurologist).",
         {
           "t": "Repetitive movements or play and strong distress at small changes, together with difficulty communicating and relating to others: see the card \"Early signs of autism\" (segnali-autismo). Some of these features can also appear without autism: it is the whole picture that counts, not a single sign.",
           "from": 12,

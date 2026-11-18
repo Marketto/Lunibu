@@ -784,7 +784,7 @@
     ],
     "it": {
       "title": "Spiegare rischio e pericolo alle diverse età",
-      "summary": "Nessuno studio dimostra che spiegare i rischi riduca gli incidenti: le spiegazioni aiutano, ma non sostituiscono mai la sorveglianza. Le prove sono moderate e per lo più osservazionali.",
+      "summary": "L'educazione stradale può migliorare le conoscenze e cambiare il comportamento osservato nell'attraversare, ma nessuno degli studi della revisione Cochrane ne ha misurato l'effetto sugli incidenti; a 4–6 anni conoscere le regole di casa non era legato a meno incidenti, mentre rispettarle e la sorveglianza sì. Le prove sono moderate.",
       "keywords": [
         "rischio",
         "pericolo",
@@ -803,7 +803,7 @@
       ],
       "research": [
         {
-          "t": "Il controllo degli impulsi fa il primo grande salto negli anni prescolari; a 2–3 anni è ancora limitato (Best e Miller 2010).",
+          "t": "Il controllo degli impulsi mostra un miglioramento particolarmente marcato negli anni prescolari (Best e Miller 2010).",
           "from": 24,
           "to": 36
         },
@@ -813,7 +813,7 @@
           "to": 36
         },
         {
-          "t": "In uno studio citato da Morrongiello e Schell (2010) su bambini di 2–3 anni, meno sorveglianza si associava a più incidenti; gli esperti concordano che i bambini piccoli hanno bisogno di una sorveglianza continua e ravvicinata, ma non esistono standard di età basati su prove.",
+          "t": "In uno studio citato da Morrongiello e Schell (2010) su bambini di 2–3 anni, meno sorveglianza si associava a più incidenti; gli esperti concordano che i bambini piccoli hanno bisogno di una sorveglianza continua e ravvicinata, ma in letteratura non ci sono linee guida o standard minimi chiari per sorvegliare i bambini alle diverse età.",
           "from": 24,
           "to": 36
         },
@@ -823,7 +823,7 @@
           "to": 72
         },
         {
-          "t": "Bambini con minore controllo degli impulsi a 33 e 46 mesi tendevano a sopravvalutare le proprie capacità e ad avere avuto più incidenti entro i 6 anni (Schwebel e Plumert 1999; 59 bambini, associazione).",
+          "t": "Bambini più estroversi e con minore controllo degli impulsi a 33 e 46 mesi tendevano a sopravvalutare le proprie capacità fisiche e ad avere avuto più incidenti a 6 anni (Schwebel e Plumert 1999; associazione).",
           "from": 36,
           "to": 72
         },
@@ -848,7 +848,7 @@
           "to": 108
         },
         {
-          "t": "Il controllo degli impulsi continua a migliorare soprattutto tra 5 e 8 anni, ma i dati non sono concordi (Best e Miller 2010).",
+          "t": "Secondo uno studio citato, i maggiori progressi nel controllo degli impulsi avvengono tra 5 e 8 anni; i dati su quanto migliori dopo i 5 anni non sono concordi (Best e Miller 2010).",
           "from": 72,
           "to": 108
         },
@@ -869,7 +869,7 @@
           "to": 120
         },
         {
-          "t": "L'educazione stradale migliora conoscenze e comportamenti, ma l'effetto cala nel tempo e quello sugli incidenti non è noto: gli studi sono di qualità scarsa (Cochrane, Duperrex 2002).",
+          "t": "L'educazione stradale può migliorare le conoscenze e cambiare il comportamento osservato nell'attraversare, ma l'effetto cala nel tempo e quello sugli incidenti non è noto: gli studi sono di qualità scarsa (Cochrane, Duperrex 2002).",
           "from": 48,
           "to": 144
         },
@@ -878,33 +878,37 @@
       ],
       "tips": [
         {
-          "t": "Usa frasi brevi e concrete («la strada si attraversa per mano»), poche regole ripetute, e mostrale con l'esempio; le regole non sostituiscono mai la sorveglianza vicina.",
+          "t": "Secondo gli esperti, i bambini piccoli hanno bisogno di una sorveglianza continua e ravvicinata nella maggior parte delle situazioni (Morrongiello e Schell 2010).",
           "from": 24,
           "to": 36
         },
         {
-          "t": "Usa parole semplici e fai pratica in situazioni reali tranquille; i giochi di \"stop/via\" allenano il controllo. Sotto i 6 anni conta soprattutto la vicinanza dell'adulto.",
+          "t": "Sotto i 6 anni la vicinanza dell'adulto è particolarmente importante per la sicurezza (Morrongiello e McArthur). Giochi come le «statuine», in cui ci si blocca quando la musica si ferma, esercitano il controllo degli impulsi (Center on the Developing Child).",
           "from": 36,
           "to": 72
         },
         {
-          "t": "Spiega il perché delle regole e allenale in posti diversi, non solo il solito incrocio, perché a questa età si applicano in modo rigido; chiedigli di spiegarti cosa guarda.",
+          "t": "Dai 4 anni circa può iniziare un allenamento pratico a bordo strada guidato da un adulto (Thomson 1996).",
+          "from": 48,
+          "to": 72
+        },
+        {
+          "t": "Mentre camminate insieme, mostra cosa fai e spiega perché ti protegge, e digli perché scegli un certo percorso (AAP). A questa età i bambini tendono ad applicare le regole in modo rigido e hanno bisogno di un'idea più chiara di cosa guardare (Thomson 1996).",
           "from": 72,
           "to": 108
         },
         {
-          "t": "Concedi autonomia graduale su percorsi tranquilli e conosciuti, con traffico leggero; fai ripassi periodici perché gli effetti calano e parlate insieme dei rischi nuovi.",
+          "t": "Concedi autonomia graduale su percorsi tranquilli e conosciuti, con traffico leggero; fai ripassi periodici perché gli effetti calano (Cochrane) e parlate del traffico e degli altri pericoli da evitare (AAP).",
           "from": 120,
           "to": 144
         },
         "Il tuo esempio conta: i bambini imparano la sicurezza in strada soprattutto dai comportamenti degli adulti di cui si fidano.",
-        "Lascialo arrampicarsi e mettersi alla prova secondo le sue capacità, mentre tu gestisci i pericoli veri: traffico, acqua, veleni, attrezzature rotte (vedi le schede strada-auto, nuoto-acqua, casa-sicura).",
-        "Per approfondire consulta le fonti citate: spiegare i rischi aiuta, ma nessuno studio dimostra che da solo riduca gli incidenti."
+        "Nel gioco, lascia che scelga sfide adatte alle sue capacità (per esempio arrampicarsi); elimina i pericoli che non può riconoscere, come una ringhiera rotta (Brussoni 2012). Per traffico, acqua e veleni vedi le schede strada-auto, nuoto-acqua e casa-sicura."
       ]
     },
     "ru": {
       "title": "Как объяснять риск и опасность детям разного возраста",
-      "summary": "Ни одно исследование не доказало, что объяснение рисков снижает число несчастных случаев: объяснения помогают, но никогда не заменяют присмотр. Доказательства умеренные и в основном наблюдательные.",
+      "summary": "Обучение безопасности на дороге может улучшить знания и изменить наблюдаемое поведение при переходе дороги, но ни одно из исследований в обзоре Cochrane не оценивало его влияние на число несчастных случаев; в 4–6 лет знание домашних правил не было связано с меньшим числом травм, а их соблюдение и присмотр — были. Доказательства умеренные.",
       "keywords": [
         "риск",
         "опасность",
@@ -923,7 +927,7 @@
       ],
       "research": [
         {
-          "t": "Контроль импульсов делает первый большой скачок в дошкольные годы; в 2–3 года он ещё ограничен (Best и Miller 2010).",
+          "t": "Контроль импульсов особенно заметно улучшается в дошкольные годы (Best и Miller 2010).",
           "from": 24,
           "to": 36
         },
@@ -933,7 +937,7 @@
           "to": 36
         },
         {
-          "t": "В исследовании, на которое ссылаются Morrongiello и Schell (2010), с участием детей 2–3 лет меньший присмотр был связан с большим числом несчастных случаев; эксперты сходятся во мнении, что маленьким детям нужен постоянный присмотр рядом, но стандартов по возрасту, основанных на доказательствах, не существует.",
+          "t": "В исследовании, на которое ссылаются Morrongiello и Schell (2010), с участием детей 2–3 лет меньший присмотр был связан с большим числом несчастных случаев; эксперты сходятся во мнении, что маленьким детям нужен постоянный присмотр рядом, но в литературе нет чётких рекомендаций или минимальных стандартов присмотра для разных возрастов.",
           "from": 24,
           "to": 36
         },
@@ -943,7 +947,7 @@
           "to": 72
         },
         {
-          "t": "Дети с более низким контролем импульсов в 33 и 46 месяцев склонны были переоценивать свои возможности и чаще получали травмы к 6 годам (Schwebel и Plumert 1999; 59 детей, связь).",
+          "t": "Более экстравертные дети с более низким контролем импульсов в 33 и 46 месяцев были склонны переоценивать свои физические возможности и чаще получали травмы к 6 годам (Schwebel и Plumert 1999; связь).",
           "from": 36,
           "to": 72
         },
@@ -968,7 +972,7 @@
           "to": 108
         },
         {
-          "t": "Контроль импульсов продолжает улучшаться в основном между 5 и 8 годами, но данные неоднозначны (Best и Miller 2010).",
+          "t": "По данным одного из цитируемых исследований, наибольшие успехи в контроле импульсов приходятся на 5–8 лет; данные о его улучшении после 5 лет неоднозначны (Best и Miller 2010).",
           "from": 72,
           "to": 108
         },
@@ -989,7 +993,7 @@
           "to": 120
         },
         {
-          "t": "Обучение безопасности на дороге улучшает знания и поведение, но эффект со временем снижается, а влияние на число несчастных случаев неизвестно: качество исследований низкое (Cochrane, Duperrex 2002).",
+          "t": "Обучение безопасности на дороге может улучшить знания и изменить наблюдаемое поведение при переходе дороги, но эффект со временем снижается, а влияние на число несчастных случаев неизвестно: качество исследований низкое (Cochrane, Duperrex 2002).",
           "from": 48,
           "to": 144
         },
@@ -998,33 +1002,37 @@
       ],
       "tips": [
         {
-          "t": "Используйте короткие конкретные фразы («дорогу переходят за руку»), немного правил, которые повторяются, и показывайте их на своём примере; правила никогда не заменяют присмотр рядом.",
+          "t": "По мнению экспертов, маленьким детям в большинстве ситуаций нужен постоянный присмотр рядом (Morrongiello и Schell 2010).",
           "from": 24,
           "to": 36
         },
         {
-          "t": "Используйте простые слова и тренируйтесь в реальных спокойных ситуациях; игры «стоп/вперёд» тренируют контроль. До 6 лет главное — близость взрослого.",
+          "t": "До 6 лет близость взрослого особенно важна для безопасности (Morrongiello и McArthur). Игры вроде «Музыкальных статуй», где нужно замереть, когда музыка останавливается, тренируют контроль импульсов (Center on the Developing Child).",
           "from": 36,
           "to": 72
         },
         {
-          "t": "Объясняйте, зачем нужны правила, и отрабатывайте их в разных местах, а не только на привычном перекрёстке, потому что в этом возрасте их применяют жёстко; попросите ребёнка рассказать, на что он смотрит.",
+          "t": "Примерно с 4 лет можно начинать практические тренировки у дороги под руководством взрослого (Thomson 1996).",
+          "from": 48,
+          "to": 72
+        },
+        {
+          "t": "Во время совместных прогулок показывайте, что вы делаете, и объясняйте, почему это вас защищает, и почему вы выбираете этот маршрут (AAP). В этом возрасте дети склонны применять правила жёстко, и им нужно более ясное представление о том, на что смотреть (Thomson 1996).",
           "from": 72,
           "to": 108
         },
         {
-          "t": "Предоставляйте самостоятельность постепенно: на спокойных, знакомых маршрутах с небольшим движением; периодически повторяйте правила, потому что эффект снижается, и обсуждайте вместе новые риски.",
+          "t": "Предоставляйте самостоятельность постепенно: на спокойных, знакомых маршрутах с небольшим движением; периодически повторяйте правила, потому что эффект снижается (Cochrane), и говорите о транспорте и других опасностях, которых нужно избегать (AAP).",
           "from": 120,
           "to": 144
         },
         "Ваш пример важен: безопасному поведению на улице дети учатся прежде всего на примере взрослых, которым доверяют.",
-        "Разрешайте ему лазать и пробовать свои силы в рамках его возможностей, а реальные опасности берите на себя: транспорт, вода, яды, сломанное оборудование (см. карточки strada-auto, nuoto-acqua, casa-sicura).",
-        "Чтобы узнать больше, обратитесь к указанным источникам: объяснение рисков помогает, но ни одно исследование не доказало, что само по себе оно снижает число несчастных случаев."
+        "В игре позволяйте ребёнку выбирать посильные для него испытания (например, лазанье); устраняйте опасности, которые он не может распознать, например сломанные перила (Brussoni 2012). О транспорте, воде и ядах — см. карточки strada-auto, nuoto-acqua и casa-sicura."
       ]
     },
     "en": {
       "title": "Explaining risk and danger at different ages",
-      "summary": "No study shows that explaining risks reduces injuries: explanations help, but they never replace supervision. The evidence is moderate and mostly observational.",
+      "summary": "Road-safety education can improve knowledge and change observed road-crossing behavior, but none of the studies in the Cochrane review measured its effect on injuries; at ages 4–6, knowing home safety rules was not linked to fewer injuries, while following them and supervision were. The evidence is moderate.",
       "keywords": [
         "risk",
         "danger",
@@ -1043,7 +1051,7 @@
       ],
       "research": [
         {
-          "t": "Impulse control takes its first big leap in the preschool years; at ages 2–3 it is still limited (Best and Miller 2010).",
+          "t": "Impulse control shows particularly striking improvement during the preschool years (Best and Miller 2010).",
           "from": 24,
           "to": 36
         },
@@ -1053,7 +1061,7 @@
           "to": 36
         },
         {
-          "t": "In a study of 2- to 3-year-olds cited by Morrongiello and Schell (2010), less supervision was associated with more injuries; experts agree that young children need continuous, close supervision, but there are no evidence-based age standards.",
+          "t": "In a study of 2- to 3-year-olds cited by Morrongiello and Schell (2010), less supervision was associated with more injuries; experts agree that young children need continuous, close supervision, but the literature has no clear guidelines or minimum standards for supervising children at different ages.",
           "from": 24,
           "to": 36
         },
@@ -1063,7 +1071,7 @@
           "to": 72
         },
         {
-          "t": "Children with lower impulse control at 33 and 46 months tended to overestimate their abilities and to have had more injuries by age 6 (Schwebel and Plumert 1999; 59 children, association).",
+          "t": "Children who were more extraverted and lower in impulse control at 33 and 46 months tended to overestimate their physical abilities and to have had more injuries by age 6 (Schwebel and Plumert 1999; association).",
           "from": 36,
           "to": 72
         },
@@ -1088,7 +1096,7 @@
           "to": 108
         },
         {
-          "t": "Impulse control keeps improving mainly between ages 5 and 8, but the data are not consistent (Best and Miller 2010).",
+          "t": "According to one study they cite, the biggest gains in impulse control occur between ages 5 and 8; findings on further improvement after age 5 are mixed (Best and Miller 2010).",
           "from": 72,
           "to": 108
         },
@@ -1109,7 +1117,7 @@
           "to": 120
         },
         {
-          "t": "Road-safety education improves knowledge and behavior, but the effect fades over time and the effect on injuries is unknown: the studies are of poor quality (Cochrane, Duperrex 2002).",
+          "t": "Road-safety education can improve knowledge and change observed road-crossing behavior, but the effect fades over time and the effect on injuries is unknown: the studies are of poor quality (Cochrane, Duperrex 2002).",
           "from": 48,
           "to": 144
         },
@@ -1118,28 +1126,32 @@
       ],
       "tips": [
         {
-          "t": "Use short, concrete phrases (\"we cross the street holding hands\"), a few rules repeated often, and show them by example; rules never replace close supervision.",
+          "t": "Experts agree that young children need continuous, close supervision in most situations (Morrongiello and Schell 2010).",
           "from": 24,
           "to": 36
         },
         {
-          "t": "Use simple words and practice in real, calm situations; \"stop/go\" games train impulse control. Under age 6, what matters most is having an adult close by.",
+          "t": "Under age 6, having an adult close by is particularly important for safety (Morrongiello and McArthur). Games like freeze dance, where children freeze when the music stops, exercise impulse control (Center on the Developing Child).",
           "from": 36,
           "to": 72
         },
         {
-          "t": "Explain why the rules exist and practice them in different places, not just the usual intersection, because at this age children apply them rigidly; ask your child to tell you what they are looking at.",
+          "t": "From about age 4, practical roadside training guided by an adult can begin (Thomson 1996).",
+          "from": 48,
+          "to": 72
+        },
+        {
+          "t": "When you walk together, point out what you are doing and explain why it keeps you safe, and tell your child why you choose a route (AAP). At this age children tend to apply rules rigidly and need a much clearer idea of what to look for (Thomson 1996).",
           "from": 72,
           "to": 108
         },
         {
-          "t": "Give autonomy gradually, on quiet, familiar routes with light traffic; review the rules from time to time because the effects fade, and talk together about new risks.",
+          "t": "Give autonomy gradually, on quiet, familiar routes with light traffic; review the rules regularly because the effects fade (Cochrane), and talk about traffic and other hazards to avoid (AAP).",
           "from": 120,
           "to": 144
         },
         "Your example matters: children learn pedestrian safety mostly from the behavior of the adults they trust.",
-        "Let your child climb and test their limits within their abilities, while you handle the real dangers: traffic, water, poisons, broken equipment (see the strada-auto, nuoto-acqua and casa-sicura cards).",
-        "To learn more, consult the cited sources: explaining risks helps, but no study shows that it alone reduces injuries."
+        "In play, let your child choose challenges that suit their abilities (for example, climbing); remove hazards they cannot recognize, such as a broken railing (Brussoni 2012). For traffic, water and poisons, see the strada-auto, nuoto-acqua and casa-sicura cards."
       ]
     }
   }

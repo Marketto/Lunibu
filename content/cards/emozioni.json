@@ -2296,11 +2296,9 @@
       "B30"
     ],
     "it": {
-      "title": "Nei conflitti il problema non è il bambino",
-      "summary": "Le prove su come parlare al bambino durante i conflitti sono limitate: un breve esperimento di laboratorio, alcuni studi di associazione e indicazioni di enti sanitari e società scientifiche. Suggeriscono di descrivere il comportamento invece di giudicare la persona e di non coinvolgere il bambino nei litigi tra adulti. Vedi anche le schede disciplina, capricci e lodi.",
+      "title": "Critiche, litigi e senso di colpa: cosa dicono studi e indicazioni",
+      "summary": "Le prove su come parlare al bambino durante i conflitti sono limitate: un breve esperimento di laboratorio, alcuni studi di associazione e indicazioni di enti sanitari e società scientifiche. Le indicazioni disponibili suggeriscono di dire chiaramente ai bambini piccoli e in età prescolare cosa fare (CDC), di non umiliare i figli (AAP) e, in caso di separazione, di non litigare con l'altro genitore né criticarlo davanti a loro (AAP). Vedi anche le schede disciplina, capricci e lodi.",
       "keywords": [
-        "il problema non è il bambino",
-        "sei cattivo",
         "etichette",
         "critica alla persona",
         "colpa",
@@ -2311,8 +2309,7 @@
         "litigare davanti ai figli",
         "non è colpa tua",
         "umiliare",
-        "rimproveri",
-        "descrivere il comportamento"
+        "rimproveri"
       ],
       "research": [
         {
@@ -2343,20 +2340,26 @@
         }
       ],
       "tips": [
-        "Descrivi il comportamento e cosa fare invece: «Hai tirato il cubo: i cubi servono per costruire», non «Sei cattivo».",
-        "Prima di reagire, chiediti se è stanco, affamato, ha dolore o sta per ammalarsi (AACAP).",
-        "Parla con tono fermo ma calmo, senza urlare (CDC) e senza umiliare (AAP).",
-        "Evitate di litigare o di criticare l'altro genitore davanti a lui, e non usatelo come messaggero (AAP).",
-        "Se ha assistito a un litigio, fategli sapere che vi siete chiariti. (deduzione da studi di laboratorio, non un intervento testato)",
-        "Digli chiaramente che i problemi tra adulti non sono colpa sua: è un'indicazione dell'AAP, non un intervento testato."
+        {
+          "t": "Di' chiaramente cosa vuoi che faccia, non solo cosa smettere di fare: per esempio «Per favore, appoggia il gioco a terra piano» (CDC).",
+          "from": 24,
+          "to": 60
+        },
+        "I bambini piccoli possono fare capricci quando sono stanchi, affamati, hanno dolore o stanno per ammalarsi (AACAP).",
+        {
+          "t": "Parla con voce ferma ma calma, senza urlare (CDC).",
+          "from": 24,
+          "to": 60
+        },
+        "Non umiliarlo (AAP).",
+        "In caso di separazione, l'AAP consiglia di non litigare con l'altro genitore né criticarlo davanti al bambino e di non chiedergli di portare messaggi.",
+        "In caso di separazione, assicurati che sappia che non è colpa sua (AAP): è un'indicazione, non un intervento testato."
       ]
     },
     "ru": {
-      "title": "В конфликтах проблема не в ребёнке",
-      "summary": "Данных о том, как разговаривать с ребёнком во время конфликтов, немного: один краткий лабораторный эксперимент, несколько исследований связи и рекомендации органов здравоохранения и научных обществ. Они советуют описывать поведение, а не судить о личности, и не вовлекать ребёнка в ссоры взрослых. См. также карточки о дисциплине, капризах и похвале.",
+      "title": "Критика, ссоры и чувство вины: что говорят исследования и рекомендации",
+      "summary": "Данных о том, как разговаривать с ребёнком во время конфликтов, немного: один краткий лабораторный эксперимент, несколько исследований связи и рекомендации органов здравоохранения и научных обществ. Имеющиеся рекомендации советуют ясно говорить малышам и дошкольникам, что делать (CDC), не унижать детей (AAP), а при разводе или расставании не ссориться с другим родителем и не критиковать его при детях (AAP). См. также карточки о дисциплине, капризах и похвале.",
       "keywords": [
-        "проблема не в ребёнке",
-        "ты плохой",
         "ярлыки",
         "критика личности",
         "вина",
@@ -2367,8 +2370,7 @@
         "ссориться при детях",
         "это не твоя вина",
         "унижать",
-        "упрёки",
-        "описывать поведение"
+        "упрёки"
       ],
       "research": [
         {
@@ -2377,11 +2379,11 @@
           "to": 72
         },
         {
-          "t": "В исследовании 277 семей, за которыми наблюдали более 4 лет, матери, склонные приписывать враждебные намерения неоднозначному поведению ребёнка, применяли более жёсткую дисциплину, а у детей было больше проблем с поведением в школе; связь сохранялась с поправкой на исходные проблемы. Это связь, а не доказательство причины (Nix, 1999).",
+          "t": "В исследовании 277 семей, за которыми наблюдали более 4 лет, матери, склонные приписывать враждебные намерения неоднозначному поведению ребёнка, применяли более жёсткую дисциплину, а у детей было больше проблем с поведением в школе; связь сохранялась с поправкой на исходные проблемы. Это связь (Nix, 1999).",
           "from": 60,
           "to": 108
         },
-        "Метаанализ (van Eldik, 2020: 169 исследований о проблемах детей, 61 — об их реакциях) связывает конфликты между родителями, особенно враждебные — с проблемами поведения, с большим числом проблем у детей; конфликты, касающиеся самих детей, несут сходные риски. Это связи, а не доказательство причины.",
+        "Метаанализ (van Eldik, 2020: 169 исследований о проблемах детей, 61 — об их реакциях) связывает конфликты между родителями, особенно враждебные — с проблемами поведения, с большим числом проблем у детей; конфликты, касающиеся самих детей, несут сходные риски. Это связи.",
         {
           "t": "В исследовании 298 подростков 11–12 лет более сильный конфликт между родителями предсказывал, что дети будут чувствовать себя более под угрозой и более виноватыми; чувство вины затем было связано с большим числом проблем с поведением, чувство угрозы — с большей тревогой и грустью (Grych, 2003). Связь, а не доказательство причины.",
           "from": 132,
@@ -2399,20 +2401,26 @@
         }
       ],
       "tips": [
-        "Описывайте поведение и что делать вместо этого: «Ты бросил кубик: кубики нужны, чтобы строить», а не «Ты плохой».",
-        "Прежде чем реагировать, спросите себя, не устал ли он, не голоден ли, не болит ли у него что-то или не заболевает ли он (AACAP).",
-        "Говорите твёрдым, но спокойным тоном, не кричите (CDC) и не унижайте (AAP).",
-        "Старайтесь не ссориться и не критиковать другого родителя при ребёнке и не используйте его как посредника (AAP).",
-        "Если он стал свидетелем ссоры, дайте ему знать, что вы помирились. (вывод из лабораторных исследований, а не проверенное вмешательство)",
-        "Скажите ему ясно, что проблемы между взрослыми — не его вина: это рекомендация AAP, а не проверенное вмешательство."
+        {
+          "t": "Ясно говорите, что вы хотите, чтобы ребёнок сделал, а не только что прекратить: например, «Пожалуйста, положи игрушку на пол аккуратно» (CDC).",
+          "from": 24,
+          "to": 60
+        },
+        "Маленькие дети могут закатывать истерики, когда устали, голодны, им больно или они начинают заболевать (AACAP).",
+        {
+          "t": "Говорите твёрдым, но спокойным голосом, не кричите (CDC).",
+          "from": 24,
+          "to": 60
+        },
+        "Не унижайте ребёнка (AAP).",
+        "При разводе или расставании AAP советует не ссориться с другим родителем и не критиковать его при ребёнке и не просить ребёнка передавать сообщения.",
+        "При разводе или расставании убедитесь, что ребёнок знает: это не его вина (AAP). Это рекомендация, а не проверенное вмешательство."
       ]
     },
     "en": {
-      "title": "In conflicts, the problem is not the child",
-      "summary": "The evidence on how to talk to a child during conflicts is limited: one brief laboratory experiment, some association studies and guidance from health agencies and professional societies. They suggest describing the behavior rather than judging the person, and not involving the child in arguments between adults. See also the cards on discipline, tantrums and praise.",
+      "title": "Criticism, arguments and guilt: what studies and guidance say",
+      "summary": "The evidence on how to talk to a child during conflicts is limited: one brief laboratory experiment, some association studies and guidance from health agencies and professional societies. The available guidance suggests telling toddlers and preschoolers clearly what to do (CDC), not humiliating children (AAP), and, in a divorce or separation, not fighting with or criticizing the other parent in front of them (AAP). See also the cards on discipline, tantrums and praise.",
       "keywords": [
-        "the problem is not the child",
-        "you're bad",
         "labels",
         "criticizing the person",
         "blame",
@@ -2423,8 +2431,7 @@
         "arguing in front of children",
         "it's not your fault",
         "humiliating",
-        "scolding",
-        "describing the behavior"
+        "scolding"
       ],
       "research": [
         {
@@ -2455,12 +2462,20 @@
         }
       ],
       "tips": [
-        "Describe the behavior and what to do instead: \"You threw the block: blocks are for building,\" not \"You're bad.\"",
-        "Before reacting, ask yourself whether they are tired, hungry, in pain or about to get sick (AACAP).",
-        "Speak in a firm but calm tone, without yelling (CDC) and without humiliating (AAP).",
-        "Avoid arguing or criticizing the other parent in front of them, and don't use them as a messenger (AAP).",
-        "If they witnessed an argument, let them know that you have made up. (inferred from laboratory studies, not a tested intervention)",
-        "Tell them clearly that problems between adults are not their fault: this is AAP guidance, not a tested intervention."
+        {
+          "t": "Say clearly what you want your child to do, not just what to stop doing: for example, \"Please put the toy on the floor gently\" (CDC).",
+          "from": 24,
+          "to": 60
+        },
+        "Young children may have tantrums when they are tired, hungry, in pain or coming down with a mild illness (AACAP).",
+        {
+          "t": "Speak in a firm but calm voice, without yelling (CDC).",
+          "from": 24,
+          "to": 60
+        },
+        "Don't humiliate your child (AAP).",
+        "In a divorce or separation, the AAP advises not fighting with or criticizing the other parent in front of your child and not asking your child to carry messages.",
+        "In a divorce or separation, make sure your child knows it is not their fault (AAP): this is guidance, not a tested intervention."
       ]
     }
   }

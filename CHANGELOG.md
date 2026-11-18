@@ -1,5 +1,8 @@
 # Novità di Lunibù
 
+## 1.16.1 — 18 novembre 2026
+- Le tre nuove schede sono state ricontrollate frase per frase: tolti consigli ed esempi non presenti nelle fonti, riportate età e contesti come nelle fonti. Nuovo titolo: «Critiche, litigi e senso di colpa: cosa dicono studi e indicazioni».
+
 ## 1.16.0 — 18 novembre 2026
 - Tre nuove schede con fonti verificate (italiano, russo, inglese): «Domande ripetute, rituali e "non ascolta": quando è normale», «Nei conflitti il problema non è il bambino» e «Spiegare rischio e pericolo alle diverse età» (con fasce 2–3, 3–6, 6–9, 9–12 anni).
 
