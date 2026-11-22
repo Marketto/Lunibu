@@ -1,6 +1,7 @@
 // Diario medicine: registrazione libera di qualsiasi farmaco + controllo prudenziale
 // per i principi attivi in src/data/meds.json (nessun calcolo/suggerimento di dose: solo verifica di limiti).
 import MEDS from '../data/meds.json';
+import { localDate } from './util.js';
 
 export const ACTIVE = MEDS.active;
 export const MED_SOURCES = MEDS.sources;
@@ -29,14 +30,13 @@ export function vitDLimit(months) {
   return t || null;
 }
 const RX_VITD_ANALOG = /calcifediol|alfacalcidol|calcitriol|diidrotachisterol|dihydrotachysterol|кальцифедиол|альфакальцидол|кальцитриол|дигидротахистерол/i;
-const localDate = (iso) => { const d = new Date(iso); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 
 /** Totale UI di vitamina D registrate dal bimbo nello stesso giorno locale (entry incluso se passato in log). */
 export function vitDDayTotal(log, kidId, dayISO) {
-  const day = localDate(dayISO);
+  const day = localDate(new Date(dayISO));
   let iu = 0, missing = 0;
   for (const e of log) {
-    if (e.kidId !== kidId || e.active !== 'vitaminaD' || localDate(e.at) !== day) continue;
+    if (e.kidId !== kidId || e.active !== 'vitaminaD' || localDate(new Date(e.at)) !== day) continue;
     const v = toIU(e);
     if (v == null) missing++; else iu += v;
   }
@@ -188,7 +188,6 @@ export function findPlan(plans, entry) {
 }
 export const entryMatchesPlan = (e, plan) => e.kidId === plan.kidId && ((!!plan.active && e.active === plan.active) || (!!normName(plan.name) && normName(e.name) === normName(plan.name)));
 
-const localDay = (iso) => { const d = new Date(iso); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 
 /**
  * Controlla una somministrazione solo rispetto ai valori che il genitore ha copiato da prescrizione/foglietto.
@@ -210,7 +209,7 @@ export function checkPlan(entry, log, plan) {
     const n = 1 + same.filter((e) => { const t = new Date(e.at).getTime(); return t > at - 24 * H && t <= at; }).length;
     if (n > plan.maxPerDay) out.push({ kind: 'planTooMany', level: 'warn', max: plan.maxPerDay, n });
   }
-  if (plan.until && localDay(entry.at) > plan.until) out.push({ kind: 'planEnded', level: 'warn', until: plan.until });
+  if (plan.until && localDate(new Date(entry.at)) > plan.until) out.push({ kind: 'planEnded', level: 'warn', until: plan.until });
   const d = plan.dose;
   if (d && d.amount > 0 && entry.amount && (+entry.amount !== +d.amount || (entry.unit || 'other') !== (d.unit || 'other'))) {
     out.push({ kind: 'planDoseDiff', level: 'info', amount: d.amount, unit: d.unit });
@@ -220,6 +219,6 @@ export function checkPlan(entry, log, plan) {
 
 export function toCsv(rows, header) {
   // prefisso ' alle celle che iniziano con = + - @ (iniezione di formule nei fogli di calcolo)
-  const esc = (v) => { let t = String(v ?? ''); if (typeof v === 'string' && /^[=+\-@]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
+  const esc = (v) => { let t = String(v ?? ''); if (typeof v === 'string' && /^[=+\-@\t\r]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
   return [header.map(esc).join(';'), ...rows.map((r) => r.map(esc).join(';'))].join('\n');
 }

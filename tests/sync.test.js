@@ -152,3 +152,21 @@ describe('twins and xlsx dates', () => {
     expect(xlsxCell(7)).toBe('7');
   });
 });
+
+describe('mergeData gemelli', () => {
+  const tw = (id, name) => ({ id, name, birth: '2025-01-01' });
+  it('gemelli remoti senza nome su telefono vuoto -> 2 bimbi', () => {
+    const m = mergeData({ kids: [] }, { kids: [tw('a', ''), tw('b', '')] });
+    expect(m.kids).toHaveLength(2);
+  });
+  it('gemelli con nome, id diversi -> abbinati per nome', () => {
+    const m = mergeData({ kids: [tw('x', 'Anna'), tw('y', 'Bruno')] }, { kids: [tw('b', ' bruno '), tw('a', 'ANNA')] });
+    expect(m.kids).toHaveLength(2);
+    expect(m.stats.addedKids).toBe(0);
+  });
+  it('id identico vince su remoto con id diverso e stessa data', () => {
+    const m = mergeData({ kids: [tw('x', '')] }, { kids: [tw('z', ''), tw('x', '')] });
+    expect(m.kids).toHaveLength(2);
+    expect(m.stats.addedKids).toBe(1);
+  });
+});

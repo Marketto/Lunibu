@@ -10,6 +10,7 @@ import { ShareCard, VersionLine } from './Share.jsx';
 
 import { TERMS } from '../lib/terms.js';
 import { localDate } from '../lib/util.js';
+import ErrorBoundary from './ErrorBoundary.jsx';
 const SyncCard = lazy(() => import('./SyncCard.jsx'));
 
 export default function Settings({ lang, setLang, kids, setKids, onReset, syncState, onSync }) {
@@ -43,7 +44,7 @@ export default function Settings({ lang, setLang, kids, setKids, onReset, syncSt
       </div>
       <p className="muted small" style={{ marginTop: 12 }}>{s.privacyNote}</p>
 
-      <Suspense fallback={<Wait />}><SyncCard lang={lang} state={syncState} onMerge={onSync} /></Suspense>
+      <ErrorBoundary lang={lang}><Suspense fallback={<Wait />}><SyncCard lang={lang} state={syncState} onMerge={onSync} /></Suspense></ErrorBoundary>
 
       <InstallCard lang={lang} />
       <ShareCard lang={lang} />

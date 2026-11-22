@@ -42,13 +42,14 @@ export default function Tour({ lang, slides, onClose, go, route }) {
 
   // Cerca il bersaglio (con qualche tentativo), lo porta in vista e lo misura
   useEffect(() => {
-    let alive = true, tries = 0, raf = 0;
+    let alive = true, raf = 0;
+    const deadline = performance.now() + 3000;
     const measure = () => {
       if (!alive) return;
       const el = find(sl.target);
       let r = read(el);
       if (!r) {
-        if (++tries > 150) { if (last) onClose(); else setI((n) => n + 1); return; }
+        if (performance.now() > deadline) { if (last) onClose(); else setI((n) => n + 1); return; }
         raf = requestAnimationFrame(measure); return;
       }
       const fixed = !!el.closest('.bottom-nav');

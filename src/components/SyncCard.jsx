@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useSyncExternalStore } from 'react'
 import { motion } from 'framer-motion';
 import qrcode from 'qrcode-generator';
 import { tap } from './Common.jsx';
+import { localDate } from '../lib/util.js';
 import { LOCALE } from '../lib/i18n.js';
 import { appUrl } from './Share.jsx';
 import { driveEnabled, fileLink, getToken, pickFile, share, revoke, transport } from '../lib/drive.js';
@@ -97,6 +98,20 @@ const EM = { 'bad-pass': 'badPass', 'bad-file': 'badFile', auth: 'dAuthFail', ne
 export const errMsg = (s, e) => s[EM[e?.message]] || (e instanceof TypeError ? s.dNet : s.fail);
 export const version = () => (typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '');
 
+/** Finestra modale: Esc la chiude, il focus va al primo campo/pulsante. */
+function Sheet({ labelledby, onClose, children }) {
+  const ref = useRef(null);
+  const close = useRef(onClose); close.current = onClose;
+  useEffect(() => {
+    const prev = document.activeElement;
+    ref.current?.querySelector('input, button, [href], select, textarea')?.focus();
+    const key = (e) => { if (e.key === 'Escape') { e.stopPropagation(); close.current?.(); } };
+    document.addEventListener('keydown', key);
+    return () => { document.removeEventListener('keydown', key); prev?.focus?.(); };
+  }, []);
+  return <div ref={ref} className="sync-sheet" role="dialog" aria-modal="true" aria-labelledby={labelledby}>{children}</div>;
+}
+
 export function PassForm({ s, twice, onSubmit, onCancel, busy, label }) {
   const [a, setA] = useState(''), [b, setB] = useState(''), [e, setE] = useState('');
   const submit = (ev) => {
@@ -167,7 +182,7 @@ export default function SyncCard({ lang, state, onMerge }) {
     setBusy(true);
     try {
       const blob = await exportEncrypted(readState(state), pass, version());
-      const f = new File([blob], `lunibu-${new Date().toISOString().slice(0, 10)}.lunibu`, { type: 'application/octet-stream' });
+      const f = new File([blob], `lunibu-${localDate()}.lunibu`, { type: 'application/octet-stream' });
       if (navigator.canShare?.({ files: [f] })) {
         try { await navigator.share({ files: [f] }); setMsg(s.shared); } catch (e) { if (e?.name !== 'AbortError') throw e; }
       } else {
@@ -357,6 +372,7 @@ export function DriveAuto({ lang, state, onMerge }) {
     } catch (e) {
       if (e?.message === 'auth') setNeeds(true);
       else if (e?.message === 'bad-pass') { clearPass(); setAskPass(true); setPMsg(s.badPass); }
+      else if (!silent) { setAskPass(true); setPMsg(s[EM[e?.message]] || s.fail); }
     }
   };
   useEffect(() => {
@@ -390,23 +406,23 @@ export function DriveAuto({ lang, state, onMerge }) {
   return (
     <>
       {askPass && (
-        <div className="sync-sheet" role="dialog" aria-modal="true" aria-labelledby="drive-ph">
+        <Sheet labelledby="drive-ph" onClose={() => { setAskPass(false); setPMsg(''); }}>
           <div className="sync-sheet-in">
             <h2 id="drive-ph" style={{ marginTop: 0 }}>{s.dTitle}</h2>
             {pMsg && <p className="small" role="alert">{pMsg}</p>}
             <PassForm s={s} label={s.askPass} busy={pBusy} onSubmit={async (p) => { setPBusy(true); await run(false, p); setPBusy(false); }} onCancel={() => { setAskPass(false); setPMsg(''); }} />
           </div>
-        </div>
+        </Sheet>
       )}
       {needs && <button className="drive-chip" onClick={() => run(false)}>{s.dChip}</button>}
       {res && (
-        <div className="sync-sheet" role="dialog" aria-modal="true" aria-labelledby="drive-rh">
+        <Sheet labelledby="drive-rh" onClose={() => setRes(null)}>
           <div className="sync-sheet-in">
             <h2 id="drive-rh" style={{ marginTop: 0 }}>{s.dTitle}</h2>
             <SyncResult s={s} lang={lang} stats={res} kids={state.kids || []} />
             <button className="btn primary" style={{ marginTop: 12 }} onClick={() => setRes(null)}>{s.close}</button>
           </div>
-        </div>
+        </Sheet>
       )}
     </>
   );
@@ -427,7 +443,7 @@ export function QuickReceive({ lang, data, state, onMerge, onClose }) {
     setBusy(false);
   };
   return (
-    <div className="sync-sheet" role="dialog" aria-modal="true" aria-labelledby="sync-rh">
+    <Sheet labelledby="sync-rh" onClose={onClose}>
       <motion.div className="sync-sheet-in" initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 26 }}>
         <h2 id="sync-rh" style={{ marginTop: 0 }}>{s.recvTitle}</h2>
         {res ? (
@@ -438,6 +454,6 @@ export function QuickReceive({ lang, data, state, onMerge, onClose }) {
             {msg && <p className="small" role="alert">{msg}</p>}</>
         )}
       </motion.div>
-    </div>
+    </Sheet>
   );
 }

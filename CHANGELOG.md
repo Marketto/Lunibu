@@ -1,5 +1,13 @@
 # Novità di Lunibù
 
+## 1.16.3 — 22 novembre 2026
+- «Cancella tutti i dati» ora cancella davvero tutto, anche la frase segreta e il collegamento a Google Drive (il file su Drive resta).
+- Gemelli: due bimbi con la stessa data di nascita non vengono più uniti per errore quando si sincronizzano due telefoni.
+- Date e ore sempre locali (anche dopo mezzanotte, nell'esportazione CSV/Excel e nel nome del file da inviare).
+- Avvio più leggero: diario, suoni, giochi e sincronizzazione si caricano quando li apri; se manca la rete compare un messaggio con «Riprova».
+- Frase segreta di Drive sbagliata: l'app la richiede invece di riprovare di continuo.
+- Accessibilità: etichette per pulsanti −/+ e codici QR, finestre chiudibili con Esc.
+
 ## 1.16.1 — 18 novembre 2026
 - Le tre nuove schede sono state ricontrollate frase per frase: tolti consigli ed esempi non presenti nelle fonti, riportate età e contesti come nelle fonti. Nuovo titolo: «Critiche, litigi e senso di colpa: cosa dicono studi e indicazioni».
 

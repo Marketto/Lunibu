@@ -150,14 +150,30 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
   const kidMap = {}; // id remoto -> id locale
   let addedKids = 0;
   const used = new Set(); // bimbi locali già abbinati in questa unione
-  for (const rk of remote.kids || []) {
-    // stesso id; altrimenti per data di nascita solo se UN SOLO bimbo locale la ha e i nomi non sono in conflitto (gemelli!)
-    let m = kids.find((k) => k.id === rk.id);
-    if (!m && rk.birth) {
-      const sameBirth = kids.filter((k) => k.birth === rk.birth && !used.has(k.id));
-      const c = sameBirth[0];
-      if (sameBirth.length === 1 && !(c.name && rk.name && c.name.trim().toLowerCase() !== String(rk.name).trim().toLowerCase())) m = c;
+  const norm = (s) => String(s || '').trim().toLowerCase();
+  const rKids = remote.kids || [];
+  const matched = new Map(); // remoto -> bimbo locale
+  // passo A: stesso id (l'id vince sempre)
+  for (const rk of rKids) {
+    const m = kids.find((k) => k.id === rk.id && !used.has(k.id));
+    if (m) { matched.set(rk, m); used.add(m.id); }
+  }
+  // passo B: per data di nascita, solo tra i bimbi locali originali (gemelli!)
+  for (const rk of rKids) {
+    if (matched.has(rk) || !rk.birth) continue;
+    const cands = kids.slice(0, lKids.length).filter((k) => k.birth === rk.birth && !used.has(k.id));
+    let m = null;
+    if (cands.length === 1) {
+      const c = cands[0];
+      if (!(c.name && rk.name && norm(c.name) !== norm(rk.name))) m = c;
+    } else if (cands.length > 1 && rk.name) {
+      const byName = cands.filter((k) => norm(k.name) === norm(rk.name));
+      if (byName.length === 1) m = byName[0];
     }
+    if (m) { matched.set(rk, m); used.add(m.id); }
+  }
+  for (const rk of rKids) {
+    const m = matched.get(rk);
     if (m) {
       used.add(m.id);
       kidMap[rk.id] = m.id;

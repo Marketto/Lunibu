@@ -13,6 +13,6 @@ export function initialFromImport(remote) {
 /** Dopo la revisione: i bimbi modificati (nome/nascita) + i dati del diario da importare. */
 export function finishOnboarding(kids, imported) {
   const clean = kids.map((k) => ({ ...k, name: (k.name || '').trim() }));
-  const extra = imported ? (({ kids: _k, ...rest }) => rest)(syncShape(imported)) : {}; // eslint-disable-line no-unused-vars
+  const { kids: _kids, ...extra } = imported ? syncShape(imported) : {};
   return { kids: clean, extra };
 }

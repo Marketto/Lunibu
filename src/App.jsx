@@ -8,6 +8,16 @@ import { AudioProvider, useAudio } from './lib/audio/useAudio.jsx';
 import Settings from './components/Settings.jsx';
 import { MiniPlayer } from './components/MiniPlayer.jsx';
 import { Wait } from './components/Common.jsx';
+import { uid } from './lib/util.js';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
+
+// chunk non scaricabile (deploy nuovo/offline): ricarica una sola volta
+if (typeof window !== 'undefined') {
+  window.addEventListener('vite:preloadError', () => {
+    try { if (sessionStorage.getItem('lunibu:preload-reload')) return; sessionStorage.setItem('lunibu:preload-reload', '1'); } catch { return; }
+    window.location.reload();
+  });
+}
 
 // Viste pesanti caricate a richiesta (il service worker le tiene in cache: restano disponibili offline)
 const Onboarding = lazy(() => import('./components/Onboarding.jsx'));
@@ -133,7 +143,7 @@ function BottomNav({ view, go, lang }) {
 }
 
 // Ogni bimbo ha un id stabile: i diari (crescita, medicine) restano collegati anche se l'ordine cambia
-const withIds = (kids) => kids.map((k) => (k.id ? k : { ...k, id: Math.random().toString(36).slice(2, 10) }));
+const withIds = (kids) => kids.map((k) => (k.id ? k : { ...k, id: uid() }));
 
 function UpdateBanner({ lang }) {
   const [u, setU] = React.useState({ ready: false, justUpdated: null });
@@ -241,8 +251,8 @@ function Shell({ state, setState, update, setList, applySync }) {
         {splashEl}
         <Backdrop />
         <main className="app" style={{ paddingBottom: 30 }}>
-          <Suspense fallback={<Wait />}><Onboarding lang={lang} setLang={setLang} qrData={incoming} onQrClose={closeIncoming}
-            onDone={(k, extra = {}) => { closeIncoming(); update({ ...extra, kids: k, accepted: true, activeKid: 0, terms: TERMS_VERSION, termsAt: new Date().toISOString() }); }} /></Suspense>
+          <ErrorBoundary lang={lang}><Suspense fallback={<Wait />}><Onboarding lang={lang} setLang={setLang} qrData={incoming} onQrClose={closeIncoming}
+            onDone={(k, extra = {}) => { closeIncoming(); update({ ...extra, kids: k, accepted: true, activeKid: 0, terms: TERMS_VERSION, termsAt: new Date().toISOString() }); }} /></Suspense></ErrorBoundary>
         </main>
       </>
     );
@@ -280,7 +290,7 @@ function Shell({ state, setState, update, setList, applySync }) {
   else if (view === 'bimbi') content = (
     <Settings lang={lang} setLang={setLang} kids={kids} syncState={state} onSync={applySync}
       setKids={(k) => update({ kids: k, activeKid: Math.min(state.activeKid, k.length - 1) })}
-      onReset={() => { clearState(); forgetDrive(); revokeDrive().catch(() => {}); setState({ lang, accepted: false, kids: [], activeKid: 0, ambient: false }); go(''); }} />
+      onReset={() => { clearState(); forgetDrive(); revokeDrive().catch(() => {}); setState({ lang, accepted: false, kids: [], activeKid: 0, ambient: false }); setTourSeen([]); setTourOpen(null); go(''); }} />
   );
   else content = <Home {...common} query={query} setQuery={setQuery} showInstall={!state.installDismissed} onDismissInstall={() => update({ installDismissed: true })} />;
 
@@ -292,10 +302,10 @@ function Shell({ state, setState, update, setList, applySync }) {
       {sweep.k > 0 && <CharacterParade k={sweep.k} set={sweep.set} color={sweep.color} />}
       <Backdrop night={night} />
       <UpdateBanner lang={lang} />
-      <Suspense fallback={null}>
+      <ErrorBoundary lang={lang}><Suspense fallback={null}>
         <DriveAuto lang={lang} state={state} onMerge={applySync} />
         {incoming && <QuickReceive lang={lang} data={incoming} state={state} onMerge={applySync} onClose={closeIncoming} />}
-      </Suspense>
+      </Suspense></ErrorBoundary>
       <main className="app">
         <div className="topbar">
           <AnimatePresence>
@@ -314,7 +324,7 @@ function Shell({ state, setState, update, setList, applySync }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, transition: { duration: 0.18 } }}
             transition={{ type: 'spring', stiffness: 260, damping: 26, delay: 0.18 }}>
-            <Suspense fallback={<Wait />}>{content}</Suspense>
+            <ErrorBoundary lang={lang}><Suspense fallback={<Wait />}>{content}</Suspense></ErrorBoundary>
           </motion.div>
         </AnimatePresence>
         <TourRecall lang={lang} onClick={() => setTourOpen('all')} />

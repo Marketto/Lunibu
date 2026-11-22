@@ -1,6 +1,6 @@
 {
   "name": "lunibu",
-  "version": "1.16.2",
+  "version": "1.16.3",
   "description": "Utility offline per cercare rapidamente cosa dice la ricerca, per genitori 0-12 anni (IT/RU/EN)",
   "scripts": {
     "content": "node scripts/build-growth.mjs && node scripts/build-content.mjs",

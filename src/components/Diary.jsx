@@ -813,7 +813,7 @@ function Meds({ lang, kid, months, meds, setMeds, growth, medPlans, setMedPlans,
   const nDays = Math.min(fDays || 30, 30);
   const daysArr = Array.from({ length: nDays }, (_, i) => localDate(new Date(Date.now() - (nDays - 1 - i) * 86400000)));
   const perDay = daysArr.map((d) => {
-    const items = shown.filter((e) => e.at.slice(0, 10) === d);
+    const items = shown.filter((e) => localDate(new Date(e.at)) === d);
     const by = {};
     items.forEach((e) => { by[medKey(e)] = (by[medKey(e)] || 0) + 1; });
     return { d, by, n: items.length };

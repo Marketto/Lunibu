@@ -79,9 +79,9 @@ npm run check:secrets  # cerca email personali, token e chiavi nei file tracciat
 - `src/data/growth.json` generato da `scripts/build-growth.mjs` (tabelle LMS OMS in `scripts/data-raw`)
 - `src/lib/` età, ricerca, i18n, audio (`audio/engine.js`, `audio/realistic.js`, `audio/meter.js`, loop in `public/audio/`),
   sincronizzazione (`sync.js`, `drive*.js`), crescita (`growth.js`), medicine (`meds.js`), temperatura (`fever*.js`),
-  tappe (`milestones.js`), import CSV (`csv.js`)
+  tappe (`milestones.js`), import CSV (`csv.js`), date locali e id (`util.js`: mai `toISOString()` per date locali)
 - `src/data/tour.js` slide del giro delle funzioni (logica in `src/lib/tour.js`, stato `lunibu:tour` non sincronizzato)
 - `src/components/` UI (Paper, Characters, Scenes, Views, Sounds, Games, Diary, Fever, Milestones, SyncCard, ImportCsv,
-  Onboarding, Tour, VolumeCheck, Terms)
+  Onboarding, Tour, VolumeCheck, Terms, Common, KidForm, MiniPlayer); viste pesanti caricate con `React.lazy`
 - `scripts/` build contenuti, controlli, hook
 - `.claude/agents/`, `.claude/skills/` configurazione agentica
