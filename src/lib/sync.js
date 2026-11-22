@@ -3,6 +3,10 @@
 // dal mezzo: un futuro trasporto (es. Google Drive) può riusarle così come sono.
 
 export const MIN_PASS = 8;
+/** Collezioni sincronizzate (elenchi di record con id): un'unica definizione per tutta l'app. */
+export const COLLECTIONS = ['kids', 'growth', 'meds', 'medPlans', 'milestones', 'temps'];
+/** Stato -> solo i dati sincronizzati (elenchi vuoti se assenti) + lapidi. */
+export const syncShape = (st = {}) => ({ ...Object.fromEntries(COLLECTIONS.map((k) => [k, st[k] || []])), deleted: st.deleted || {} });
 const ITER = 310000;
 const H48 = 48 * 3600000;
 const H24 = 24 * 3600000;
@@ -42,7 +46,7 @@ async function decryptBytes(salt, iv, ct, pass) {
 export function buildPayload(state, appVersion = '') {
   return {
     format: 'lunibu-sync', v: 1, exportedAt: new Date().toISOString(), appVersion,
-    kids: state.kids || [], growth: state.growth || [], meds: state.meds || [], medPlans: state.medPlans || [], milestones: state.milestones || [], temps: state.temps || [], deleted: state.deleted || {}
+    ...syncShape(state)
   };
 }
 
@@ -145,9 +149,17 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
   const kids = lKids.map((k) => ({ ...k }));
   const kidMap = {}; // id remoto -> id locale
   let addedKids = 0;
+  const used = new Set(); // bimbi locali già abbinati in questa unione
   for (const rk of remote.kids || []) {
-    let m = kids.find((k) => k.id === rk.id) || (rk.birth ? kids.find((k) => k.birth === rk.birth) : null);
+    // stesso id; altrimenti per data di nascita solo se UN SOLO bimbo locale la ha e i nomi non sono in conflitto (gemelli!)
+    let m = kids.find((k) => k.id === rk.id);
+    if (!m && rk.birth) {
+      const sameBirth = kids.filter((k) => k.birth === rk.birth && !used.has(k.id));
+      const c = sameBirth[0];
+      if (sameBirth.length === 1 && !(c.name && rk.name && c.name.trim().toLowerCase() !== String(rk.name).trim().toLowerCase())) m = c;
+    }
     if (m) {
+      used.add(m.id);
       kidMap[rk.id] = m.id;
       for (const f of ['sex', 'gaWeeks', 'name']) if (!m[f] && rk[f]) m[f] = rk[f];
     } else { kids.push({ ...rk }); kidMap[rk.id] = rk.id; addedKids++; }
@@ -186,7 +198,7 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
     .map((e) => ({ id: e.id, kidId: e.kidId, name: e.name, at: e.at, amount: e.amount, unit: e.unit }));
 
   return {
-    kids, growth: g.list, meds: m.list, medPlans: mp.list, milestones: ms.list, temps: tp.list, deleted,
+    ...{ kids, growth: g.list, meds: m.list, medPlans: mp.list, milestones: ms.list, temps: tp.list }, deleted,
     stats: { addedGrowth: g.added.size, addedMeds: m.added.size, updated: g.updated.size + m.updated.size + mp.updated.size + ms.updated.size + tp.updated.size + tp.added.size, addedTemps: tp.added.size, addedMilestones: ms.added.size, addedPlans: mp.added.size, addedKids, recentDoses }
   };
 }

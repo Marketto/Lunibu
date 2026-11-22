@@ -2,7 +2,7 @@
 // Se la frase non è ricordata resta solo in memoria (finché l'app è aperta).
 import { syncOnce } from './driveSync.js';
 import { transport } from './drive.js';
-import { mergeData } from './sync.js';
+import { mergeData, syncShape } from './sync.js';
 
 const KEY = 'lunibu:drive';
 export const AUTO_MS = 5 * 60000;
@@ -24,6 +24,8 @@ export function savePass(pass) {
   memPass = pass;
   setDrive({ pass: getDrive().remember !== false ? pass : undefined });
 }
+/** Frase sbagliata: la dimentica (anche quella in memoria) così non si riprova a ogni ritorno in primo piano. */
+export const clearPass = () => { memPass = null; setDrive({ pass: undefined }); };
 export const forget = () => { memPass = null; setDrive(null); };
 
 let busy = false;
@@ -40,6 +42,6 @@ export async function runSync({ latest, silent = false, fileId, pass, appVersion
     savePass(pass);
     // modifiche locali fatte mentre si aspettava la rete: unione col risultato (le statistiche restano quelle di Drive)
     const m = mergeData(latest(), r.merged);
-    return { merged: { kids: m.kids, growth: m.growth, meds: m.meds, medPlans: m.medPlans, milestones: m.milestones, temps: m.temps, deleted: m.deleted }, stats: r.stats };
+    return { merged: syncShape(m), stats: r.stats };
   } finally { busy = false; }
 }

@@ -42,7 +42,7 @@ scientifici revisionati, in **italiano, russo e inglese**, che funziona **offlin
   rumori bianco/rosa/profondo, grembo materno, shhh, ventilatore, pioggia, onde; ninne nanne in carillon
   (melodie di pubblico dominio: Brahms, "Brilla brilla", "Fra Martino") e musiche originali generative.
   Timer di spegnimento, volume, note di sicurezza con fonti (Spencer 1990, Hugh 2014).
-  Tutto è **sintetizzato in tempo reale con Web Audio**: nessun file audio, funziona offline, nessun diritto d'autore.
+  I suoni sono **sintetizzati con Web Audio** e registrati in anticipo in loop (`public/audio/*.m4a`, generati con `npm run audio:render`): funzionano offline e a schermo spento, senza diritti d'autore.
 - **Musica di sottofondo** rilassante attivabile in alto a destra (generativa).
 - UI "nursery di carta ritagliata": giostrina della culla animata (si tocca e oscilla), icone in carta,
   modalità notte per i suoni del sonno, transizioni e micro-animazioni con Framer Motion

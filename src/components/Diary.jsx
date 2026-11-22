@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { lazy, Suspense, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KidPills, Refs, spring, tap } from './Common.jsx';
 import { Character } from './Characters.jsx';
@@ -9,12 +9,12 @@ import { formatAge } from '../lib/age.js';
 import Milestones from './Milestones.jsx';
 import Fever from './Fever.jsx';
 import { FEVER_TEXT } from '../lib/feverText.js';
-import ImportCsv, { IMPORT_BTN } from './ImportCsv.jsx';
+import { uid, nowLocal, localDate, localDateTime } from '../lib/util.js';
 import SOURCES from '../../content/sources.json';
 
-const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
-const today = () => new Date().toISOString().slice(0, 10);
-const nowLocal = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); };
+const ImportCsv = lazy(() => import('./ImportCsv.jsx'));
+const IMPORT_BTN = { it: 'Importa da un\'altra app (CSV)', ru: 'Импорт из другого приложения (CSV)', en: 'Import from another app (CSV)' };
+const today = () => localDate();
 const fmt = (n, d = 1) => (n == null || isNaN(n) ? '–' : Number(n).toLocaleString(undefined, { maximumFractionDigits: d }));
 const ordEn = (n) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' })[n % 10] || 'th'}`;
 
@@ -748,10 +748,10 @@ function downloadCsv({ kid, lang, meds, growth, temps = [] }) {
   const rows = meds.filter((m) => m.kidId === kid.id).sort((a, b) => a.at.localeCompare(b.at)).map((e) => {
     const w = latestWeight(growth, kid.id, e.at);
     const mg = toMg(e);
-    return [e.at.slice(0, 16).replace('T', ' '), e.name, e.route || '', e.amount, e.unit, e.conc || '', mg || '', w ? w.kg : '', mg && w ? (mg / w.kg).toFixed(1) : '', e.note];
+    return [localDateTime(new Date(e.at)).replace('T', ' '), e.name, e.route || '', e.amount, e.unit, e.conc || '', mg || '', w ? w.kg : '', mg && w ? (mg / w.kg).toFixed(1) : '', e.note];
   });
   const g = growth.filter((x) => x.kidId === kid.id).sort((a, b) => a.date.localeCompare(b.date)).map((x) => [x.date, x.weight || '', x.height || '', x.head || '']);
-  const tp = temps.filter((x) => x.kidId === kid.id).sort((a, b) => a.at.localeCompare(b.at)).map((x) => [x.at.slice(0, 16).replace('T', ' '), x.value ?? '', x.site || '', x.feelsHot ? 1 : 0, x.note || '']);
+  const tp = temps.filter((x) => x.kidId === kid.id).sort((a, b) => a.at.localeCompare(b.at)).map((x) => [localDateTime(new Date(x.at)).replace('T', ' '), x.value ?? '', x.site || '', x.feelsHot ? 1 : 0, x.note || '']);
   const H = lang === 'en'
     ? [['date_time', 'medicine', 'route', 'amount', 'unit', 'mg_per_ml', 'mg', 'weight_kg', 'mg_per_kg', 'note'], ['date', 'weight_kg', 'height_cm', 'head_cm'], ['date_time', 'temperature_c', 'site', 'feels_hot_no_thermometer', 'how_are_they_note']]
     : [['data_ora', 'farmaco', 'via', 'quantita', 'unita', 'mg_per_ml', 'mg', 'peso_kg', 'mg_per_kg', 'nota'], ['data', 'peso_kg', 'altezza_cm', 'testa_cm'], ['data_ora', 'temperatura_c', 'sede', 'sembra_caldo_senza_termometro', 'come_sta_nota']];
@@ -811,7 +811,7 @@ function Meds({ lang, kid, months, meds, setMeds, growth, medPlans, setMedPlans,
 
   // Grafico: dosi al giorno (ultimi N giorni, max 30 barre)
   const nDays = Math.min(fDays || 30, 30);
-  const daysArr = Array.from({ length: nDays }, (_, i) => new Date(Date.now() - (nDays - 1 - i) * 86400000).toISOString().slice(0, 10));
+  const daysArr = Array.from({ length: nDays }, (_, i) => localDate(new Date(Date.now() - (nDays - 1 - i) * 86400000)));
   const perDay = daysArr.map((d) => {
     const items = shown.filter((e) => e.at.slice(0, 10) === d);
     const by = {};
@@ -1026,7 +1026,7 @@ export default function Diary({ lang, kids, active, setActive, growth, meds, set
       {tab === 'temp' && <Fever lang={lang} kid={kid} temps={temps} setTemps={setTemps} meds={meds} onExport={() => downloadCsv({ kid, lang, meds, growth, temps })} />}
       {tab === 'miles' && <Milestones lang={lang} kid={kid} milestones={milestones} setMilestones={setMilestones} />}
       {importing
-        ? <ImportCsv lang={lang} kids={kids} active={Math.max(0, active)} growth={growth} meds={meds} setGrowth={setGrowth} setMeds={setMeds} temps={temps} setTemps={setTemps} onClose={() => setImporting(false)} />
+        ? <Suspense fallback={null}><ImportCsv lang={lang} kids={kids} active={Math.max(0, active)} growth={growth} meds={meds} setGrowth={setGrowth} setMeds={setMeds} temps={temps} setTemps={setTemps} onClose={() => setImporting(false)} /></Suspense>
         : <button className="btn ghost wide" style={{ marginTop: 14 }} onClick={() => setImporting(true)}>⤒ {IMPORT_BTN[lang]}</button>}
     </div>
   );

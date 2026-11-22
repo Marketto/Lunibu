@@ -1,6 +1,10 @@
 // Import da CSV di altre app per neonati: tutto in locale, nessuna rete.
 import { monthsAt } from './growth.js';
 import { ACTIVE } from './meds.js';
+import { uid, localDate, localDateTime } from './util.js';
+
+/** Cella di un foglio Excel -> testo. Le date si formattano con i getter locali (toISOString sposterebbe la mezzanotte al giorno prima a est di UTC). */
+export const xlsxCell = (v) => (v instanceof Date ? localDateTime(v).replace('T', ' ').replace(' 00:00', '') : v == null ? '' : String(v));
 
 const ACTIVE_KEYS = Object.keys(ACTIVE);
 
@@ -120,7 +124,6 @@ export const RX_VITD = /vitamin[ae]?\s*d|colecalciferol|cholecalciferol|вита
 export const suggestActive = (name) => (RX_VITD.test(String(name || '')) ? 'vitaminaD' : activeOf(name) || '');
 export const activeOf = (name) => (RX_PARA.test(name) ? 'paracetamolo' : RX_IBU.test(name) ? 'ibuprofene' : null);
 const LIMITS = { weight: [0.3, 200], height: [20, 230], head: [20, 60] };
-const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
 
 const gKey = (r) => [r.kidId, r.date, r.weight ?? '', r.height ?? '', r.head ?? ''].join('|');
 const mKey = (r) => [r.kidId, r.at, r.active || '', (r.name || '').toLowerCase(), r.amount ?? '', r.unit || ''].join('|');
@@ -137,7 +140,7 @@ export function buildRecords(rows, map, opts) {
   const ignored = { noDate: 0, empty: 0, badValue: 0, outOfRange: 0, noName: 0, duplicate: 0 };
   const growth = [], meds = [];
   const cell = (r, f) => (map[f] >= 0 ? r[map[f]] ?? '' : '');
-  const today = now.slice(0, 10);
+  const today = opts.now ? opts.now.slice(0, 10) : localDate();
 
   for (const r of rows) {
     const d = parseDate(cell(r, 'date'), order);
@@ -260,7 +263,7 @@ export function summarizeMeds(meds) {
 export function buildFromBabyTracker(rows, opts) {
   const { kid, existing = {}, medMap = {} } = opts;
   const now = opts.now || new Date().toISOString();
-  const today = now.slice(0, 10);
+  const today = opts.now ? opts.now.slice(0, 10) : localDate();
   const seenG = new Set((existing.growth || []).filter((g) => g.kidId === kid.id).map(gKey));
   const seenM = new Set((existing.meds || []).filter((g) => g.kidId === kid.id).map(mKey));
   // il principio attivo può cambiare tra due importazioni: per i doppioni conta anche la chiave senza "active"

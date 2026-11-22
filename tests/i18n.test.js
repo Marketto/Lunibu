@@ -11,6 +11,9 @@ import { DIARY_TEXT } from '../src/components/Diary.jsx';
 import { GAME_TEXT } from '../src/components/Games.jsx';
 import { SHARE_TEXT } from '../src/components/Share.jsx';
 import { TX } from '../src/components/SyncCard.jsx';
+import { OT } from '../src/components/Onboarding.jsx';
+import { TX as IMPORT_TX } from '../src/components/ImportCsv.jsx';
+import { T as VOLUME_T } from '../src/components/VolumeCheck.jsx';
 
 // Ogni chiave (anche annidata) presente in it deve esistere in ru e en, con lo stesso tipo (stringa/funzione/lista)
 const shape = (o) => (o && typeof o === 'object' && !Array.isArray(o)
@@ -27,7 +30,7 @@ describe('lingue', () => {
   for (const [name, map, skip] of [
     ['STRINGS', STRINGS, ['srcTypes']], ['MILESTONE_TEXT', MILESTONE_TEXT, []], ['TERMS', TERMS, []],
     ['SOUND_STRINGS', SOUND_STRINGS, []], ['DIARY_TEXT', DIARY_TEXT, []], ['GAME_TEXT', GAME_TEXT, []],
-    ['SHARE_TEXT', SHARE_TEXT, []], ['SyncCard TX', TX, []]
+    ['SHARE_TEXT', SHARE_TEXT, []], ['SyncCard TX', TX, []], ['Onboarding OT', OT, []], ['ImportCsv TX', IMPORT_TX, []], ['VolumeCheck T', VOLUME_T, []]
   ]) {
     for (const l of ['ru', 'en']) {
       it(`${name}: ogni chiave it ha ${l}`, () => {

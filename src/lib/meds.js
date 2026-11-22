@@ -219,6 +219,7 @@ export function checkPlan(entry, log, plan) {
 }
 
 export function toCsv(rows, header) {
-  const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  // prefisso ' alle celle che iniziano con = + - @ (iniezione di formule nei fogli di calcolo)
+  const esc = (v) => { let t = String(v ?? ''); if (typeof v === 'string' && /^[=+\-@]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
   return [header.map(esc).join(';'), ...rows.map((r) => r.map(esc).join(';'))].join('\n');
 }

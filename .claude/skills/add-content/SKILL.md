@@ -11,11 +11,11 @@ descrizioni accurate delle fonti, senza affermazioni di beneficio aggiunte.
 
 1. **Fonti** → agente `source-researcher` (sonnet): restituisce record JSON con citazione, DOI/URL, età, risultati.
 2. **Verifica fonti** → agente `evidence-verifier` (opus, high): conferma esistenza, numeri, età. Scarta i "must fix".
-3. Aggiungi le fonti a `content/sources.json` (id univoco, `type`: guideline|meta|review|rct|cohort|study).
+3. Aggiungi le fonti a `content/sources.json` (id univoco non già usato; `type` scelto tra quelli già presenti nel file, es. «linea guida», «meta-analisi», «revisione sistematica», «studio osservazionale»; prima controlla che la fonte non ci sia già con un altro id).
 4. **Scrittura IT** → agente `content-writer`: schema delle schede esistenti; voci per età `{"t","from","to"}`;
    soglie di sicurezza `"strict": true`; possibili patologie → campo `alert`.
 5. **Traduzione** → agenti `translator-ru` e `translator-en` (in sequenza sullo stesso file).
-6. `npm run content` (schema, fonti, allineamento it/ru, fasce 0–144 mesi).
+6. `npm run content` (schema, fonti, allineamento it/ru/en, fasce 0–144 mesi).
 7. **Verifica testo** → `evidence-verifier` su IT+RU+EN contro le fonti, frase per frase. Applica le correzioni e ripeti 6–7 finché OK.
 8. `npm test` e screenshot con `qa-runner`.
 

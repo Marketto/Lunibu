@@ -6,6 +6,7 @@ import { VERSION, BUILD, BUILD_DATE } from '../lib/update.js';
 
 export const SHARE_TEXT = {
   it: {
+    qrAlt: 'Codice QR',
     title: 'Condividi Lunibù', sub: 'Manda il link dell\'app (senza i tuoi dati: restano solo su questo telefono).',
     share: 'Condividi', copy: 'Copia link', copied: 'Link copiato', qr: 'Oppure fai inquadrare questo QR code',
     message: 'Lunibù: ricerca rapida di dati scientifici per genitori di bambini 0–12 anni. Funziona anche offline.',
@@ -13,6 +14,7 @@ export const SHARE_TEXT = {
     updated: (v) => `Lunibù è stata aggiornata alla versione ${v}.`, ready: 'Nuova versione pronta: si aggiornerà alla prossima apertura.', now: 'Aggiorna ora', ok: 'Ok'
   },
   ru: {
+    qrAlt: 'QR-код',
     title: 'Поделиться Lunibù', sub: 'Отправьте ссылку на приложение (без ваших данных: они остаются только на этом телефоне).',
     share: 'Поделиться', copy: 'Копировать ссылку', copied: 'Ссылка скопирована', qr: 'Или дайте отсканировать этот QR-код',
     message: 'Lunibù: быстрый поиск научных данных для родителей детей 0–12 лет. Работает и офлайн.',
@@ -20,6 +22,7 @@ export const SHARE_TEXT = {
     updated: (v) => `Lunibù обновлено до версии ${v}.`, ready: 'Новая версия готова: обновится при следующем открытии.', now: 'Обновить сейчас', ok: 'Ок'
   },
   en: {
+    qrAlt: 'QR code',
     title: 'Share Lunibù', sub: 'Send the app link (without your data: it stays only on this phone).',
     share: 'Share', copy: 'Copy link', copied: 'Link copied', qr: 'Or let them scan this QR code',
     message: 'Lunibù: quick lookup of scientific data for parents of children aged 0–12. Works offline too.',
@@ -59,7 +62,7 @@ export function ShareCard({ lang }) {
         <motion.button className="btn ghost" onClick={copy} {...tap}>{copied ? `✓ ${s.copied}` : s.copy}</motion.button>
       </div>
       <p className="small muted">{s.qr}</p>
-      <div className="qr" aria-label="QR" dangerouslySetInnerHTML={{ __html: svg }} />
+      <div className="qr" role="img" aria-label={s.qrAlt} dangerouslySetInnerHTML={{ __html: svg }} />
       <p className="small muted url">{url}</p>
     </section>
   );

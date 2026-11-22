@@ -6,9 +6,10 @@ import { Refs } from './Common.jsx';
 import { MILESTONE_TEXT } from '../lib/i18n.js';
 import { monthsAt } from '../lib/growth.js';
 import { AREAS, PRETERM_CORRECT_UNTIL, ageForMilestones, milestoneKey, position, split, status } from '../lib/milestones.js';
+import { localDate } from '../lib/util.js';
 import MILESTONES from '../../content/milestones.json';
 
-const today = () => new Date().toISOString().slice(0, 10);
+const today = () => localDate();
 const num = (n, lang) => String(Math.round(n * 10) / 10).replace('.', lang === 'en' ? '.' : ','); // separatore decimale per lingua
 const AREA_LOOK = {
   motor: { c: 'ladybug', bg: '#dcefe5' }, language: { c: 'cloud', bg: '#dfe9fb' }, social: { c: 'heart', bg: '#fbe3ea' },

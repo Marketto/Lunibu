@@ -1,17 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import { loadState, saveState, clearState, guessLang } from './lib/storage.js';
 import { ageInMonths } from './lib/age.js';
 import { t } from './lib/i18n.js';
 import { loadIndex } from './lib/search.js';
 import { AudioProvider, useAudio } from './lib/audio/useAudio.jsx';
-import Onboarding from './components/Onboarding.jsx';
 import Settings from './components/Settings.jsx';
-import Sounds, { MiniPlayer } from './components/Sounds.jsx';
-import { GamesList, GameView } from './components/Games.jsx';
-import Diary from './components/Diary.jsx';
-import { QuickReceive, DriveAuto } from './components/SyncCard.jsx';
-import { syncFromHash } from './lib/sync.js';
+import { MiniPlayer } from './components/MiniPlayer.jsx';
+import { Wait } from './components/Common.jsx';
+
+// Viste pesanti caricate a richiesta (il service worker le tiene in cache: restano disponibili offline)
+const Onboarding = lazy(() => import('./components/Onboarding.jsx'));
+const Sounds = lazy(() => import('./components/Sounds.jsx'));
+const GamesList = lazy(() => import('./components/Games.jsx').then((m) => ({ default: m.GamesList })));
+const GameView = lazy(() => import('./components/Games.jsx').then((m) => ({ default: m.GameView })));
+const Diary = lazy(() => import('./components/Diary.jsx'));
+const QuickReceive = lazy(() => import('./components/SyncCard.jsx').then((m) => ({ default: m.QuickReceive })));
+const DriveAuto = lazy(() => import('./components/SyncCard.jsx').then((m) => ({ default: m.DriveAuto })));
+import { syncFromHash, COLLECTIONS } from './lib/sync.js';
+import { forget as forgetDrive } from './lib/driveStore.js';
+import { revoke as revokeDrive } from './lib/drive.js';
 import { VersionLine, SHARE_TEXT } from './components/Share.jsx';
 import Tour, { TourRecall } from './components/Tour.jsx';
 import { TOUR } from './data/tour.js';
@@ -165,7 +173,7 @@ export default function App() {
     for (const r of prev) if (!keep.has(r.id)) deleted[r.id] = now;
     return { ...s, [key]: stamped, deleted };
   });
-  const applySync = (m) => setState((s) => ({ ...s, kids: withIds(m.kids), growth: m.growth, meds: m.meds, medPlans: m.medPlans || s.medPlans || [], milestones: m.milestones || s.milestones || [], temps: m.temps || s.temps || [], deleted: m.deleted }));
+  const applySync = (m) => setState((s) => ({ ...s, ...Object.fromEntries(COLLECTIONS.map((k) => [k, m[k] || s[k] || []])), kids: withIds(m.kids), deleted: m.deleted }));
   return (
     <MotionConfig reducedMotion="user">
       <AudioProvider lang={state.lang} ambientPref={state.ambient} setAmbientPref={(v) => update({ ambient: v })}>
@@ -233,8 +241,8 @@ function Shell({ state, setState, update, setList, applySync }) {
         {splashEl}
         <Backdrop />
         <main className="app" style={{ paddingBottom: 30 }}>
-          <Onboarding lang={lang} setLang={setLang} qrData={incoming} onQrClose={closeIncoming}
-            onDone={(k, extra = {}) => { closeIncoming(); update({ ...extra, kids: k, accepted: true, activeKid: 0, terms: TERMS_VERSION, termsAt: new Date().toISOString() }); }} />
+          <Suspense fallback={<Wait />}><Onboarding lang={lang} setLang={setLang} qrData={incoming} onQrClose={closeIncoming}
+            onDone={(k, extra = {}) => { closeIncoming(); update({ ...extra, kids: k, accepted: true, activeKid: 0, terms: TERMS_VERSION, termsAt: new Date().toISOString() }); }} /></Suspense>
         </main>
       </>
     );
@@ -272,7 +280,7 @@ function Shell({ state, setState, update, setList, applySync }) {
   else if (view === 'bimbi') content = (
     <Settings lang={lang} setLang={setLang} kids={kids} syncState={state} onSync={applySync}
       setKids={(k) => update({ kids: k, activeKid: Math.min(state.activeKid, k.length - 1) })}
-      onReset={() => { clearState(); setState({ lang, accepted: false, kids: [], activeKid: 0, ambient: false }); go(''); }} />
+      onReset={() => { clearState(); forgetDrive(); revokeDrive().catch(() => {}); setState({ lang, accepted: false, kids: [], activeKid: 0, ambient: false }); go(''); }} />
   );
   else content = <Home {...common} query={query} setQuery={setQuery} showInstall={!state.installDismissed} onDismissInstall={() => update({ installDismissed: true })} />;
 
@@ -284,8 +292,10 @@ function Shell({ state, setState, update, setList, applySync }) {
       {sweep.k > 0 && <CharacterParade k={sweep.k} set={sweep.set} color={sweep.color} />}
       <Backdrop night={night} />
       <UpdateBanner lang={lang} />
-      <DriveAuto lang={lang} state={state} onMerge={applySync} />
-      {incoming && <QuickReceive lang={lang} data={incoming} state={state} onMerge={applySync} onClose={closeIncoming} />}
+      <Suspense fallback={null}>
+        <DriveAuto lang={lang} state={state} onMerge={applySync} />
+        {incoming && <QuickReceive lang={lang} data={incoming} state={state} onMerge={applySync} onClose={closeIncoming} />}
+      </Suspense>
       <main className="app">
         <div className="topbar">
           <AnimatePresence>
@@ -304,7 +314,7 @@ function Shell({ state, setState, update, setList, applySync }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, transition: { duration: 0.18 } }}
             transition={{ type: 'spring', stiffness: 260, damping: 26, delay: 0.18 }}>
-            {content}
+            <Suspense fallback={<Wait />}>{content}</Suspense>
           </motion.div>
         </AnimatePresence>
         <TourRecall lang={lang} onClick={() => setTourOpen('all')} />

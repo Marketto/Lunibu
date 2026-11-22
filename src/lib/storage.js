@@ -27,7 +27,12 @@ export function saveState(state) {
 }
 
 export function clearState() {
-  try { localStorage.removeItem(KEY); } catch { /* ignore */ }
+  try {
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith('lunibu:')) keys.push(k); }
+    keys.forEach((k) => localStorage.removeItem(k));
+    localStorage.removeItem(KEY);
+  } catch { /* ignore */ }
 }
 
 export function guessLang() {

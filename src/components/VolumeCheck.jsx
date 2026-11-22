@@ -14,7 +14,7 @@ const KEY = 'lunibu:calibration';
 const loadCal = () => { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch { return null; } };
 const saveCal = (c) => { try { localStorage.setItem(KEY, JSON.stringify(c)); } catch { /* */ } };
 
-const T = {
+export const T = {
   it: {
     title: 'Misura il volume',
     intro: 'Usa il microfono per stimare quanto è forte il suono. Niente viene registrato o salvato: il segnale si analizza al momento e si scarta.',

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { parseCsv, parseDate, dateOrderState, guessMapping, buildRecords } from '../src/lib/csv.js';
+import { parseCsv, parseDate, dateOrderState, guessMapping, buildRecords, xlsxCell } from '../src/lib/csv.js';
 import { mergeData, exportEncrypted, importEncrypted, encodeQr, decodeQr, buildQuickPayload, syncFromHash, QR_MAX_CHARS } from '../src/lib/sync.js';
 
 describe('csv', () => {
@@ -126,4 +126,29 @@ it2('struttura del file senza dati', () => {
   expect2(out).toContain('Foglio "Growth" (2 righe)');
   expect2(out).toContain('- Date: 9999-99-99');
   expect2(out).not.toContain('8.5');
+});
+
+describe('twins and xlsx dates', () => {
+  it('twins created separately are not collapsed', () => {
+    const local = { kids: [{ id: 'a', birth: '2025-01-01', name: 'Mia' }, { id: 'b', birth: '2025-01-01', name: 'Leo' }], growth: [], meds: [] };
+    const remote = { kids: [{ id: 'x', birth: '2025-01-01', name: 'Sara' }, { id: 'y', birth: '2025-01-01' }], growth: [], meds: [] };
+    const m = mergeData(local, remote);
+    expect(m.kids).toHaveLength(4);
+    expect(m.stats.addedKids).toBe(2);
+  });
+  it('names in conflict on a single birth match are added as new', () => {
+    const m = mergeData({ kids: [{ id: 'a', birth: '2025-01-01', name: 'Mia' }] }, { kids: [{ id: 'x', birth: '2025-01-01', name: 'Leo' }] });
+    expect(m.kids.map((k) => k.id)).toEqual(['a', 'x']);
+  });
+  it('single birth match with compatible names still merges', () => {
+    const m = mergeData({ kids: [{ id: 'a', birth: '2025-01-01' }] }, { kids: [{ id: 'x', birth: '2025-01-01', name: 'Mia' }], growth: [{ id: 'g', kidId: 'x', date: '2025-02-01', weight: 4 }] });
+    expect(m.kids).toEqual([{ id: 'a', birth: '2025-01-01', name: 'Mia' }]);
+    expect(m.growth[0].kidId).toBe('a');
+  });
+  it('xlsxCell formats Dates with local getters', () => {
+    expect(xlsxCell(new Date(2025, 2, 4))).toBe('2025-03-04');
+    expect(xlsxCell(new Date(2025, 2, 4, 13, 5))).toBe('2025-03-04 13:05');
+    expect(xlsxCell(null)).toBe('');
+    expect(xlsxCell(7)).toBe('7');
+  });
 });

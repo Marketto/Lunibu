@@ -11,10 +11,9 @@ import {
   completedMonths, isNight, normalizePrefs, redItems, reminderPlan
 } from '../lib/fever.js';
 import { clearPrefs, loadRawPrefs, loadReminder, saveRawPrefs, saveReminder } from '../lib/feverStore.js';
+import { uid, nowLocal } from '../lib/util.js';
 import SOURCES from '../../content/sources.json';
 
-const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
-const nowLocal = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); };
 const parseVal = (v) => { const n = parseFloat(String(v ?? '').replace(',', '.')); return isFinite(n) ? Math.round(n * 10) / 10 : null; };
 const validVal = (n) => n != null && n >= TEMP_MIN && n <= TEMP_MAX;
 const dec = (n, lang) => (n == null ? '–' : n.toFixed(1).replace('.', lang === 'en' ? '.' : ','));

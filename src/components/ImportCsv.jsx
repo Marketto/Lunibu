@@ -1,16 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { tap } from './Common.jsx';
-import { parseCsv, guessMapping, dateOrderState, buildRecords, FIELDS, detectPreset, buildFromBabyTracker, summarizeMeds, suggestActive } from '../lib/csv.js';
+import { parseCsv, guessMapping, dateOrderState, buildRecords, FIELDS, detectPreset, xlsxCell, buildFromBabyTracker, summarizeMeds, suggestActive } from '../lib/csv.js';
 import { ACTIVE } from '../lib/meds.js';
 
 const MEDMAP_KEY = 'lunibu:medmap'; // scelte dell'utente: restano sul dispositivo, mai nel repository
 const loadMedMap = () => { try { return JSON.parse(localStorage.getItem(MEDMAP_KEY)) || {}; } catch { return {}; } };
 const saveMedMap = (m) => { try { localStorage.setItem(MEDMAP_KEY, JSON.stringify(m)); } catch { /* storage pieno/bloccato */ } };
 
-export const IMPORT_BTN = { it: 'Importa da un\'altra app (CSV)', ru: 'Импорт из другого приложения (CSV)', en: 'Import from another app (CSV)' };
 
-const TX = {
+export const TX = {
   it: {
     structHint: 'Il tuo file non è riconosciuto bene? Copia solo la struttura (nomi dei fogli e delle colonne, nessun dato, nessuna foto) e mandala per ricevere supporto.', structCopy: 'Copia la struttura del file', structCopied: 'Struttura copiata',
     title: 'Importa da CSV o Excel', local: 'Il file viene letto solo sul tuo telefono: non viene inviato da nessuna parte.',
@@ -128,7 +127,7 @@ export default function ImportCsv({ lang, kids, active, growth, meds, setGrowth,
         const XLSX = await import('xlsx');
         const wb = XLSX.read(await f.arrayBuffer(), { cellDates: true, cellStyles: false, bookImages: false });
         const names = wb.SheetNames;
-        const cell = (v) => (v instanceof Date ? v.toISOString().slice(0, 16).replace('T', ' ').replace(' 00:00', '') : v == null ? '' : String(v));
+        const cell = xlsxCell;
         let best = null;
         const struct = [];
         for (const name of names) {

@@ -48,7 +48,7 @@ export default function Tour({ lang, slides, onClose, go, route }) {
       const el = find(sl.target);
       let r = read(el);
       if (!r) {
-        if (++tries > 30) { if (last) onClose(); else setI((n) => n + 1); return; }
+        if (++tries > 150) { if (last) onClose(); else setI((n) => n + 1); return; }
         raf = requestAnimationFrame(measure); return;
       }
       const fixed = !!el.closest('.bottom-nav');

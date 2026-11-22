@@ -5,12 +5,13 @@ import { tap } from './Common.jsx';
 import { LOCALE } from '../lib/i18n.js';
 import { appUrl } from './Share.jsx';
 import { driveEnabled, fileLink, getToken, pickFile, share, revoke, transport } from '../lib/drive.js';
-import { getDrive, setDrive, subscribe, passOf, savePass, forget, runSync, AUTO_MS } from '../lib/driveStore.js';
+import { getDrive, setDrive, subscribe, passOf, savePass, clearPass, forget, runSync, AUTO_MS } from '../lib/driveStore.js';
 import { createRemote } from '../lib/driveSync.js';
-import { MIN_PASS, exportEncrypted, importEncrypted, mergeData, buildQuickPayload, encodeQr, decodeQr } from '../lib/sync.js';
+import { MIN_PASS, COLLECTIONS, syncShape, exportEncrypted, importEncrypted, mergeData, buildQuickPayload, encodeQr, decodeQr } from '../lib/sync.js';
 
 export const TX = {
   it: {
+    qrAlt: 'Codice QR',
     title: 'Condividi i dati con l\'altro genitore', intro: 'Crea un file protetto da una frase segreta e invialo all\'altro genitore: i dati di crescita e medicine si uniscono sui due telefoni, senza server.',
     create: 'Crea file da inviare', open: 'Apri file ricevuto', qr: 'Mostra QR (ultimi aggiornamenti)',
     privacy: 'Il file contiene dati sanitari. È protetto dalla frase segreta e non viene salvato da nessun\'altra parte: lo conservi e lo inoltri solo tu.',
@@ -37,6 +38,7 @@ export const TX = {
     dUpToDate: 'Già aggiornato.'
   },
   ru: {
+    qrAlt: 'QR-код',
     title: 'Поделиться данными с другим родителем', intro: 'Создайте файл, защищённый секретной фразой, и отправьте другому родителю: данные о росте и лекарствах объединятся на двух телефонах, без сервера.',
     create: 'Создать файл для отправки', open: 'Открыть полученный файл', qr: 'Показать QR (последние обновления)',
     privacy: 'Файл содержит данные о здоровье. Он защищён секретной фразой и нигде больше не сохраняется: хранить и пересылать его можете только вы.',
@@ -63,6 +65,7 @@ export const TX = {
     dUpToDate: 'Уже актуально.'
   },
   en: {
+    qrAlt: 'QR code',
     title: 'Share your data with the other parent', intro: 'Create a file protected by a secret phrase and send it to the other parent: growth and medicine data merge on the two phones, with no server.',
     create: 'Create a file to send', open: 'Open a received file', qr: 'Show QR (latest updates)',
     privacy: 'The file contains health data. It is protected by the secret phrase and is not saved anywhere else: only you keep it and forward it.',
@@ -147,7 +150,7 @@ export function SyncResult({ s, lang, stats, kids }) {
   );
 }
 
-const readState = (st) => ({ kids: st.kids || [], growth: st.growth || [], meds: st.meds || [], medPlans: st.medPlans || [], milestones: st.milestones || [], temps: st.temps || [], deleted: st.deleted || {} });
+const readState = syncShape;
 
 export default function SyncCard({ lang, state, onMerge }) {
   const s = TX[lang];
@@ -240,7 +243,7 @@ export default function SyncCard({ lang, state, onMerge }) {
           ) : (
             <>
               <p className="small">{s.qrHow}</p>
-              <div className="qr" aria-label="QR" dangerouslySetInnerHTML={{ __html: qr.svg }} />
+              <div className="qr" role="img" aria-label={s.qrAlt} dangerouslySetInnerHTML={{ __html: qr.svg }} />
               <p className="small muted">{s.qrNote}</p>
               <button className="btn" onClick={() => reset(null)}>{s.close}</button>
             </>
@@ -343,14 +346,17 @@ export function DriveAuto({ lang, state, onMerge }) {
   const latest = useRef(state); latest.current = state;
   const cb = useRef(); cb.current = onMerge;
 
-  const run = async (silent) => {
+  const [askPass, setAskPass] = useState(false);
+  const [pBusy, setPBusy] = useState(false);
+  const [pMsg, setPMsg] = useState('');
+  const run = async (silent, pass) => {
     try {
-      const r = await runSync({ latest: () => readState(latest.current), silent, appVersion: version() });
-      cb.current(r.merged); setNeeds(false);
+      const r = await runSync({ latest: () => readState(latest.current), silent, pass, appVersion: version() });
+      cb.current(r.merged); setNeeds(false); setAskPass(false); setPMsg('');
       if (r.stats.recentDoses.length > 0) setRes(r.stats);
     } catch (e) {
       if (e?.message === 'auth') setNeeds(true);
-      else if (e?.message === 'bad-pass') setDrive({ pass: undefined });
+      else if (e?.message === 'bad-pass') { clearPass(); setAskPass(true); setPMsg(s.badPass); }
     }
   };
   useEffect(() => {
@@ -365,7 +371,7 @@ export function DriveAuto({ lang, state, onMerge }) {
   }, [d.fileId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // dopo una modifica locale (misura, dose, import): sincronizza dopo 8 s di calma, senza rincorrersi
-  const sig = (st) => JSON.stringify(['growth', 'meds', 'medPlans', 'milestones', 'temps', 'kids'].map((k) => (st[k] || []).map((x) => `${x.id}:${x.updatedAt || ''}`).sort()));
+  const sig = (st) => JSON.stringify(COLLECTIONS.map((k) => (st[k] || []).map((x) => `${x.id}:${x.updatedAt || ''}`).sort()));
   const lastSig = useRef(null);
   const curSig = sig(state);
   useEffect(() => {
@@ -383,6 +389,15 @@ export function DriveAuto({ lang, state, onMerge }) {
   if (!driveEnabled || !d.fileId) return null;
   return (
     <>
+      {askPass && (
+        <div className="sync-sheet" role="dialog" aria-modal="true" aria-labelledby="drive-ph">
+          <div className="sync-sheet-in">
+            <h2 id="drive-ph" style={{ marginTop: 0 }}>{s.dTitle}</h2>
+            {pMsg && <p className="small" role="alert">{pMsg}</p>}
+            <PassForm s={s} label={s.askPass} busy={pBusy} onSubmit={async (p) => { setPBusy(true); await run(false, p); setPBusy(false); }} onCancel={() => { setAskPass(false); setPMsg(''); }} />
+          </div>
+        </div>
+      )}
       {needs && <button className="drive-chip" onClick={() => run(false)}>{s.dChip}</button>}
       {res && (
         <div className="sync-sheet" role="dialog" aria-modal="true" aria-labelledby="drive-rh">

@@ -22,5 +22,5 @@ Per ogni frase fattuale indicata:
 3. controlla la sicurezza per la fascia d'età indicata (`from`/`to`, `strict`);
 4. confronta russo e inglese con l'italiano (significato e numeri): nessuna aggiunta né omissione.
 
-Output conciso: per ogni problema → file, id, campo/indice, lingua, problema, correzione proposta (IT e RU), URL di prova.
+Output conciso: per ogni problema → file, id, campo/indice, lingua, problema, correzione proposta (IT, RU ed EN), URL di prova.
 Chiudi con un verdetto per elemento: OK / minor fixes / must fix. Non modificare file.

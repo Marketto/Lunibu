@@ -1,7 +1,7 @@
 // Primo avvio del secondo genitore: stato iniziale costruito dai dati condivisi (file, QR o Drive).
-import { mergeData } from './sync.js';
+import { mergeData, syncShape } from './sync.js';
 
-const EMPTY = { kids: [], growth: [], meds: [], medPlans: [], milestones: [], temps: [], deleted: {} };
+const EMPTY = syncShape();
 
 /** Unisce i dati ricevuti in uno stato vuoto. Restituisce kids/growth/meds/medPlans/deleted + riepilogo. */
 export function initialFromImport(remote) {
@@ -13,6 +13,6 @@ export function initialFromImport(remote) {
 /** Dopo la revisione: i bimbi modificati (nome/nascita) + i dati del diario da importare. */
 export function finishOnboarding(kids, imported) {
   const clean = kids.map((k) => ({ ...k, name: (k.name || '').trim() }));
-  const extra = imported ? { growth: imported.growth, meds: imported.meds, medPlans: imported.medPlans, milestones: imported.milestones, temps: imported.temps, deleted: imported.deleted } : {};
+  const extra = imported ? (({ kids: _k, ...rest }) => rest)(syncShape(imported)) : {}; // eslint-disable-line no-unused-vars
   return { kids: clean, extra };
 }

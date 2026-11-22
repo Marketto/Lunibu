@@ -8,6 +8,9 @@ import { IconCare, IconAlert, IconShift } from './Icons.jsx';
 import { Character } from './Characters.jsx';
 import SOURCES from '../../content/sources.json';
 
+/** Attesa minima per le viste caricate a richiesta (React.lazy). */
+export const Wait = () => <div role="status" aria-busy="true" className="small muted" style={{ minHeight: 120, padding: 24, textAlign: 'center' }}>…</div>;
+
 export const spring = { type: 'spring', stiffness: 420, damping: 30 };
 export const tap = { whileTap: { scale: 0.95 }, transition: spring };
 

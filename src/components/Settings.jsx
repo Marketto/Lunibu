@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { t } from '../lib/i18n.js';
 import { validBirth } from '../lib/age.js';
-import { KidForm } from './Onboarding.jsx';
-import { LangSwitch, tap } from './Common.jsx';
+import { KidForm } from './KidForm.jsx';
+import { LangSwitch, Wait, tap } from './Common.jsx';
 import { useAudio } from '../lib/audio/useAudio.jsx';
 import InstallCard from './Install.jsx';
 import { ShareCard, VersionLine } from './Share.jsx';
-import SyncCard from './SyncCard.jsx';
+
 import { TERMS } from '../lib/terms.js';
+import { localDate } from '../lib/util.js';
+const SyncCard = lazy(() => import('./SyncCard.jsx'));
 
 export default function Settings({ lang, setLang, kids, setKids, onReset, syncState, onSync }) {
   const s = t(lang);
@@ -16,7 +18,7 @@ export default function Settings({ lang, setLang, kids, setKids, onReset, syncSt
   const [draft, setDraft] = useState(kids);
   const [saved, setSaved] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localDate();
   const valid = draft.length > 0 && draft.every((k) => validBirth(k.birth));
   const dirty = JSON.stringify(draft) !== JSON.stringify(kids);
 
@@ -41,7 +43,7 @@ export default function Settings({ lang, setLang, kids, setKids, onReset, syncSt
       </div>
       <p className="muted small" style={{ marginTop: 12 }}>{s.privacyNote}</p>
 
-      <SyncCard lang={lang} state={syncState} onMerge={onSync} />
+      <Suspense fallback={<Wait />}><SyncCard lang={lang} state={syncState} onMerge={onSync} /></Suspense>
 
       <InstallCard lang={lang} />
       <ShareCard lang={lang} />

@@ -19,4 +19,4 @@ Scrivi contenuti per Lunibù solo a partire da record di fonti già verificati. 
 - Ogni frase di ricerca cita autore e anno; il campo `sources` include tutti gli id usati.
 - Tono: chiaro, gentile, non allarmistico; niente promesse di benefici non dimostrati.
 - Dopo la modifica esegui `npm run content` e correggi gli errori di schema.
-- Non tradurre: lascia la parte `ru` allineata in struttura (stesse voci e fasce) e segnala che va tradotta.
+- Non tradurre: scrivi solo `it`; `translator-ru` e `translator-en` aggiungono `ru` ed `en` con la stessa struttura (stesse voci e fasce).

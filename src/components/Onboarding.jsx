@@ -7,39 +7,11 @@ import { LangSwitch, spring, tap } from './Common.jsx';
 import { IconLock } from './Icons.jsx';
 import { TermsAccept } from './Terms.jsx';
 import { PassForm, TX, errMsg, version } from './SyncCard.jsx';
-import { importEncrypted, decodeQr } from '../lib/sync.js';
+import { importEncrypted, decodeQr, syncShape } from '../lib/sync.js';
 import { initialFromImport, finishOnboarding } from '../lib/onboard.js';
+import { KidForm } from './KidForm.jsx';
 import { driveEnabled, getToken, pickFile } from '../lib/drive.js';
 import { runSync } from '../lib/driveStore.js';
-
-const todayISO = () => new Date().toISOString().slice(0, 10);
-const AV = ['#f7c48f', '#b9b2ec', '#a8d0be', '#f1b4c3', '#a9c7ee', '#f7d79a'];
-
-export function KidForm({ kid, index, lang, onChange, onRemove }) {
-  const s = t(lang);
-  const future = kid.birth && kid.birth > todayISO();
-  const label = kid.name || s.unnamedKid(index);
-  return (
-    <motion.div className="kid-card" layout initial={{ opacity: 0, y: 20, rotate: index % 2 ? 1.5 : -1.5 }}
-      animate={{ opacity: 1, y: 0, rotate: 0 }} exit={{ opacity: 0, scale: 0.9 }} transition={{ ...spring, delay: index * 0.06 }}>
-      <div className="kid-card-head">
-        <span className="av" style={{ background: AV[index % AV.length] }}>{label.slice(0, 1).toUpperCase()}</span>
-        <strong>{label}</strong>
-        {onRemove && <button className="rm" onClick={onRemove}>{s.remove}</button>}
-      </div>
-      <label className="field">
-        <span>{s.birthDate}</span>
-        <input type="date" max={todayISO()} value={kid.birth || ''} onChange={(e) => onChange({ ...kid, birth: e.target.value })} />
-      </label>
-      {future && <p className="error">{s.birthFuture}</p>}
-      {!future && kid.birth && !validBirth(kid.birth) && <p className="error">{s.birthTooOld}</p>}
-      <label className="field">
-        <span>{s.nameOptional}</span>
-        <input type="text" maxLength={30} value={kid.name || ''} onChange={(e) => onChange({ ...kid, name: e.target.value })} />
-      </label>
-    </motion.div>
-  );
-}
 
 const slide = {
   initial: (d) => ({ opacity: 0, x: d * 40 }),
@@ -47,8 +19,9 @@ const slide = {
   exit: (d) => ({ opacity: 0, x: d * -40, transition: { duration: 0.15 } })
 };
 
-const OT = {
+export const OT = {
   it: {
+    kidDel: 'Togli un bimbo', kidAdd: 'Aggiungi un bimbo',
     askTitle: 'Hai già dei dati condivisi dall\'altro genitore?', no: 'No, inizio da zero', noSub: 'Aggiungo i miei bimbi.',
     file: 'Sì, ho un file Lunibù (.lunibu)', fileSub: 'Lo apro con la frase segreta concordata.',
     drive: 'Sì, usiamo Google Drive', driveSub: 'Collego Drive e scelgo il file condiviso.',
@@ -58,6 +31,7 @@ const OT = {
     review: 'Controlla i bimbi', reviewHint: 'Puoi correggere nomi e date di nascita.', fromScratch: 'Inizia da zero'
   },
   ru: {
+    kidDel: 'Убрать ребёнка', kidAdd: 'Добавить ребёнка',
     askTitle: 'У вас уже есть данные от другого родителя?', no: 'Нет, начинаю с нуля', noSub: 'Добавлю своих детей.',
     file: 'Да, у меня есть файл Lunibù (.lunibu)', fileSub: 'Открою его по согласованной секретной фразе.',
     drive: 'Да, мы используем Google Drive', driveSub: 'Подключу Drive и выберу общий файл.',
@@ -67,6 +41,7 @@ const OT = {
     review: 'Проверьте детей', reviewHint: 'Можно исправить имена и даты рождения.', fromScratch: 'Начать с нуля'
   },
   en: {
+    kidDel: 'Remove a child', kidAdd: 'Add a child',
     askTitle: 'Do you already have data shared by the other parent?', no: 'No, I\'m starting from scratch', noSub: 'I\'ll add my children.',
     file: 'Yes, I have a Lunibù file (.lunibu)', fileSub: 'I\'ll open it with the agreed secret phrase.',
     drive: 'Yes, we use Google Drive', driveSub: 'I\'ll connect Drive and choose the shared file.',
@@ -116,7 +91,7 @@ export default function Onboarding({ lang, setLang, onDone, qrData, onQrClose })
   const fromFile = (pass) => run(async () => { if (!file) throw new Error('bad-file'); accept(await importEncrypted(file, pass)); });
   const fromQr = (pass) => run(async () => { accept(await decodeQr(qrData, pass)); });
   const fromDrive = (pass) => run(async () => {
-    const r = await runSync({ latest: () => ({ kids: [], growth: [], meds: [], medPlans: [], milestones: [], temps: [], deleted: {} }), fileId: picked, pass, appVersion: version() });
+    const r = await runSync({ latest: () => syncShape(), fileId: picked, pass, appVersion: version() });
     accept(r.merged);
   });
   const connect = () => run(async () => { await getToken(); setLinked(true); });
@@ -204,13 +179,13 @@ export default function Onboarding({ lang, setLang, onDone, qrData, onQrClose })
               <>
                 <h1>{s.howManyKids}</h1>
                 <div className="stepper">
-                  <motion.button onClick={() => setN(count - 1)} aria-label="−" {...tap}>−</motion.button>
+                  <motion.button onClick={() => setN(count - 1)} aria-label={o.kidDel} {...tap}>−</motion.button>
                   <AnimatePresence mode="popLayout">
                     <motion.span key={count} className="count" initial={{ y: -30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 30, opacity: 0 }} transition={spring}>
                       {count}
                     </motion.span>
                   </AnimatePresence>
-                  <motion.button onClick={() => setN(count + 1)} aria-label="+" {...tap}>+</motion.button>
+                  <motion.button onClick={() => setN(count + 1)} aria-label={o.kidAdd} {...tap}>+</motion.button>
                 </div>
                 <div className="row">
                   <button className="btn ghost" onClick={() => back('ask')}>{s.back}</button>
