@@ -1,5 +1,11 @@
 # Novità di Lunibù
 
+## 1.17.0 — 23 novembre 2026
+- Abbinamento con l'altro genitore tramite QR: il telefono crea una chiave casuale lunghissima e l'altro la riceve inquadrando il codice. La frase segreta resta come alternativa.
+- La chiave o la frase non sono più salvate in chiaro: sono cifrate e, dove il telefono lo permette, si sbloccano con impronta o volto. Pulsante per rimuovere la chiave dal telefono.
+- Eliminare un bimbo cancella anche le sue misure, medicine, tappe e temperature, anche sull'altro telefono sincronizzato (con conferma).
+- Informativa privacy aggiornata (versione 1.7) sulla conservazione cifrata della chiave.
+
 ## 1.16.3 — 22 novembre 2026
 - «Cancella tutti i dati» ora cancella davvero tutto, anche la frase segreta e il collegamento a Google Drive (il file su Drive resta).
 - Gemelli: due bimbi con la stessa data di nascita non vengono più uniti per errore quando si sincronizzano due telefoni.

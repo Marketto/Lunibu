@@ -543,8 +543,8 @@
     "alert": "none",
     "evidence": "alta",
     "sources": [
-      "A19",
-      "A18"
+      "V4",
+      "V5"
     ],
     "it": {
       "title": "Vitamina D nel primo anno",

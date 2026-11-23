@@ -3,7 +3,7 @@ import { readFileSync, existsSync, statSync } from 'node:fs';
 
 // Ogni traccia del catalogo (e la musica di sottofondo) ha il suo loop pre-renderizzato in public/audio
 describe('loop audio pre-renderizzati', () => {
-  const src = readFileSync('src/lib/audio/engine.js', 'utf8');
+  const src = readFileSync('src/lib/audio/catalog.js', 'utf8');
   const ids = [...src.matchAll(/^\s*\{ id: '([a-z-]+)', group:/gm)].map((m) => m[1]).concat('ambient');
   it('catalogo non vuoto', () => expect(ids.length).toBeGreaterThan(15));
   it.each(ids)('%s.m4a esiste (npm run audio:render)', (id) => {

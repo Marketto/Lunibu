@@ -98,7 +98,7 @@ describe('testi sensibili en', () => {
     expect(STRINGS.en.urgentTitle).toContain('112');
   });
   it('condizioni: versione 1.6 e nota che prevale l\'italiano', () => {
-    expect(TERMS_VERSION).toBe('1.6');
+    expect(TERMS_VERSION).toBe('1.7');
     expect(TERMS.en.updated).toMatch(/Italian version prevails/);
     expect(TERMS.en.sections.length).toBe(TERMS.it.sections.length);
   });

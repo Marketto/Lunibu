@@ -18,6 +18,15 @@ const outDir = path.join(root, 'public/data');
 // AVVISO e l'app ripiega sull'italiano.
 const REQUIRE_EN = true;
 const errors = [];
+// Una fonte = un id: stesso URL/DOI con due id diversi è un errore (si riusa l'id esistente).
+{
+  const byUrl = {};
+  for (const [id, x] of Object.entries(sources)) {
+    const k = String(x.url || '').trim().toLowerCase().replace(/\/+$/, '').replace(/^https?:\/\/(dx\.)?doi\.org\//, 'doi:');
+    if (!k) continue;
+    if (byUrl[k]) errors.push(`fonte duplicata: ${byUrl[k]} e ${id} hanno lo stesso URL (${x.url})`); else byUrl[k] = id;
+  }
+}
 const warnings = [];
 const enProblem = (msg) => (REQUIRE_EN ? errors : warnings).push(msg);
 const ALERTS = ['none', 'pediatra', 'urgente'];

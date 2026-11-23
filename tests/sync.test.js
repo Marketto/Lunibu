@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { parseCsv, parseDate, dateOrderState, guessMapping, buildRecords, xlsxCell } from '../src/lib/csv.js';
-import { mergeData, exportEncrypted, importEncrypted, encodeQr, decodeQr, buildQuickPayload, syncFromHash, QR_MAX_CHARS } from '../src/lib/sync.js';
+import { mergeData, exportEncrypted, importEncrypted, encodeQr, decodeQr, buildQuickPayload, removeKidsCascade, syncFromHash, QR_MAX_CHARS } from '../src/lib/sync.js';
 
 describe('csv', () => {
   it('quotes, separators, BOM, CRLF', () => {
@@ -168,5 +168,49 @@ describe('mergeData gemelli', () => {
     const m = mergeData({ kids: [tw('x', '')] }, { kids: [tw('z', ''), tw('x', '')] });
     expect(m.kids).toHaveLength(2);
     expect(m.stats.addedKids).toBe(1);
+  });
+});
+
+describe('eliminazione bimbo: lapide + cascata', () => {
+  const T0 = '2025-02-01T10:00:00Z', DEL = '2025-03-01T10:00:00Z';
+  const base = {
+    kids: [{ id: 'a', birth: '2025-01-01', name: 'Mia' }, { id: 'b', birth: '2023-01-01', name: 'Leo' }],
+    growth: [{ id: 'g1', kidId: 'a', date: '2025-02-01', updatedAt: T0 }, { id: 'g2', kidId: 'b', date: '2025-02-01', updatedAt: T0 }],
+    meds: [{ id: 'm1', kidId: 'a', at: T0, updatedAt: T0 }], medPlans: [{ id: 'a:p', kidId: 'a', updatedAt: T0 }],
+    milestones: [{ id: 'a:x', kidId: 'a', updatedAt: T0 }], temps: [{ id: 't1', kidId: 'a', updatedAt: T0 }], deleted: {}
+  };
+  const A = { ...base, ...removeKidsCascade(base, [base.kids[1]], DEL) };
+  it('cascade removes kid data and tombstones every record', () => {
+    expect(A.kids.map((k) => k.id)).toEqual(['b']);
+    expect(A.growth.map((g) => g.id)).toEqual(['g2']);
+    expect([A.meds, A.medPlans, A.milestones, A.temps].every((l) => l.length === 0)).toBe(true);
+    expect(Object.keys(A.deleted).sort()).toEqual(['a', 'a:p', 'a:x', 'g1', 'm1', 't1']);
+  });
+  it('both sides of the merge lose the kid and its data', () => {
+    const onA = mergeData(A, base);
+    expect(onA.kids.map((k) => k.id)).toEqual(['b']);
+    expect(onA.growth.map((g) => g.id)).toEqual(['g2']);
+    expect(onA.meds.length + onA.temps.length + onA.milestones.length + onA.medPlans.length).toBe(0);
+    const onB = mergeData(base, A);
+    expect(onB.kids.map((k) => k.id)).toEqual(['b']);
+    expect(onB.growth.map((g) => g.id)).toEqual(['g2']);
+    expect(onB.meds.length + onB.temps.length + onB.milestones.length + onB.medPlans.length).toBe(0);
+  });
+  it('remote kid matched by birth date to a locally deleted kid is dropped with its records', () => {
+    const R = { kids: [{ id: 'zz', birth: '2025-01-01', name: 'Mia' }], growth: [{ id: 'g9', kidId: 'zz', date: '2025-02-10' }], meds: [] };
+    const m = mergeData({ ...base, deleted: A.deleted }, R);
+    expect(m.kids.map((k) => k.id)).toEqual(['b']);
+    expect(m.growth.map((g) => g.id)).toEqual(['g2']);
+  });
+  it('tombstone travels in the quick payload', () => {
+    const q = buildQuickPayload(A, { now: Date.parse('2025-03-01T12:00:00Z') });
+    expect(q.deleted.a).toBe(DEL);
+    expect(mergeData(base, q).kids.map((k) => k.id)).toEqual(['b']);
+  });
+  it('kid recreated with same birth date after deletion stays', () => {
+    const re = { ...A, kids: [...A.kids, { id: 'new', birth: '2025-01-01', name: 'Mia' }], growth: [...A.growth, { id: 'g5', kidId: 'new', date: '2025-04-01', updatedAt: '2025-04-01T00:00:00Z' }] };
+    const m = mergeData(re, base);
+    expect(m.kids.map((k) => k.id).sort()).toEqual(['b', 'new']);
+    expect(m.growth.map((g) => g.id).sort()).toEqual(['g2', 'g5']);
   });
 });

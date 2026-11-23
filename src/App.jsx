@@ -26,9 +26,11 @@ const GamesList = lazy(() => import('./components/Games.jsx').then((m) => ({ def
 const GameView = lazy(() => import('./components/Games.jsx').then((m) => ({ default: m.GameView })));
 const Diary = lazy(() => import('./components/Diary.jsx'));
 const QuickReceive = lazy(() => import('./components/SyncCard.jsx').then((m) => ({ default: m.QuickReceive })));
+const PairReceive = lazy(() => import('./components/SyncCard.jsx').then((m) => ({ default: m.PairReceive })));
 const DriveAuto = lazy(() => import('./components/SyncCard.jsx').then((m) => ({ default: m.DriveAuto })));
-import { syncFromHash, COLLECTIONS } from './lib/sync.js';
+import { syncFromHash, COLLECTIONS, removeKidsCascade } from './lib/sync.js';
 import { forget as forgetDrive } from './lib/driveStore.js';
+import { pairFromHash, deleteDb } from './lib/keystore.js';
 import { revoke as revokeDrive } from './lib/drive.js';
 import { VersionLine, SHARE_TEXT } from './components/Share.jsx';
 import Tour, { TourRecall } from './components/Tour.jsx';
@@ -219,6 +221,15 @@ function Shell({ state, setState, update, setList, applySync }) {
     window.addEventListener('hashchange', on);
     return () => window.removeEventListener('hashchange', on);
   }, []);
+  // Abbinamento (#pair=chiave): il frammento si toglie subito dall'URL, la chiave resta solo in memoria finché non si conferma
+  const [pairIn, setPairIn] = useState(() => pairFromHash(window.location.hash));
+  useEffect(() => {
+    const take = () => { const k = pairFromHash(window.location.hash); if (k) { setPairIn(k); window.history.replaceState(null, '', window.location.pathname + window.location.search); } };
+    take();
+    window.addEventListener('hashchange', take);
+    return () => window.removeEventListener('hashchange', take);
+  }, []);
+  const pairEl = pairIn ? <Suspense fallback={null}><PairReceive lang={lang} secret={pairIn} onClose={() => setPairIn(null)} /></Suspense> : null;
   const closeIncoming = () => { window.history.replaceState(null, '', window.location.pathname + window.location.search); setIncoming(null); };
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
@@ -249,6 +260,7 @@ function Shell({ state, setState, update, setList, applySync }) {
     return (
       <>
         {splashEl}
+        {pairEl}
         <Backdrop />
         <main className="app" style={{ paddingBottom: 30 }}>
           <ErrorBoundary lang={lang}><Suspense fallback={<Wait />}><Onboarding lang={lang} setLang={setLang} qrData={incoming} onQrClose={closeIncoming}
@@ -289,8 +301,13 @@ function Shell({ state, setState, update, setList, applySync }) {
   else if (view === 'suoni') content = <Sounds {...common} group={group} setGroup={setGroup} />;
   else if (view === 'bimbi') content = (
     <Settings lang={lang} setLang={setLang} kids={kids} syncState={state} onSync={applySync}
-      setKids={(k) => update({ kids: k, activeKid: Math.min(state.activeKid, k.length - 1) })}
-      onReset={() => { clearState(); forgetDrive(); revokeDrive().catch(() => {}); setState({ lang, accepted: false, kids: [], activeKid: 0, ambient: false }); setTourSeen([]); setTourOpen(null); go(''); }} />
+      setKids={(k) => setState((st) => {
+        const next = withIds(k);
+        const cur = st.kids[st.activeKid]?.id;
+        const idx = next.findIndex((x) => x.id === cur);
+        return { ...st, ...removeKidsCascade(st, next), activeKid: idx >= 0 ? idx : Math.max(0, Math.min(st.activeKid, next.length - 1)) };
+      })}
+      onReset={() => { clearState(); forgetDrive(); deleteDb(); revokeDrive().catch(() => {}); setState({ lang, accepted: false, kids: [], activeKid: 0, ambient: false }); setTourSeen([]); setTourOpen(null); go(''); }} />
   );
   else content = <Home {...common} query={query} setQuery={setQuery} showInstall={!state.installDismissed} onDismissInstall={() => update({ installDismissed: true })} />;
 
@@ -303,6 +320,7 @@ function Shell({ state, setState, update, setList, applySync }) {
       <Backdrop night={night} />
       <UpdateBanner lang={lang} />
       <ErrorBoundary lang={lang}><Suspense fallback={null}>
+        {pairEl}
         <DriveAuto lang={lang} state={state} onMerge={applySync} />
         {incoming && <QuickReceive lang={lang} data={incoming} state={state} onMerge={applySync} onClose={closeIncoming} />}
       </Suspense></ErrorBoundary>

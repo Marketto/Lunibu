@@ -79,16 +79,6 @@
     "url": "https://www.cdc.gov/botulism/prevention/index.html",
     "type": "ente sanitario"
   },
-  "A18": {
-    "label": "Braegger C et al. Vitamin D in the healthy European paediatric population. J Pediatr Gastroenterol Nutr. 2013;56(6):692-701",
-    "url": "https://doi.org/10.1097/MPG.0b013e31828f3c05",
-    "type": "position paper"
-  },
-  "A19": {
-    "label": "Saggese G et al. Vitamin D in pediatric age: consensus of the Italian Pediatric Society and the Italian Society of Preventive and Social Pediatrics, jointly with the Italian Federation of Pediatricians. Ital J Pediatr. 2018;44(1):51",
-    "url": "https://doi.org/10.1186/s13052-018-0488-7",
-    "type": "consensus"
-  },
   "A20": {
     "label": "Taylor CM et al. Picky/fussy eating in children: Review of definitions, assessment, prevalence and dietary intakes. Appetite. 2015;95:349-359",
     "url": "https://doi.org/10.1016/j.appet.2015.07.026",
@@ -132,11 +122,6 @@
   "B1": {
     "label": "NICE. Fever in under 5s: assessment and initial management. NICE guideline NG143; 2019 (aggiornata 2021)",
     "url": "https://www.nice.org.uk/guidance/ng143",
-    "type": "linea guida"
-  },
-  "B2": {
-    "label": "Chiappini E et al. 2016 Update of the Italian Pediatric Society Guidelines for Management of Fever in Children. J Pediatr. 2017;180:177-183.e1",
-    "url": "https://doi.org/10.1016/j.jpeds.2016.09.043",
     "type": "linea guida"
   },
   "B3": {
@@ -877,12 +862,12 @@
   "V4": {
     "label": "Saggese G, Vierucci F, Prodam F et al. Vitamin D in pediatric age: consensus of the Italian Pediatric Society and the Italian Society of Preventive and Social Pediatrics, jointly with the Italian Federation of Pediatricians. Ital J Pediatr. 2018;44:51",
     "url": "https://doi.org/10.1186/s13052-018-0488-7",
-    "type": "linea guida"
+    "type": "consensus"
   },
   "V5": {
     "label": "Braegger C et al. (ESPGHAN Committee on Nutrition). Vitamin D in the healthy European paediatric population. J Pediatr Gastroenterol Nutr. 2013;56(6):692-701",
     "url": "https://doi.org/10.1097/MPG.0b013e31828f3c05",
-    "type": "linea guida"
+    "type": "position paper"
   },
   "V6": {
     "label": "Wagner CL, Greer FR. Prevention of rickets and vitamin D deficiency in infants, children, and adolescents. Pediatrics. 2008;122(5):1142-52",

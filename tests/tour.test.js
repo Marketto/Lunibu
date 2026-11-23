@@ -6,9 +6,9 @@ import { pendingSlides, markSeen, cmpVer } from '../src/lib/tour.js';
 const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
 describe('dati del giro', () => {
-  it('6-9 passi con id unici', () => {
+  it('6-10 passi con id unici', () => {
     expect(TOUR.length).toBeGreaterThanOrEqual(6);
-    expect(TOUR.length).toBeLessThanOrEqual(9);
+    expect(TOUR.length).toBeLessThanOrEqual(10);
     expect(new Set(TOUR.map((s) => s.id)).size).toBe(TOUR.length);
   });
   it('testo IT, RU e EN breve', () => {

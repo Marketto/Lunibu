@@ -19,6 +19,7 @@ export default function Settings({ lang, setLang, kids, setKids, onReset, syncSt
   const [draft, setDraft] = useState(kids);
   const [saved, setSaved] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [rmIdx, setRmIdx] = useState(null); // bimbo già salvato di cui si chiede conferma di eliminazione
   const today = localDate();
   const valid = draft.length > 0 && draft.every((k) => validBirth(k.birth));
   const dirty = JSON.stringify(draft) !== JSON.stringify(kids);
@@ -30,9 +31,19 @@ export default function Settings({ lang, setLang, kids, setKids, onReset, syncSt
         {draft.map((k, i) => (
           <KidForm key={i} kid={k} index={i} lang={lang}
             onChange={(nk) => { setDraft((d) => d.map((x, j) => (j === i ? nk : x))); setSaved(false); }}
-            onRemove={draft.length > 1 ? () => setDraft((d) => d.filter((_, j) => j !== i)) : null} />
+            onRemove={draft.length > 1 ? () => (k.id ? setRmIdx(i) : setDraft((d) => d.filter((_, j) => j !== i))) : null} />
         ))}
       </AnimatePresence>
+      {rmIdx !== null && draft[rmIdx] && (
+        <div className="note urgent" role="alert" style={{ flexDirection: 'column' }}>
+          <span>{s.removeKidConfirm}</span>
+          <div className="row" style={{ width: '100%', marginTop: 10 }}>
+            <button className="btn" onClick={() => setRmIdx(null)}>{s.back}</button>
+            <button className="btn danger" style={{ background: 'var(--urg-ink)', color: '#fff' }}
+              onClick={() => { setDraft((d) => d.filter((_, j) => j !== rmIdx)); setSaved(false); setRmIdx(null); }}>{s.remove}</button>
+          </div>
+        </div>
+      )}
       <div className="row">
         {draft.length < 6 && (
           <motion.button className="btn" onClick={() => setDraft((d) => [...d, { birth: '', name: '' }])} {...tap}>＋ {s.addKid}</motion.button>

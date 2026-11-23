@@ -6,7 +6,7 @@ import { Mobile } from './Paper.jsx';
 import { LangSwitch, spring, tap } from './Common.jsx';
 import { IconLock } from './Icons.jsx';
 import { TermsAccept } from './Terms.jsx';
-import { PassForm, TX, errMsg, version } from './SyncCard.jsx';
+import { AskSecret, TX, errMsg, version } from './SyncCard.jsx';
 import { importEncrypted, decodeQr, syncShape } from '../lib/sync.js';
 import { initialFromImport, finishOnboarding } from '../lib/onboard.js';
 import { KidForm } from './KidForm.jsx';
@@ -137,7 +137,7 @@ export default function Onboarding({ lang, setLang, onDone, qrData, onQrClose })
               <>
                 <h1>{o.fileTitle}</h1>
                 <label className="field"><span>{x.pick}</span><input type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} /></label>
-                <PassForm s={x} label={x.askPass} busy={busy} onSubmit={fromFile} onCancel={() => back('ask')} />
+                <AskSecret s={x} label={x.askPass} busy={busy} onSubmit={fromFile} onCancel={() => back('ask')} />
                 <Msg />
               </>
             )}
@@ -145,7 +145,7 @@ export default function Onboarding({ lang, setLang, onDone, qrData, onQrClose })
               <>
                 <h1>{o.qrTitle}</h1>
                 <p className="small">{x.recvIntro}</p>
-                <PassForm s={x} label={x.askPass} busy={busy} onSubmit={fromQr} onCancel={() => { onQrClose?.(); back('ask'); }} />
+                <AskSecret s={x} label={x.askPass} busy={busy} onSubmit={fromQr} onCancel={() => { onQrClose?.(); back('ask'); }} />
                 <Msg />
               </>
             )}
@@ -154,7 +154,7 @@ export default function Onboarding({ lang, setLang, onDone, qrData, onQrClose })
                 <h1>{x.dTitle}</h1>
                 {!linked && <button className="btn primary" disabled={busy} onClick={connect}>{busy ? x.busy : o.connect}</button>}
                 {linked && !picked && <button className="btn primary" disabled={busy} onClick={pick}>{busy ? x.busy : o.pickDrive}</button>}
-                {linked && picked && <PassForm s={x} label={x.askPass} busy={busy} onSubmit={fromDrive} onCancel={() => setPicked(null)} />}
+                {linked && picked && <AskSecret s={x} label={x.askPass} busy={busy} onSubmit={fromDrive} onCancel={() => setPicked(null)} />}
                 <Msg />
                 {!picked && <div className="row"><button className="btn ghost" onClick={() => back('ask')}>{s.back}</button></div>}
               </>

@@ -25,7 +25,8 @@ e invitare ad approfondire e verificare.
 6. **Sicurezza bambini**: soglie di sicurezza (miele < 12 mesi, schermi < 2 anni, frutta secca intera < 5 anni,
    latte crudo < 5 anni, nuoto) sono voci `strict: true` senza tolleranza. Schede su possibili patologie: `alert`.
 7. **Mai committare dati sensibili**: niente email personali, token, chiavi, file `.env`. L'unica identità ammessa è
-   l'account GitHub del proprietario (autore commit con indirizzo `users.noreply.github.com`).
+   l'account GitHub del proprietario (autore commit con indirizzo `users.noreply.github.com`), senza righe
+   `Co-Authored-By` né altre identità nei messaggi di commit.
    Lo script `npm run check:secrets` e gli hook lo controllano.
 8. **Disclaimer sempre visibile** (app e README): strumento di ricerca rapida, non sostituisce i professionisti.
 
@@ -68,6 +69,7 @@ npm run content        # valida contenuti e genera indici (fallisce se mancano f
 npm test               # età, tolleranza, filtri, soglie strict, ricerca IT/RU/EN, guide
 npm run build          # build PWA in dist/
 npm run check:secrets  # cerca email personali, token e chiavi nei file tracciati
+npm run test:e2e       # dopo il build: apre ogni sezione IT/RU/EN nel browser, screenshot in shots/
 ```
 
 ## Struttura
@@ -78,10 +80,10 @@ npm run check:secrets  # cerca email personali, token e chiavi nei file tracciat
 - `src/data/meds.json` limiti di controllo per paracetamolo/ibuprofene (dati di ricerca: ogni modifica → `evidence-verifier`)
 - `src/data/growth.json` generato da `scripts/build-growth.mjs` (tabelle LMS OMS in `scripts/data-raw`)
 - `src/lib/` età, ricerca, i18n, audio (`audio/engine.js`, `audio/realistic.js`, `audio/meter.js`, loop in `public/audio/`),
-  sincronizzazione (`sync.js`, `drive*.js`), crescita (`growth.js`), medicine (`meds.js`), temperatura (`fever*.js`),
+  sincronizzazione (`sync.js`, `drive*.js`, chiave cifrata `keystore.js`), crescita (`growth.js`), medicine (`meds.js`), temperatura (`fever*.js`),
   tappe (`milestones.js`), import CSV (`csv.js`), date locali e id (`util.js`: mai `toISOString()` per date locali)
 - `src/data/tour.js` slide del giro delle funzioni (logica in `src/lib/tour.js`, stato `lunibu:tour` non sincronizzato)
 - `src/components/` UI (Paper, Characters, Scenes, Views, Sounds, Games, Diary, Fever, Milestones, SyncCard, ImportCsv,
-  Onboarding, Tour, VolumeCheck, Terms, Common, KidForm, MiniPlayer); viste pesanti caricate con `React.lazy`
+  Onboarding, Tour, VolumeCheck, Terms, Common, KidForm, MiniPlayer, ErrorBoundary; diario in `diary/`); viste pesanti caricate con `React.lazy`
 - `scripts/` build contenuti, controlli, hook
 - `.claude/agents/`, `.claude/skills/` configurazione agentica

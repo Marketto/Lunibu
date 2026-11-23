@@ -24,6 +24,8 @@ process.stdin.on('end', () => {
       if (!email) { try { email = execSync('git config user.email', { stdio: 'pipe' }).toString().trim(); } catch {} }
       if (!OK(email)) fail(`Autore del commit non ammesso (${email || 'nessuna email'}): usa l'indirizzo users.noreply.github.com (CLAUDE.md, regola 7).`);
     }
+    // Nessun co-autore: l'unica identità nei commit è l'account GitHub del proprietario.
+    if (/co-authored-by\s*:/i.test(cmd)) fail('Riga "Co-Authored-By" non ammessa nei commit (CLAUDE.md, regola 7).');
     for (const v of ['GIT_AUTHOR_EMAIL', 'GIT_COMMITTER_EMAIL']) {
       const m = new RegExp(`\\b${v}=("[^"]*"|'[^']*'|\\S+)`).exec(cmd);
       if (m && !OK(clean(m[1]))) fail(`${v} non ammesso: usa users.noreply.github.com (CLAUDE.md, regola 7).`);

@@ -1,7 +1,7 @@
 // Giro delle funzioni (coach-mark sull'interfaccia reale). Nuova funzionalità visibile → aggiungi un passo con since = versione.
 // target: valore di data-tour="…" sull'elemento reale da evidenziare. Testi brevi (≤ 60 caratteri).
 // Gli id della 1.13.0 restano invariati: chi li ha già visti non li rivede.
-export const TOUR_TARGETS = ['search', 'nav-giochi', 'nav-suoni', 'nav-diario', 'nav-bimbi', 'footer', 'recall', 'lang', 'diary-temp'];
+export const TOUR_TARGETS = ['search', 'nav-giochi', 'nav-suoni', 'nav-diario', 'nav-bimbi', 'footer', 'recall', 'lang', 'diary-temp', 'sync'];
 export const TOUR = [
   { id: 'domande', since: '1.13.0', target: 'search', icon: '🔎',
     it: { text: 'Cerca una domanda: risposte per età, con fonti' },
@@ -38,5 +38,9 @@ export const TOUR = [
   { id: 'temperatura', since: '1.15.0', target: 'diary-temp', icon: '🌡️',
     it: { text: 'Nuovo: registro della temperatura' },
     ru: { text: 'Новое: дневник температуры' },
-    en: { text: 'New: temperature log' } }
+    en: { text: 'New: temperature log' } },
+  { id: 'abbina', since: '1.17.0', target: 'sync', icon: '🔐',
+    it: { text: 'Abbina con un QR; chiave cifrata, sblocco biometrico' },
+    ru: { text: 'Связь по QR; ключ зашифрован, биометрия' },
+    en: { text: 'Pair with a QR; key encrypted, biometric unlock' } }
 ];

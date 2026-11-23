@@ -157,8 +157,14 @@ ricerca; il livello di evidenza è dichiarato (forte / media / raccomandato da l
   va in secondo piano, così non si perde un modulo a metà (`src/lib/update.js`).
 - **Condividi l'app**: Web Share, copia link e QR code, senza dati.
 - **Import** da altre app: CSV o Excel (.xlsx) con mappatura delle colonne, tutto letto sul telefono.
-- **Altro genitore**: file `.lunibu` cifrato (PBKDF2 + AES-GCM, frase segreta) oppure QR con gli ultimi aggiornamenti
-  nel frammento dell'URL (mai inviato al server); unione per id con tombstone per le cancellazioni (`src/lib/sync.js`).
+- **Altro genitore**: file `.lunibu` cifrato (PBKDF2 + AES-GCM) oppure QR con gli ultimi aggiornamenti nel frammento
+  dell'URL (mai inviato al server); unione per id con tombstone per le cancellazioni, anche a cascata quando si elimina
+  un bimbo (`src/lib/sync.js`).
+- **Chiave di sincronizzazione** (`src/lib/keystore.js`): i due telefoni si abbinano con un QR `#pair=` che contiene una
+  chiave casuale da 256 bit (in alternativa resta la frase segreta). Il segreto non è mai salvato in chiaro: è cifrato
+  con una chiave derivata da una passkey WebAuthn (estensione PRF, sblocco con impronta o volto) oppure, dove la PRF non
+  c'è, con una chiave AES non estraibile in IndexedDB.
+- **Prova nel browser**: `npm run build && npm run test:e2e` apre ogni sezione in IT/RU/EN e salva gli screenshot in `shots/`.
 
 ## Lavorare al progetto con agenti (Claude Code)
 

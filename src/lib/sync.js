@@ -144,8 +144,40 @@ export const syncFromHash = (hash) => { const m = /^#\/?sync=([A-Za-z0-9_-]+)$/.
 /* ---------- unione ---------- */
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
+/**
+ * Eliminazione di bimbi con "lapide + cascata": per ogni bimbo tolto da `state.kids` registra una lapide
+ * (id -> ISO) e rimuove i suoi record dalle altre collezioni, con una lapide per ciascun record
+ * (l'altro telefono li cancella anche se non conosce la lapide del bimbo). Restituisce una patch dello stato.
+ */
+export function removeKidsCascade(state, nextKids, now = new Date().toISOString()) {
+  const keep = new Set(nextKids.map((k) => k.id));
+  const gone = new Set((state.kids || []).filter((k) => k.id && !keep.has(k.id)).map((k) => k.id));
+  if (!gone.size) return { kids: nextKids };
+  const deleted = { ...(state.deleted || {}) };
+  for (const id of gone) deleted[id] = now;
+  const patch = { kids: nextKids, deleted };
+  for (const key of COLLECTIONS.filter((c) => c !== 'kids')) {
+    patch[key] = (state[key] || []).filter((r) => {
+      if (!gone.has(r.kidId)) return true;
+      deleted[r.id] = now;
+      return false;
+    });
+  }
+  return patch;
+}
+
 export function mergeData(local, remote, { now = Date.now() } = {}) {
-  const lKids = local.kids || [];
+  // Lapidi unite (la più recente vince). Regola unica, come per i record: una lapide elimina l'elemento solo
+  // se è più recente del suo updatedAt (assente = più vecchio). I bimbi oggi non hanno updatedAt: la lapide vince;
+  // un bimbo ricreato ha un id nuovo e non è colpito.
+  const deleted = { ...(local.deleted || {}) };
+  for (const [id, t] of Object.entries(remote.deleted || {})) if (!deleted[id] || t > deleted[id]) deleted[id] = t;
+  const isDead = (k) => !!deleted[k.id] && deleted[k.id] > (k.updatedAt || '');
+  const deadIds = new Set(); // id (locali, dopo il remap) dei bimbi eliminati
+  const lAll = local.kids || [];
+  const lKids = lAll.filter((k) => !isDead(k));
+  const deadLocal = lAll.filter(isDead);
+  for (const k of deadLocal) deadIds.add(k.id);
   const kids = lKids.map((k) => ({ ...k }));
   const kidMap = {}; // id remoto -> id locale
   let addedKids = 0;
@@ -172,7 +204,18 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
     }
     if (m) { matched.set(rk, m); used.add(m.id); }
   }
+  // bimbi remoti con lapide propria, o abbinabili per data di nascita (e nome compatibile) a un bimbo locale
+  // eliminato e non ricreato: scartati insieme ai loro record. Il bimbo ricreato (id nuovo, vivo) ha la precedenza.
+  const dropped = new Set();
   for (const rk of rKids) {
+    if (matched.has(rk)) continue;
+    if (isDead(rk)) { dropped.add(rk); deadIds.add(rk.id); continue; }
+    if (!rk.birth) continue;
+    const dead = deadLocal.filter((k) => k.birth === rk.birth && !(k.name && rk.name && norm(k.name) !== norm(rk.name)));
+    if (dead.length === 1 && deleted[dead[0].id] > (rk.updatedAt || '')) { dropped.add(rk); kidMap[rk.id] = dead[0].id; }
+  }
+  for (const rk of rKids) {
+    if (dropped.has(rk)) continue;
     const m = matched.get(rk);
     if (m) {
       used.add(m.id);
@@ -181,9 +224,6 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
     } else { kids.push({ ...rk }); kidMap[rk.id] = rk.id; addedKids++; }
   }
   const remap = (r) => (kidMap[r.kidId] && kidMap[r.kidId] !== r.kidId ? { ...r, kidId: kidMap[r.kidId] } : r);
-
-  const deleted = { ...(local.deleted || {}) };
-  for (const [id, t] of Object.entries(remote.deleted || {})) if (!deleted[id] || t > deleted[id]) deleted[id] = t;
 
   const mergeList = (lList = [], rList = [], prefixId = false) => {
     const out = new Map(lList.map((r) => [r.id, r]));
@@ -198,7 +238,7 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
       else if (r.updatedAt && !cur.updatedAt && !same(r, cur)) { out.set(r.id, r); updated.add(r.id); }
     }
     // lapidi: eliminano i record più vecchie della cancellazione
-    for (const [id, r] of [...out]) if (deleted[id] && deleted[id] > (r.updatedAt || '')) { out.delete(id); added.delete(id); updated.delete(id); }
+    for (const [id, r] of [...out]) if (deadIds.has(r.kidId) || (deleted[id] && deleted[id] > (r.updatedAt || ''))) { out.delete(id); added.delete(id); updated.delete(id); }
     return { list: [...out.values()], added, updated };
   };
   const g = mergeList(local.growth, remote.growth);
@@ -215,6 +255,6 @@ export function mergeData(local, remote, { now = Date.now() } = {}) {
 
   return {
     ...{ kids, growth: g.list, meds: m.list, medPlans: mp.list, milestones: ms.list, temps: tp.list }, deleted,
-    stats: { addedGrowth: g.added.size, addedMeds: m.added.size, updated: g.updated.size + m.updated.size + mp.updated.size + ms.updated.size + tp.updated.size + tp.added.size, addedTemps: tp.added.size, addedMilestones: ms.added.size, addedPlans: mp.added.size, addedKids, recentDoses }
+    stats: { addedGrowth: g.added.size, addedMeds: m.added.size, updated: g.updated.size + m.updated.size + mp.updated.size + ms.updated.size + tp.updated.size + tp.added.size, addedTemps: tp.added.size, addedMilestones: ms.added.size, addedPlans: mp.added.size, addedKids, removedKids: deadLocal.length, recentDoses }
   };
 }
